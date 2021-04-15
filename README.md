@@ -7,6 +7,8 @@
 然后可以尝试基于Qemu for RV64来开发和测试自己实现的OS，之后再在k210开发板上烧写OS，在SD card上建立加载了测试用例的
 fat32文件系统，让自己开发的OS能够正确访问并执行sd card上的测试用例。
 
+在本地通过测试后，可提交[OS评测系统](https://os.educg.net/)进行测试。
+
 ## syscalls说明
 [syscalls说明](oscomp_syscalls.md)
 
