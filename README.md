@@ -5,7 +5,7 @@
 
 内核实现组可通过[syscalls测试用例 for Linux on Qemu RV64运行环境](riscv-linux-rootfs)了解测试用例在Linux on Qemu for RV64上的执行效果；
 然后可以尝试基于Qemu for RV64来开发，并用测试用例来测试自己实现的OS；之后再在k210开发板上烧写OS，在SD card上建立加载了测试用例的
-fat32文件系统，让自己开发的OS能够正确访问并执行sd card上的测试用例。
+[fat32文件系统](./fat32-info.md)，让自己开发的OS能够正确访问并执行sd card上的测试用例。
 
 在本地通过测试后，可提交[OS评测系统](https://os.educg.net/)进行测试。
 
