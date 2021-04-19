@@ -10,13 +10,14 @@
  */
 void test_exit(void){
     TEST_START(__func__);
-    int cpid;
+    int cpid, waitret, wstatus;
     cpid = fork();
     assert(cpid != -1);
     if(cpid == 0){
         exit(0);
     }else{
-        if(wait(NULL) != cpid) printf("exit OK.\n");
+        waitret = wait(&wstatus);
+        if(waitret == cpid) printf("exit OK.\n");
         else printf("exit ERR.\n");
     }
     TEST_END(__func__);
