@@ -7,7 +7,11 @@
 ---
 附: Linux系统中格式化sdcard为fat32文件系统
 1. 通过读卡器把sdcard插入Linux系统机器；
-2. 使用工具fdisk操作sdcard的盘号：/dev/sdx，盘号会根据实际机器不同而改变:
+2. 卸载可能已有的sdcard分区;
+```
+umount /dev/sdx*
+```
+3. 使用工具fdisk操作sdcard的盘号：/dev/sdx，盘号会根据实际机器不同而改变:
 ```
 fdisk /dev/sdx
 o #创建分区表
@@ -23,4 +27,11 @@ c #设置为fat32类型
 
 w #最后把修改写入sdcard盘，后退出
 ```
-3.最后可查看sdcard盘的分区信息 `fdisk -l /dev/sdx`
+4.执行格式化sdcard的分区
+```
+mkfs.vfat -F 32 /dev/sdx1
+```
+5.最后可查看sdcard盘的分区信息 
+```
+fdisk -l /dev/sdx
+```
