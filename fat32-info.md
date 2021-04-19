@@ -5,7 +5,7 @@
 在github上搜索fat32 关键字，可查询到不少fat32的参考实现
 
 ---
-附: Linux系统中格式化sdcard为fat32文件系统
+附: **Linux系统中格式化sdcard为fat32文件系统**
 1. 通过读卡器把sdcard插入Linux系统机器；
 2. 卸载可能已有的sdcard分区;
 ```
@@ -27,11 +27,11 @@ c #设置为fat32类型
 
 w #最后把修改写入sdcard盘，后退出
 ```
-4.执行格式化sdcard的分区
+4. 执行格式化sdcard的分区
 ```
 mkfs.vfat -F 32 /dev/sdx1
 ```
-5.最后可查看sdcard盘的分区信息 
+5. 最后可查看sdcard盘的分区信息 
 ```
 fdisk -l /dev/sdx
 ```
