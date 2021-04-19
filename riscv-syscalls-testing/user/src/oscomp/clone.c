@@ -16,10 +16,12 @@ void test_clone(void){
     child_pid = clone(child_func, NULL, stack, 1024, SIGCHLD);
     assert(child_pid != -1);
     if (child_pid == 0){
-	    printf("child pid = %d", child_pid);
+	exit(0);
     }else{
-	    wait(&wstatus);
+	if(wait(&wstatus) == child_pid)
 	    printf("clone process successfully.\npid:%d\n", child_pid);
+	else
+	    printf("clone process error.\n");
     }
 
     TEST_END(__func__);

@@ -10,13 +10,12 @@ void test_wait(void){
 	printf("This is child process\n");
         exit(0);
     }else{
-	//if(cpid == wait(NULL)) printf("wait success.\n");
-	//else printf("wait error.\n");
-
 	pid_t ret = wait(&wstatus);
 	assert(ret != -1);
-
-	printf("wait child success.\nwstatus: %d\n", wstatus);
+	if(ret == cpid)
+	    printf("wait child success.\nwstatus: %d\n", wstatus);
+	else
+	    printf("wait child error.\n");
     }
     TEST_END(__func__);
 }

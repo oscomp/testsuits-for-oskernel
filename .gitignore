@@ -1,0 +1,5 @@
+riscv-linux-rootfs/archives/
+riscv-linux-rootfs/build/
+riscv-syscalls-testing/user/build
+riscv-syscalls-testing/user/lib/syscall_ids.h
+riscv-syscalls-testing/user/riscv64

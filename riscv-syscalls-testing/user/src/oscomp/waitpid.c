@@ -16,13 +16,11 @@ void test_waitpid(void){
     }else{
 	pid_t ret = waitpid(cpid, &wstatus, 0);
 	assert(ret != -1);
-	printf("waitpid successfully.\nwstatus: %x\n", WEXITSTATUS(wstatus));
+	if(ret == cpid && WEXITSTATUS(wstatus) == 3)
+	    printf("waitpid successfully.\nwstatus: %x\n", WEXITSTATUS(wstatus));
+	else
+	    printf("waitpid error.\n");
 
-	/*
-	if(WEXITSTATUS(wstatus) == 3){
-	    printf("  waitpid success.\n");
-	}else printf("  waitpid error.\n");
-	*/
     }
     TEST_END(__func__);
 }
