@@ -292,7 +292,7 @@ int ret = syscall(SYS_fstat, fd, &kst);
 pid_t ret = syscall(SYS_clone, flags, stack, ptid, tls, ctid)
 ```
 
-### #define SYS_execve 59
+### #define SYS_execve 221
 * 功能：执行一个指定的程序；
 * 输入：
     - path: 待执行程序路径名称，
