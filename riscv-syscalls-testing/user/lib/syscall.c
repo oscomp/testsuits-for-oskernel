@@ -63,7 +63,7 @@ void exit(int code)
 
 int waitpid(int pid, int *code, int options)
 {
-    return syscall(SYS_wait4, pid, code, options, 0);
+    return syscall(SYS_wait4, pid, code, options);
 }
 
 int exec(char *name)
@@ -129,7 +129,7 @@ int munmap(void *start, size_t len)
 
 int wait(int *code)
 {
-    return waitpid((int)-1, code, 0);
+    return waitpid(-1, code, 0);
 }
 
 int spawn(char *file)
