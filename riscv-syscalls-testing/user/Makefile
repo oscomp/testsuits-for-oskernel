@@ -48,7 +48,7 @@ endif
 binary:
 	@mkdir -p build
 	@cd build && cmake $(cmake_build_args) .. && make
-	@$(CP) src/oscomp/run-all.sh src/oscomp/text.txt src/oscomp/yield.sh build/riscv64/
+	@$(CP) src/oscomp/run-all.sh src/oscomp/text.txt build/riscv64/
 	@mkdir build/riscv64/mnt && touch build/riscv64/mnt/test_mount
 	@ln -s build/riscv64/ .
 
