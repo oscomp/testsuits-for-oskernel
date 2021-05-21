@@ -1,7 +1,6 @@
 from test_base import TestBase
 import re
 
-
 class yield_test(TestBase):
     def __init__(self):
         super().__init__("yield", 4)
@@ -9,27 +8,14 @@ class yield_test(TestBase):
     def test(self, data):
         self.assert_equal(len(data), 15)
         lst = ''.join(data)
-        cnt = {}
-        begin = {}
-        end ={}
-        idx = 0
+        cnt = {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0}
         for c in lst:
-            if c not in ('A', 'B', 'C'):
+            if c not in ('0', '1', '2', '3', '4'):
                 continue
-            if not c in begin:
-                begin[c] = idx
-            end[c] = idx
-            if not c in cnt:
-                cnt[c] = 0
             cnt[c] += 1
-            idx += 1
-        # self.assert_equal(cnt[' '], 15)
-        self.assert_equal(cnt['A'], 50)
-        self.assert_equal(cnt['B'], 50)
-        self.assert_equal(cnt['C'], 50)
-        # self.assert_equal(cnt['['], 15)
-        # self.assert_equal(cnt['/'], 15)
-        # self.assert_equal(cnt[']'], 15)
+        self.assert_ge(cnt['0'], 3)
+        self.assert_ge(cnt['1'], 3)
+        self.assert_ge(cnt['2'], 3)
         
 
 
