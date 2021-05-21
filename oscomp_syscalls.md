@@ -221,7 +221,7 @@ int ret = syscall(SYS_mkdirat, dirfd, path, mode);
 
 ### #define SYS_umount2 39
 * 功能：卸载文件系统；
-* 输入：指定卸载设备，卸载参数；
+* 输入：指定卸载目录，卸载参数；
 * 返回值：成功返回0，失败返回-1；
 ```
 const char *special, int flags;
