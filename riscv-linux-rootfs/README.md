@@ -71,4 +71,4 @@ cd /mnt/riscv64
 ```
 
 ---
-如需快速试跑测例，您也可以直接使用已编译好的[syscalls测试环境镜像](https://cloud.tsinghua.edu.cn/d/0b7eeedccacc44939e3c/)
+如需快速试跑测例，您也可以直接使用已编译好的[syscalls测试环境镜像](https://cloud.tsinghua.edu.cn/d/e29d3837195648009630/)
