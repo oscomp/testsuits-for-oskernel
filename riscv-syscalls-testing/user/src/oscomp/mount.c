@@ -3,7 +3,13 @@
 #include "stdlib.h"
 #include "string.h"
 
-//#define MNTPOINT "./mnt"
+/*
+ * SYS_mount系统调用, 此处是为检测自开发的OS是否能成功支持Fat32的拓展SDCard，并正常挂载到系统当中；
+ * 此处"./mnt"和"/dev/vda2"是作为mount的默认参数，指的参考测试系统中的一个挂载点，和一个Fat32存储设备；
+ * 在实际测试时，可以通过命令行传参的方式，替换掉默认参数；
+ * 例如可以手动指定自开发的OS中的Fat32拓展SDCard存储设备/dev/sdc1，挂载到/mnt/point:
+ * "mount /dev/sdc1 /mnt/point"
+ */
 
 static char mntpoint[64] = "./mnt";
 static char device[64] = "/dev/vda2";
