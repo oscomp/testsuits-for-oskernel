@@ -8,7 +8,8 @@ class mount_test(TestBase):
 
     def test(self, data):
         self.assert_ge(len(data), 4)
-        self.assert_equal(data[0], "Mounting dev:/dev/vda2 to ./mnt")
+        r = re.findall(r"Mounting dev:(.+) to ./mnt", data[0])
+        self.assert_equal(len(r) > 0, True)
         self.assert_equal(data[1], "mount return: 0")
         self.assert_equal(data[2], "mount successfully")
         self.assert_equal(data[3], "umount return: 0")
