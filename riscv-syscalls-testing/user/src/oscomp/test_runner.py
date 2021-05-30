@@ -22,6 +22,7 @@ runner = {x.name: x for x in tests}
 
 def get_runner(name):
     # return runner.get(name, runner.get("test_"+name, runner[name+"_test"]))
+    print(name, file=sys.stderr)
     return runner[name]
 # print(runner)
 
@@ -54,7 +55,16 @@ if __name__ == '__main__':
                 state = 0
                 data = []
                 continue
-            # 测试样例中间
-            data.append(line)
+            elif "========== START " in line:
+                test_name = line.replace("=", '').replace(" ", "").replace("START", "")
+                if data:
+                    # 只找到了开头没找到结尾，说明某个样例内部使用assert提前退出
+                    get_runner(test_name).start(data)
+                data = []
+                state = 1
+            else:
+                # 测试样例中间
+                data.append(line)
     test_results = [x.get_result() for x in tests]
     print(json.dumps(test_results))
+
