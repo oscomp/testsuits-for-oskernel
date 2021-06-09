@@ -1,0 +1,50 @@
+ash -c exit
+sh -c exit
+basename /aaa/bbb
+cal
+touch abc
+cat abc 
+clear 
+cp busybox busybox_bak
+cut -c 3 abc
+od abc
+rm busybox_bak
+date 
+df 
+dirname /aaa/bbb
+dmesg 
+du
+echo "abc"
+expr 1 - 1
+false
+true 
+find -name "busybox"
+free 
+grep "abc" abc
+head abc
+tail abc 
+hexdump -C abc 
+hwclock
+kill 10
+link abc abc1
+unlink abc1
+ls
+md5sum abc
+mkdir test_dir
+mv test_dir test
+rmdir test
+printf "abc\n"
+ps
+pwd
+sleep 1
+sort abc
+stat abc
+strings abc 
+uname
+uniq abc
+uptime
+wc abc
+which ls
+[
+more abc
+rm abc

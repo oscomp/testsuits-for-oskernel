@@ -1,25 +1,97 @@
 # Testsuits for OS Kernel
 
-这里给出的[syscalls测试用例](riscv-syscalls-testing/)会通过系统调用访问内核实现组开发的OS，得到正确可靠的服务。
-系统调用基于部分比较基础的Linux syscalls。从测试用例可以看出，自己开发的OS只需实现Linux syscalls的功能子集即可。
+尽力支持busybox, lua, lmbench三个示例程序。
 
-内核实现组可通过[syscalls测试用例 for Linux on Qemu RV64运行环境](riscv-linux-rootfs)了解测试用例在Linux on Qemu for RV64上的执行效果；
-然后可以尝试基于Qemu for RV64来开发，并用测试用例来测试自己实现的OS；之后再在k210开发板上烧写OS，在SD card上建立加载了测试用例的
-[fat32文件系统](./fat32-info.md)，让自己开发的OS能够正确访问并执行sd card上的测试用例。
+[busybox cmd](docs/busybox_cmd.txt)里给出了50个常用或容易支持的命令，可以先试着支持这50个命令。这些命令所使用的系统调用请参考[这个目录](docs/busybox_cmd_syscalls)所对应的文件，这些命令所依赖的系统调用都是用`strace -f -c`命令得到的。
 
-在本地通过测试后，可提交[OS评测系统](https://os.educg.net/)进行测试。
+获取lua所使用的系统调用的两个例子：
 
-## syscalls说明
-[syscalls说明](oscomp_syscalls.md)
+```
+# 例子一，让lua执行一个字符串：
+strace -f -c -o lua_print_syscall.txt ./lua -e 'print("Hello World!")'
 
-注：初赛阶段，文档中描述不会增加更多的syscall。可能会进一步完善文档内容描述，保证描述的准确性。
+# 例子二，让lua执行一个脚本：
+strace -f -c -o lua_print_syscall.txt ./lua print.lua
+```
 
-## syscalls测试用例
-[syscalls测试用例](riscv-syscalls-testing/)
+print.lua的内容如下：
 
-注：测试用例的数量会增加
+> print("Hello World!")
 
-## syscalls测试用例Qemu运行环境
-[syscalls测试用例 for Linux on Qemu RV64运行环境](riscv-linux-rootfs) ： 在Linux上运行测试用例主要是用于对比自己实现的OS
+lmbench依次执行了一些小程序来测试系统的性能，可分析`bin/lmbench`来依次执行这些小程序，以达到对lmbench逐步的支持。
 
+## 示例程序所包含的系统调用
+文档每行中前半部分`li a7,[NUM]`是二进制文件里使用系统调用时，系统调用号所对应的那条指令。后半部分`__NR_xxx [NUM]` 是头文件`unistd.h`里系统调用的名称及编号。
+
+[busybox使用的系统调用](docs/busybox_musl_static_syscall.txt)
+
+[lua使用的系统调用](docs/lua_musl_static_syscalls.txt)
+
+[lmbench使用的系统调用](docs/lmbench_libc_syscall.txt)
+
+```
+# 从二进制文件中获取系统调用号
+objdump -d objfile | grep -B 9 ecall | grep "li.a7" | tee syscall.txt
+```
+
+
+
+## 示例程序运行环境
+示例程序的运行环境是Debian on Qemu RV64，搭建过程如下：
+
+1. 在https://people.debian.org/~gio/dqib/点击[Images for riscv64-virt](https://gitlab.com/api/v4/projects/giomasce%2Fdqib/jobs/artifacts/master/download?job=convert_riscv64-virt)下载artifacts.zip。
+2. 解压。`unzip artifacts.zip`
+3. 安装`qemu-sysstem-riscv64`，`opensib`和`u-boot-qemu`。
+4. 参考`artifacts/readme.txt`里的指令启动debian。
+
+## 示例程序编译过程
+
+编译环境的准备
+
+```bash
+# 安装必要的软件
+sudo apt install build-essentials
+sudo apt install musl-tools
+
+# gcc是到gcc-10的链接，现在要让它变成musl-gcc的链接
+rm /usr/bin/gcc	
+ln -s /usr/bin/musl-gcc /usr/bin/gcc
+# musl-gcc使用了cc，要让cc链接到正确的编译器gcc-10
+rm /usr/bin/cc	
+ln -s /usr/bin/gcc-10 /usr/bin/cc
+```
+
+编译busybox
+
+```bash
+# 需要包含一些linux头文件
+ln -s /usr/include/linux /usr/include/riscv-linux-musl/
+ln -s /usr/include/asm-generic /usr/include/riscv-linux-musl/asm
+ln -s /usr/include/mtd /usr/include/riscv-linux-musl/
+cp /usr/include/riscv64-linux-gnu/asm/byteorder.h /usr/include/asm-generic
+
+# 编译busybox
+ cd busybox
+vi menuconfig	# 把"CC = gcc"改为"CC = gcc-10"，为了使下一条命令正确执行
+make menuconfig	# 默认动态编译，如需静态编译则设置CONFIG_STATIC=y
+vi menuconfig	# 把"CC = gcc-10"改为"CC = gcc"，为了基于musl库编译busybox
+make
+```
+
+编译lua
+
+```bash
+cd lua
+make posix	# 动态编译。由于之前的准备，现在gcc就是musl-gcc
+make posix CC="gcc -static"	# 静态编译
+```
+
+编译lmbench
+
+```bash
+cd lmbench
+make results CC="gcc-10"	# 动态编译并执行
+make results CC="gcc-10 -static"	# 静态编译并执行
+make see CC="gcc-10"		# 查看结果
+```
 
