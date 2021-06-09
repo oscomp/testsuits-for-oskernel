@@ -39,7 +39,7 @@ objdump -d objfile | grep -B 9 ecall | grep "li.a7" | tee syscall.txt
 ## 示例程序运行环境
 示例程序的运行环境是Debian on Qemu RV64，搭建过程如下：
 
-1. 在https://people.debian.org/~gio/dqib/点击[Images for riscv64-virt](https://gitlab.com/api/v4/projects/giomasce%2Fdqib/jobs/artifacts/master/download?job=convert_riscv64-virt)下载artifacts.zip。
+1. 在[https://people.debian.org/~gio/dqib/](https://people.debian.org/~gio/dqib/)点击[Images for riscv64-virt](https://gitlab.com/api/v4/projects/giomasce%2Fdqib/jobs/artifacts/master/download?job=convert_riscv64-virt)下载artifacts.zip。
 2. 解压。`unzip artifacts.zip`
 3. 安装`qemu-sysstem-riscv64`，`opensib`和`u-boot-qemu`。
 4. 参考`artifacts/readme.txt`里的指令启动debian。
