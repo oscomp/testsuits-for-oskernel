@@ -54,8 +54,9 @@ objdump -d objfile | grep -B 9 ecall | grep "li.a7" | tee syscall.txt
 
 ```bash
 # 安装必要的软件
-sudo apt install build-essentials
+sudo apt install build-essential
 sudo apt install musl-tools
+apt-get install libncurses5-dev libncursesw5-dev
 
 # gcc是到gcc-10的链接，现在要让它变成musl-gcc的链接
 rm /usr/bin/gcc	
@@ -69,9 +70,9 @@ ln -s /usr/bin/gcc-10 /usr/bin/cc
 
 ```bash
 # 需要包含一些linux头文件
-ln -s /usr/include/linux /usr/include/riscv-linux-musl/
-ln -s /usr/include/asm-generic /usr/include/riscv-linux-musl/asm
-ln -s /usr/include/mtd /usr/include/riscv-linux-musl/
+ln -s /usr/include/linux /usr/include/riscv64-linux-musl/linux
+ln -s /usr/include/asm-generic /usr/include/riscv64-linux-musl/asm
+ln -s /usr/include/mtd /usr/include/riscv64-linux-musl/mtd
 cp /usr/include/riscv64-linux-gnu/asm/byteorder.h /usr/include/asm-generic
 
 # 编译busybox
