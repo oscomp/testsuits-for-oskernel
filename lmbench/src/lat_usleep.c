@@ -27,7 +27,7 @@
  * (2) the version in the sccsid below is included in the report.
  * Support for this development by Sun Microsystems is gratefully acknowledged.
  */
-char           *id = "$Id$\n";
+static char           *id = "$Id$\n";
 
 #include "bench.h"
 #include <sched.h>
@@ -42,7 +42,7 @@ typedef struct _state {
     unsigned long usecs;
 } state_t;
 
-void
+static void
 bench_usleep(iter_t iterations, void *cookie)
 {
     state_t        *state = (state_t*)cookie;
@@ -52,7 +52,7 @@ bench_usleep(iter_t iterations, void *cookie)
     }
 }
 
-void
+static void
 bench_nanosleep(iter_t iterations, void *cookie)
 {
     state_t        *state = (state_t*)cookie;
@@ -70,7 +70,7 @@ bench_nanosleep(iter_t iterations, void *cookie)
     }
 }
 
-void
+static void
 bench_select(iter_t iterations, void *cookie)
 {
     state_t        *state = (state_t*)cookie;
@@ -84,7 +84,7 @@ bench_select(iter_t iterations, void *cookie)
 }
 
 #ifdef _POSIX_SELECT
-void
+static void
 bench_pselect(iter_t iterations, void *cookie)
 {
     state_t        *state = (state_t*)cookie;
@@ -98,7 +98,7 @@ bench_pselect(iter_t iterations, void *cookie)
 }
 #endif /* _POSIX_SELECT */
 
-void
+static void
 interval()
 {
     if (++caught == n) {
@@ -109,7 +109,7 @@ interval()
     setitimer(ITIMER_REAL, &value, NULL);
 }
 
-void
+static void
 initialize(iter_t iterations, void *cookie)
 {
     state_t        *state = (state_t*)cookie;
@@ -128,7 +128,7 @@ initialize(iter_t iterations, void *cookie)
     sigaction(SIGALRM, &sa, 0);
 }
 
-void
+static void
 bench_itimer(iter_t iterations, void *cookie)
 {
     n = iterations;
@@ -161,7 +161,7 @@ set_realtime()
 }
 
 int
-main(int ac, char **av)
+lat_usleep_main(int ac, char **av)
 {
     int             realtime = 0;
     int		    parallel = 1;

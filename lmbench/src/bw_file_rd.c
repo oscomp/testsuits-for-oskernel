@@ -12,7 +12,7 @@
  * (2) the version in the sccsid below is included in the report.
  * Support for this development by Sun Microsystems is gratefully acknowledged.
  */
-char	*id = "$Id$\n";
+static char	*id = "$Id$\n";
 
 #include "bench.h"
 
@@ -24,9 +24,9 @@ char	*id = "$Id$\n";
 #define	TYPE	int
 #define	MINSZ	(sizeof(TYPE) * 128)
 
-void	*buf;		/* do the I/O here */
-size_t	xfersize;	/* do it in units of this */
-size_t	count;		/* bytes to move (can't be modified) */
+static void	*buf;		/* do the I/O here */
+static size_t	xfersize;	/* do it in units of this */
+static size_t	count;		/* bytes to move (can't be modified) */
 
 typedef struct _state {
 	char filename[256];
@@ -51,7 +51,7 @@ void doit(int fd)
 	}
 }
 
-void
+static void
 initialize(iter_t iterations, void* cookie)
 {
 	state_t	*state = (state_t *) cookie;
@@ -76,7 +76,7 @@ initialize(iter_t iterations, void* cookie)
 	}
 }
 
-void
+void static
 init_open(iter_t iterations, void * cookie)
 {
 	state_t	*state = (state_t *) cookie;
@@ -89,7 +89,7 @@ init_open(iter_t iterations, void * cookie)
 	state->fd = ofd;
 }
 
-void
+void static
 time_with_open(iter_t iterations, void * cookie)
 {
 	state_t	*state = (state_t *) cookie;
@@ -103,7 +103,7 @@ time_with_open(iter_t iterations, void * cookie)
 	}
 }
 
-void
+void static
 time_io_only(iter_t iterations,void * cookie)
 {
 	state_t *state = (state_t *) cookie;
@@ -115,7 +115,7 @@ time_io_only(iter_t iterations,void * cookie)
 	}
 }
 
-void
+void static
 cleanup(iter_t iterations, void * cookie)
 {
 	state_t *state = (state_t *) cookie;
@@ -127,7 +127,7 @@ cleanup(iter_t iterations, void * cookie)
 }
 
 int
-main(int ac, char **av)
+bw_file_rd_main(int ac, char **av)
 {
 	int	fd;
 	state_t state;

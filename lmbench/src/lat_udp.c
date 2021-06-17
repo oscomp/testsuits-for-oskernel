@@ -12,17 +12,17 @@
  * (2) the version in the sccsid below is included in the report.
  * Support for this development by Sun Microsystems is gratefully acknowledged.
  */
-char	*id = "$Id$\n";
+static char	*id = "$Id$\n";
 #include "bench.h"
 
 #define MAX_MSIZE (10 * 1024 * 1024)
 
-void	client_main(int ac, char **av);
-void	server_main();
-void	timeout();
-void	init(iter_t iterations, void* cookie);
-void	cleanup(iter_t iterations, void* cookie);
-void    doit(iter_t iterations, void* cookie);
+static void	client_lat_udp_main(int ac, char **av);
+static void	server_lat_udp_main();
+static void	timeout();
+static void	init(iter_t iterations, void* cookie);
+static void	cleanup(iter_t iterations, void* cookie);
+static void    doit(iter_t iterations, void* cookie);
 
 typedef struct _state {
 	int	sock;
@@ -34,7 +34,7 @@ typedef struct _state {
 
 
 int
-main(int ac, char **av)
+lat_udp_main(int ac, char **av)
 {
 	state_t state;
 	int	c;
@@ -56,7 +56,7 @@ main(int ac, char **av)
 		switch(c) {
 		case 's': /* Server */
 			if (fork() == 0) {
-				server_main();
+				server_lat_udp_main();
 			}
 			exit(0);
 		case 'S': /* shutdown serverhost */
@@ -113,7 +113,7 @@ main(int ac, char **av)
 	exit(0);
 }
 
-void
+static void
 init(iter_t iterations, void* cookie)
 {
 	state_t *state = (state_t *) cookie;
@@ -128,7 +128,7 @@ init(iter_t iterations, void* cookie)
 	alarm(15);
 }
 
-void
+static void
 doit(iter_t iterations, void *cookie)
 {
 	state_t *state = (state_t *) cookie;
@@ -152,7 +152,7 @@ doit(iter_t iterations, void *cookie)
 	state->seq = seq;
 }
 
-void
+static void
 cleanup(iter_t iterations, void* cookie)
 {
 	state_t *state = (state_t *) cookie;
@@ -163,15 +163,15 @@ cleanup(iter_t iterations, void* cookie)
 	free(state->buf);
 }
 
-void
+static void
 timeout()
 {
 	fprintf(stderr, "Recv timed out\n");
 	exit(1);
 }
 
-void
-server_main()
+static void
+server_lat_udp_main()
 {
 	char	*buf = (char*)valloc(MAX_MSIZE);
 	int     sock, sent, namelen, seq = 0;

@@ -4,7 +4,7 @@
 extern	int	get_enough(int);
 
 int
-main()
+enough_main()
 {
 	putenv("LOOP_O=0.0");
 	putenv("TIMING_O=0.0");

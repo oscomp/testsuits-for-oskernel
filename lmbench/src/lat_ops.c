@@ -16,14 +16,14 @@
  * and overlap adjacent operations to get the maximal throughput
  * from the system.  In addition, we are using relatively short
  * vectors so these operations should be going to/from L1 (or
- * possibly L2) cache, rather than main memory, which should
+ * possibly L2) cache, rather than lat_ops_main memory, which should
  * reduce or eliminate the memory overheads.
  *
  * The vector operations use a slightly unrolled loop because
  * this is common in scientific codes that do these sorts of
  * operations.
  */
-char	*id = "$Id$\n";
+static char	*id = "$Id$\n";
 
 #include "bench.h"
 
@@ -38,7 +38,7 @@ struct _state {
 #define TEN(a) a a a a a a a a a a
 #define HUNDRED(a) TEN(TEN(a))
 
-void
+static void
 float_initialize(iter_t iterations, void* cookie)
 {
 	struct _state *pState = (struct _state*)cookie;
@@ -54,7 +54,7 @@ float_initialize(iter_t iterations, void* cookie)
 	}
 }
 
-void
+static void
 double_initialize(iter_t iterations, void* cookie)
 {
 	struct _state *pState = (struct _state*)cookie;
@@ -68,7 +68,7 @@ double_initialize(iter_t iterations, void* cookie)
 	}
 }
 
-void
+static void
 cleanup(iter_t iterations, void* cookie)
 {
 	struct _state *pState = (struct _state*)cookie;
@@ -79,7 +79,7 @@ cleanup(iter_t iterations, void* cookie)
 		free(pState->data);
 }
 
-void
+static void
 do_integer_bitwise(iter_t iterations, void* cookie)
 {
 	struct _state *pState = (struct _state*)cookie;
@@ -92,7 +92,7 @@ do_integer_bitwise(iter_t iterations, void* cookie)
 	use_int(r);
 }
 
-void
+static void
 do_integer_add(iter_t iterations, void* cookie)
 {
 	struct _state *pState = (struct _state*)cookie;
@@ -105,7 +105,7 @@ do_integer_add(iter_t iterations, void* cookie)
 	use_int(a+b);
 }
 
-void
+static void
 do_integer_mul(iter_t iterations, void* cookie)
 {
 	struct _state *pState = (struct _state*)cookie;
@@ -120,7 +120,7 @@ do_integer_mul(iter_t iterations, void* cookie)
 	use_int(r);
 }
 
-void
+static void
 do_integer_div(iter_t iterations, void* cookie)
 {
 	struct _state *pState = (struct _state*)cookie;
@@ -133,7 +133,7 @@ do_integer_div(iter_t iterations, void* cookie)
 	use_int(r);
 }
 
-void
+static void
 do_integer_mod(iter_t iterations, void* cookie)
 {
 	struct _state *pState = (struct _state*)cookie;
@@ -146,7 +146,7 @@ do_integer_mod(iter_t iterations, void* cookie)
 	use_int(r);
 }
 
-void
+static void
 do_int64_bitwise(iter_t iterations, void* cookie)
 {
 	struct _state *pState = (struct _state*)cookie;
@@ -161,7 +161,7 @@ do_int64_bitwise(iter_t iterations, void* cookie)
 	use_int((int)r);
 }
 
-void
+static void
 do_int64_add(iter_t iterations, void* cookie)
 {
 	struct _state *pState = (struct _state*)cookie;
@@ -177,7 +177,7 @@ do_int64_add(iter_t iterations, void* cookie)
 	use_int((int)a+(int)b);
 }
 
-void
+static void
 do_int64_mul(iter_t iterations, void* cookie)
 {
 	struct _state *pState = (struct _state*)cookie;
@@ -195,7 +195,7 @@ do_int64_mul(iter_t iterations, void* cookie)
 	use_int((int)r);
 }
 
-void
+static void
 do_int64_div(iter_t iterations, void* cookie)
 {
 	struct _state *pState = (struct _state*)cookie;
@@ -211,7 +211,7 @@ do_int64_div(iter_t iterations, void* cookie)
 	use_int((int)r);
 }
 
-void
+static void
 do_int64_mod(iter_t iterations, void* cookie)
 {
 	struct _state *pState = (struct _state*)cookie;
@@ -224,7 +224,7 @@ do_int64_mod(iter_t iterations, void* cookie)
 	use_int((int)r);
 }
 
-void
+static void
 do_float_add(iter_t iterations, void* cookie)
 {
 	struct _state *pState = (struct _state*)cookie;
@@ -239,7 +239,7 @@ do_float_add(iter_t iterations, void* cookie)
 	use_int((int)g);
 }
 
-void
+static void
 do_float_mul(iter_t iterations, void* cookie)
 {
 	struct _state *pState = (struct _state*)cookie;
@@ -254,7 +254,7 @@ do_float_mul(iter_t iterations, void* cookie)
 	use_int((int)g);
 }
 
-void
+static void
 do_float_div(iter_t iterations, void* cookie)
 {
 	struct _state *pState = (struct _state*)cookie;
@@ -268,7 +268,7 @@ do_float_div(iter_t iterations, void* cookie)
 	use_int((int)g);
 }
 
-void
+static void
 do_double_add(iter_t iterations, void* cookie)
 {
 	struct _state *pState = (struct _state*)cookie;
@@ -283,7 +283,7 @@ do_double_add(iter_t iterations, void* cookie)
 	use_int((int)g);
 }
 
-void
+static void
 do_double_mul(iter_t iterations, void* cookie)
 {
 	struct _state *pState = (struct _state*)cookie;
@@ -298,7 +298,7 @@ do_double_mul(iter_t iterations, void* cookie)
 	use_int((int)g);
 }
 
-void
+static void
 do_double_div(iter_t iterations, void* cookie)
 {
 	struct _state *pState = (struct _state*)cookie;
@@ -312,7 +312,7 @@ do_double_div(iter_t iterations, void* cookie)
 	use_int((int)g);
 }
 
-void
+static void
 do_float_bogomflops(iter_t iterations, void* cookie)
 {
 	struct _state *pState = (struct _state*)cookie;
@@ -337,7 +337,7 @@ do_float_bogomflops(iter_t iterations, void* cookie)
 	}
 }
 
-void
+static void
 do_double_bogomflops(iter_t iterations, void* cookie)
 {
 	struct _state *pState = (struct _state*)cookie;
@@ -363,7 +363,7 @@ do_double_bogomflops(iter_t iterations, void* cookie)
 }
 
 int
-main(int ac, char **av)
+lat_ops_main(int ac, char **av)
 {
 	int	__n = 1;
 	int	c, i, j;

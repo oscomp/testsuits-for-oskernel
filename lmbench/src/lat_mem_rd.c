@@ -12,20 +12,20 @@
  * (2) the version in the sccsid below is included in the report.
  * Support for this development by Sun Microsystems is gratefully acknowledged.
  */
-char	*id = "$Id: s.lat_mem_rd.c 1.13 98/06/30 16:13:49-07:00 lm@lm.bitmover.com $\n";
+static char	*id = "$Id: s.lat_mem_rd.c 1.13 98/06/30 16:13:49-07:00 lm@lm.bitmover.com $\n";
 
 #include "bench.h"
 #define STRIDE  (512/sizeof(char *))
 #define	LOWER	512
-void	loads(size_t len, size_t range, size_t stride, 
+static void	loads(size_t len, size_t range, size_t stride, 
 	      int parallel, int warmup, int repetitions);
 size_t	step(size_t k);
-void	initialize(iter_t iterations, void* cookie);
+static void	initialize(iter_t iterations, void* cookie);
 
 benchmp_f	fpInit = stride_initialize;
 
 int
-main(int ac, char **av)
+lat_mem_rd_main(int ac, char **av)
 {
 	int	i;
 	int	c;
@@ -91,7 +91,7 @@ main(int ac, char **av)
 #define	HUNDRED	FIFTY FIFTY
 
 
-void
+static void
 benchmark_loads(iter_t iterations, void *cookie)
 {
 	struct mem_state* state = (struct mem_state*)cookie;
@@ -110,7 +110,7 @@ benchmark_loads(iter_t iterations, void *cookie)
 }
 
 
-void
+static void
 loads(size_t len, size_t range, size_t stride, 
 	int parallel, int warmup, int repetitions)
 {

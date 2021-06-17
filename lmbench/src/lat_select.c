@@ -8,15 +8,15 @@
  * (1) the benchmark is unmodified, and
  * (2) the version in the sccsid below is included in the report.
  */
-char	*id = "$Id$\n";
+static char	*id = "$Id$\n";
 
 #include "bench.h"
 
-void initialize(iter_t iterations, void *cookie);
-void cleanup(iter_t iterations, void *cookie);
-void doit(iter_t iterations, void *cookie);
-void writer(int w, int r);
-void server(void* cookie);
+static void initialize(iter_t iterations, void *cookie);
+static void cleanup(iter_t iterations, void *cookie);
+static void doit(iter_t iterations, void *cookie);
+static void writer(int w, int r);
+static void server(void* cookie);
 
 typedef int (*open_f)(void* cookie);
 int  open_file(void* cookie);
@@ -34,7 +34,7 @@ typedef struct _state {
 } state_t;
 
 int
-main(int ac, char **av)
+lat_select_main(int ac, char **av)
 {
 	state_t state;
 	int parallel = 1;
@@ -95,7 +95,7 @@ main(int ac, char **av)
 	exit(0);
 }
 
-void
+static void
 server(void* cookie)
 {
 	int pid;
@@ -158,7 +158,7 @@ open_file(void* cookie)
 	return open(state->fname, O_RDONLY);
 }
 
-void
+static void
 doit(iter_t iterations, void * cookie)
 {
 	state_t * 	state = (state_t *)cookie;
@@ -175,7 +175,7 @@ doit(iter_t iterations, void * cookie)
 	}
 }
 
-void
+static void
 initialize(iter_t iterations, void *cookie)
 {
 	char	c;
@@ -205,7 +205,7 @@ initialize(iter_t iterations, void *cookie)
 		exit(1);
 }
 
-void
+static void
 cleanup(iter_t iterations, void *cookie)
 {
 	int	i;

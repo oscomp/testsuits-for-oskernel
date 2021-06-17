@@ -12,14 +12,14 @@
  * (2) the version in the sccsid below is included in the report.
  * Support for this development by Sun Microsystems is gratefully acknowledged.
  */
-char	*id = "$Id$\n";
+static char	*id = "$Id$\n";
 
 #include "bench.h"
 
-void	reader(iter_t iterations, void * cookie);
-void	writer(int controlfd, int writefd, char* buf, void* cookie);
+static void	reader(iter_t iterations, void * cookie);
+static void	writer(int controlfd, int writefd, char* buf, void* cookie);
 
-size_t	XFER	= 10*1024*1024;
+static size_t	XFER	= 10*1024*1024;
 
 struct _state {
 	int	pid;
@@ -31,7 +31,7 @@ struct _state {
 	int	initerr;
 };
 
-void 
+static void
 initialize(iter_t iterations, void* cookie)
 {
 	struct _state* state = (struct _state*)cookie;
@@ -73,7 +73,7 @@ initialize(iter_t iterations, void* cookie)
 	close(state->control[0]);
 	close(state->pipes[1]);
 }
-void 
+static void
 cleanup(iter_t iterations, void*  cookie)
 {
 	struct _state* state = (struct _state*)cookie;
@@ -89,7 +89,7 @@ cleanup(iter_t iterations, void*  cookie)
 	state->pid = 0;
 }
 
-void 
+static void
 reader(iter_t iterations, void* cookie)
 {
 	struct _state* state = (struct _state*)cookie;
@@ -107,7 +107,7 @@ reader(iter_t iterations, void* cookie)
 	}
 }
 
-void
+static void
 writer(int controlfd, int writefd, char* buf, void* cookie)
 {
 	size_t	todo, n, done;
@@ -128,7 +128,7 @@ writer(int controlfd, int writefd, char* buf, void* cookie)
 }
 
 int
-main(int argc, char *argv[])
+bw_unix_main(int argc, char *argv[])
 {
 	struct _state state;
 	int parallel = 1;

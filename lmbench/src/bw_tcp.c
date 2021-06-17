@@ -13,7 +13,7 @@
  * (2) the version in the sccsid below is included in the report.
  * Support for this development by Sun Microsystems is gratefully acknowledged.
  */
-char	*id = "$Id$\n";
+static char	*id = "$Id$\n";
 #include "bench.h"
 
 typedef struct _state {
@@ -25,16 +25,16 @@ typedef struct _state {
 	char	*buf;
 } state_t;
 
-void	server_main();
-void	client_main(int parallel, state_t *state);
-void	source(int data);
+static void	server_bw_tcp_main();
+static void	client_bw_tcp_main(int parallel, state_t *state);
+static void	source(int data);
 
-void	initialize(iter_t iterations, void* cookie);
-void	loop_transfer(iter_t iterations, void *cookie);
-void	cleanup(iter_t iterations, void* cookie);
+static void	initialize(iter_t iterations, void* cookie);
+static void	loop_transfer(iter_t iterations, void *cookie);
+static void	cleanup(iter_t iterations, void* cookie);
 
 int
-main(int ac, char **av)
+bw_tcp_main(int ac, char **av)
 {
 	int	parallel = 1;
 	int	warmup = LONGER;
@@ -52,7 +52,7 @@ main(int ac, char **av)
 		switch(c) {
 		case 's': /* Server */
 			if (fork() == 0) {
-				server_main();
+				server_bw_tcp_main();
 			}
 			exit(0);
 			break;
@@ -118,7 +118,7 @@ main(int ac, char **av)
 	}
 }
 
-void
+static void
 initialize(iter_t iterations, void *cookie)
 {
 	int	c;
@@ -163,7 +163,7 @@ loop_transfer(iter_t iterations, void *cookie)
 	}
 }
 
-void
+static void
 cleanup(iter_t iterations, void* cookie)
 {
 	state_t *state = (state_t *) cookie;
@@ -174,8 +174,8 @@ cleanup(iter_t iterations, void* cookie)
 	(void)close(state->sock);
 }
 
-void
-server_main()
+static void
+server_bw_tcp_main()
 {
 	int	data, newdata;
 
@@ -209,7 +209,7 @@ server_main()
  * data in message-size sized packets until
  * the socket goes away.
  */
-void
+static void
 source(int data)
 {
 	size_t	count, m;

@@ -10,7 +10,7 @@
  * (2) the version in the sccsid below is included in the report.
  * Support for this development by Sun Microsystems is gratefully acknowledged.
  */
-char	*id = "$Id$\n";
+static char	*id = "$Id$\n";
 #include "bench.h"
 
 struct _state {
@@ -19,12 +19,12 @@ struct _state {
 	int	msize;
 	char*	buf;
 };
-void	initialize(iter_t iterations, void* cookie);
-void	benchmark(iter_t iterations, void* cookie);
-void	cleanup(iter_t iterations, void* cookie);
+static void	initialize(iter_t iterations, void* cookie);
+static void	benchmark(iter_t iterations, void* cookie);
+static void	cleanup(iter_t iterations, void* cookie);
 
 int
-main(int ac, char **av)
+lat_unix_main(int ac, char **av)
 {
 	int parallel = 1;
 	int warmup = 0;
@@ -67,7 +67,7 @@ main(int ac, char **av)
 	return(0);
 }
 
-void
+static void
 initialize(iter_t iterations, void* cookie)
 {
 	struct _state* pState = (struct _state*)cookie;
@@ -99,7 +99,7 @@ initialize(iter_t iterations, void* cookie)
 	exit(0);
 }
 
-void
+static void
 benchmark(iter_t iterations, void* cookie)
 {
 	struct _state* pState = (struct _state*)cookie;
@@ -114,7 +114,7 @@ benchmark(iter_t iterations, void* cookie)
 	}
 }
 
-void
+static void
 cleanup(iter_t iterations, void* cookie)
 {
 	struct _state* pState = (struct _state*)cookie;

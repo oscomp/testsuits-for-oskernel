@@ -8,7 +8,7 @@
  * (2) the version in the sccsid below is included in the report.
  * Support for this development by Sun Microsystems is gratefully acknowledged.
  */
-char	*id = "$Id$\n";
+static char	*id = "$Id$\n";
 
 #include "bench.h"
 
@@ -20,8 +20,8 @@ struct _state {
 	double*	double_data;
 };
 
-void	initialize(iter_t iterations, void* cookie);
-void	cleanup(iter_t iterations, void* cookie);
+static void	initialize(iter_t iterations, void* cookie);
+static void	cleanup(iter_t iterations, void* cookie);
 
 #define	FIVE(m)		m m m m m
 #define	TEN(m)		FIVE(m) FIVE(m)
@@ -358,7 +358,7 @@ PARALLEL_BENCHMARKS(double_div)
 #undef	SAVE
 
 
-void
+static void
 initialize(iter_t iterations, void* cookie)
 {
 	struct _state *state = (struct _state*)cookie;
@@ -375,7 +375,7 @@ initialize(iter_t iterations, void* cookie)
 	}
 }
 
-void
+static void
 cleanup(iter_t iterations, void* cookie)
 {
 	struct _state *state = (struct _state*)cookie;
@@ -388,7 +388,7 @@ cleanup(iter_t iterations, void* cookie)
 
 
 int
-main(int ac, char **av)
+par_ops_main(int ac, char **av)
 {
 	int	c;
 	int	warmup = 0;

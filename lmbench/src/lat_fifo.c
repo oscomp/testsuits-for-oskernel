@@ -8,17 +8,17 @@
  * (1) the benchmark is unmodified, and
  * (2) the version in the sccsid below is included in the report.
  */
-char	*id = "$Id$\n";
+static char	*id = "$Id$\n";
 
 #include "bench.h"
 
 #define	F1	"/tmp/lmbench_f1.%d"
 #define	F2	"/tmp/lmbench_f2.%d"
 
-void initialize(iter_t iterations, void *cookie);
-void cleanup(iter_t iterations, void *cookie);
-void doit(iter_t iterations, void *cookie);
-void writer(int wr, int rd);
+static void initialize(iter_t iterations, void *cookie);
+static void cleanup(iter_t iterations, void *cookie);
+static void doit(iter_t iterations, void *cookie);
+static void writer(int wr, int rd);
 
 typedef struct _state {
 	char	filename1[256];
@@ -29,7 +29,7 @@ typedef struct _state {
 } state_t;
 
 int 
-main(int ac, char **av)
+lat_fifo_main(int ac, char **av)
 {
 	state_t state;
 	int parallel = 1;
@@ -67,7 +67,7 @@ main(int ac, char **av)
 	return (0);
 }
 
-void 
+static void
 initialize(iter_t iterations, void *cookie)
 {
 	char	c;
@@ -113,7 +113,7 @@ initialize(iter_t iterations, void *cookie)
 	}
 }
 
-void 
+static void
 cleanup(iter_t iterations, void * cookie)
 {
 	state_t * state = (state_t *)cookie;
@@ -132,7 +132,7 @@ cleanup(iter_t iterations, void * cookie)
 	}
 }
 
-void 
+static void
 doit(register iter_t iterations, void *cookie)
 {
 	state_t *state = (state_t *) cookie;
@@ -150,7 +150,7 @@ doit(register iter_t iterations, void *cookie)
 	}
 }
 
-void 
+static void
 writer(register int w, register int r)
 {
 	char		c;

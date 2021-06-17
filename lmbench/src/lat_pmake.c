@@ -10,14 +10,14 @@
  * (2) the version in the sccsid below is included in the report.
  * Support for this development by Sun Microsystems is gratefully acknowledged.
  */
-char	*id = "$Id$\n";
+static char	*id = "$Id$\n";
 
 #include "bench.h"
 
-void setup(iter_t iterations, void* cookie);
-void bench(iter_t iterations, void *cookie);
-void cleanup(iter_t iterations, void *cookie);
-void work(iter_t iterations, void *cookie);
+static void setup(iter_t iterations, void* cookie);
+static void bench(iter_t iterations, void *cookie);
+static void cleanup(iter_t iterations, void *cookie);
+static void work(iter_t iterations, void *cookie);
 
 typedef struct _state {
 	int	jobs;		/* number of jobs to create */
@@ -28,7 +28,7 @@ typedef struct _state {
 } state_t;
 
 int 
-main(int ac, char **av)
+lat_pmake_main(int ac, char **av)
 {
 	state_t state;
 	int parallel = 1;
@@ -79,7 +79,7 @@ main(int ac, char **av)
 	return (0);
 }
 
-void
+static void
 setup(iter_t iterations, void* cookie)
 {
 	state_t *state = (state_t *) cookie;
@@ -93,7 +93,7 @@ setup(iter_t iterations, void* cookie)
 	handle_scheduler(benchmp_childid(), 0, state->jobs);
 }
 
-void 
+static void
 bench(register iter_t iterations, void *cookie)
 {
 	int	i;
@@ -129,7 +129,7 @@ bench(register iter_t iterations, void *cookie)
 	}
 }
 
-void 
+static void
 cleanup(register iter_t iterations, void *cookie)
 {
 	int	i;
@@ -144,7 +144,7 @@ cleanup(register iter_t iterations, void *cookie)
 	}
 }
 
-void
+static void
 work(register iter_t iterations, void* cookie)
 {
 	state_t *state = (state_t *) cookie;

@@ -8,7 +8,7 @@
  * (1) the benchmark is unmodified, and
  * (2) the version in the sccsid below is included in the report.
  */
-char	*id = "$Id$\n";
+static char	*id = "$Id$\n";
 
 #include "bench.h"
 
@@ -27,7 +27,7 @@ void	set_alarm(uint64 usecs);
 void	clear_alarm();
 
 int
-main(int ac, char **av)
+memsize_main(int ac, char **av)
 {
 	char	*where;
 	char	*tmp;

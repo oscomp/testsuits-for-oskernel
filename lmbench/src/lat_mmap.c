@@ -12,7 +12,7 @@
  * (2) the version in the sccsid below is included in the report.
  * Support for this development by Sun Microsystems is gratefully acknowledged.
  */
-char	*id = "$Id$\n";
+static char	*id = "$Id$\n";
 
 #include "bench.h"
 
@@ -32,12 +32,12 @@ typedef struct _state {
 	char	*name;
 } state_t;
 
-void	init(iter_t iterations, void *cookie);
-void	cleanup(iter_t iterations, void *cookie);
-void	domapping(iter_t iterations, void * cookie);
+static void	init(iter_t iterations, void *cookie);
+static void	cleanup(iter_t iterations, void *cookie);
+static void	domapping(iter_t iterations, void * cookie);
 
 int
-main(int ac, char **av)
+lat_mmap_main(int ac, char **av)
 {
 	state_t state;
 	int	parallel = 1;
@@ -94,7 +94,7 @@ main(int ac, char **av)
 	return (0);
 }
 
-void
+static void
 init(iter_t iterations, void* cookie)
 {
 	state_t *state = (state_t *) cookie;
@@ -124,7 +124,7 @@ init(iter_t iterations, void* cookie)
 	}
 }
 
-void
+static void
 cleanup(iter_t iterations, void* cookie)
 {
 	state_t *state = (state_t *) cookie;
@@ -138,7 +138,7 @@ cleanup(iter_t iterations, void* cookie)
  * This alg due to Linus.  The goal is to have both sparse and full
  * mappings reported.
  */
-void
+static void
 domapping(iter_t iterations, void *cookie)
 {
 	state_t *state = (state_t *) cookie;

@@ -10,7 +10,7 @@
  * (2) the version in the sccsid below is included in the report.
  * Support for this development by Sun Microsystems is gratefully acknowledged.
  */
-char	*id = "$Id$\n";
+static char	*id = "$Id$\n";
 
 #include "bench.h"
 
@@ -25,7 +25,7 @@ void compute_times(struct mem_state* state, double* tlb_time, double* cache_time
  * 3) Pages are an even multiple of cache lines
  */
 int
-main(int ac, char **av)
+par_mem_main(int ac, char **av)
 {
 	int	i;
 	int	c;

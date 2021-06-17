@@ -27,7 +27,7 @@ int	zone(char *disk, int oflag, int bsize);
 int	seek(char *disk, int oflag);
 
 int
-main(int ac, char **av)
+disk_main(int ac, char **av)
 {
 	fprintf(stderr, "\"Seek times for %s\n", av[1]);
 	seek(av[1], 0);

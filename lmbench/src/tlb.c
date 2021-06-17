@@ -10,7 +10,7 @@
  * (2) the version in the sccsid below is included in the report.
  * Support for this development by Sun Microsystems is gratefully acknowledged.
  */
-char	*id = "$Id$\n";
+static char	*id = "$Id$\n";
 
 #include "bench.h"
 
@@ -29,7 +29,7 @@ void compute_times(int pages, int warmup, int repetitions,
  * 3) Pages are an even multiple of cache lines
  */
 int
-main(int ac, char **av)
+tlb_main(int ac, char **av)
 {
 	int	i, l, len, tlb, maxpages;
 	int	c;

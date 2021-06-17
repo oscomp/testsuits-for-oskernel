@@ -6,7 +6,7 @@
  * (1) the benchmark is unmodified, and
  * (2) the version in the sccsid below is included in the report.
  */
-char	*id = "$Id: s.lat_syscall.c 1.11 97/06/15 22:38:58-07:00 lm $\n";
+static char	*id = "$Id: s.lat_syscall.c 1.11 97/06/15 22:38:58-07:00 lm $\n";
 
 #include "bench.h"
 #define	FNAME "/usr/include/linux/types.h"
@@ -16,7 +16,7 @@ struct _state {
 	char* file;
 };
 
-void
+static void
 do_getppid(iter_t iterations, void *cookie)
 {
 	struct _state *pState = (struct _state*)cookie;
@@ -27,7 +27,7 @@ do_getppid(iter_t iterations, void *cookie)
 	}
 }
 
-void
+static void
 do_write(iter_t iterations, void *cookie)
 {
 	struct _state *pState = (struct _state*)cookie;
@@ -41,7 +41,7 @@ do_write(iter_t iterations, void *cookie)
 	}
 }
 
-void
+static void
 do_read(iter_t iterations, void *cookie)
 {
 	struct _state *pState = (struct _state*)cookie;
@@ -55,7 +55,7 @@ do_read(iter_t iterations, void *cookie)
 	}
 }
 
-void
+static void
 do_stat(iter_t iterations, void *cookie)
 {
 	struct _state *pState = (struct _state*)cookie;
@@ -69,7 +69,7 @@ do_stat(iter_t iterations, void *cookie)
 	}
 }
 
-void
+static void
 do_fstat(iter_t iterations, void *cookie)
 {
 	struct _state *pState = (struct _state*)cookie;
@@ -83,7 +83,7 @@ do_fstat(iter_t iterations, void *cookie)
 	}
 }
 
-void
+static void
 do_openclose(iter_t iterations, void *cookie)
 {
 	struct _state *pState = (struct _state*)cookie;
@@ -100,7 +100,7 @@ do_openclose(iter_t iterations, void *cookie)
 }
 
 int
-main(int ac, char **av)
+lat_syscall_main(int ac, char **av)
 {
 	int parallel = 1;
 	int warmup = 0;

@@ -9,22 +9,22 @@
  * (2) the version in the sccsid below is included in the report.
  * Support for this development by Hewlett-Packard is gratefully acknowledged.
  */
-char	*id = "$Id$\n";
+static char	*id = "$Id$\n";
 
 #include "bench.h"
 
 #ifdef HAVE_DRAND48
-void bench_drand48(iter_t iterations, void *cookie);
-void bench_lrand48(iter_t iterations, void *cookie);
+static void bench_drand48(iter_t iterations, void *cookie);
+static void bench_lrand48(iter_t iterations, void *cookie);
 #endif
 #ifdef HAVE_RAND
-void bench_rand(iter_t iterations, void *cookie);
+static void bench_rand(iter_t iterations, void *cookie);
 #endif
 #ifdef HAVE_RANDOM
-void bench_random(iter_t iterations, void *cookie);
+static void bench_random(iter_t iterations, void *cookie);
 #endif
 int 
-main(int ac, char **av)
+lat_rand_main(int ac, char **av)
 {
 	int parallel = 1;
 	int warmup = 0;
@@ -76,7 +76,7 @@ main(int ac, char **av)
 }
 
 #ifdef HAVE_DRAND48
-void 
+static void
 bench_drand48(register iter_t iterations, void *cookie)
 {
 	register double v = 0.0;
@@ -86,7 +86,7 @@ bench_drand48(register iter_t iterations, void *cookie)
 	use_int((int)v);
 }
 
-void 
+static void
 bench_lrand48(register iter_t iterations, void *cookie)
 {
 	register long v = 0.0;
@@ -97,7 +97,7 @@ bench_lrand48(register iter_t iterations, void *cookie)
 }
 #endif /* HAVE_DRAND48 */
 #ifdef HAVE_RAND
-void 
+static void
 bench_rand(register iter_t iterations, void *cookie)
 {
 	register int v = 0.0;
@@ -108,7 +108,7 @@ bench_rand(register iter_t iterations, void *cookie)
 }
 #endif /* HAVE_RAND */
 #ifdef HAVE_RANDOM
-void 
+static void
 bench_random(register iter_t iterations, void *cookie)
 {
 	register int v = 0.0;

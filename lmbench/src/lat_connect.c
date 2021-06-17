@@ -21,18 +21,18 @@
  * (2) the version in the sccsid below is included in the report.
  * Support for this development by Sun Microsystems is gratefully acknowledged.
  */
-char	*id = "$Id$\n";
+static char	*id = "$Id$\n";
 #include "bench.h"
 
 typedef struct _state {
 	char	*server;
 } state_t;
 
-void	doclient(iter_t iterations, void * cookie);
-void	server_main();
+static void	doclient(iter_t iterations, void * cookie);
+static void	server_lat_connect_main();
 
 int
-main(int ac, char **av)
+lat_connect_main(int ac, char **av)
 {
 	state_t state;
 	int	repetitions = TRIES;
@@ -44,7 +44,7 @@ main(int ac, char **av)
 		switch(c) {
 		case 's': /* Server */
 			if (fork() == 0) {
-				server_main();
+				server_lat_connect_main();
 			}
 			exit(0);
 		case 'S': /* shutdown serverhost */
@@ -77,7 +77,7 @@ main(int ac, char **av)
 	exit(0);
 }
 
-void
+static void
 doclient(iter_t iterations, void *cookie)
 {
 	state_t *state = (state_t *) cookie;
@@ -90,8 +90,8 @@ doclient(iter_t iterations, void *cookie)
 	}
 }
 
-void
-server_main()
+static void
+server_lat_connect_main()
 {
 	int     newsock, sock;
 	char	c ='1';

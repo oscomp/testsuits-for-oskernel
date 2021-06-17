@@ -101,7 +101,7 @@
  *
  *******************************************************************
  */
-char	*id = "$Id$\n";
+static char	*id = "$Id$\n";
 
 #include "bench.h"
 #include <math.h>
@@ -440,7 +440,7 @@ print_data(double mhz, result_t* data)
 }
 
 int
-main(int ac, char **av)
+mhz_main(int ac, char **av)
 {
 	int	c, i, j, k, mhz = -1;
 	double	runtime;

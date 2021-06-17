@@ -2,7 +2,7 @@
  * Benchmark creates & deletes.
  */
 
-char	*id = "$Id$\n";
+static char	*id = "$Id$\n";
 
 #include "bench.h"
 
@@ -16,18 +16,18 @@ struct _state {
 	char**	dirs;
 	size_t	size;
 };
-void	measure(size_t size, 
+static void	measure(size_t size, 
 		int parallel, int warmup, int repetitions, void* cookie);
-void	mkfile(char* s, size_t size);
-void	setup_names(iter_t iterations, void* cookie);
-void	cleanup_names(iter_t iterations, void* cookie);
-void	setup_rm(iter_t iterations, void* cookie);
-void	cleanup_mk(iter_t iterations, void* cookie);
-void	benchmark_mk(iter_t iterations, void* cookie);
-void	benchmark_rm(iter_t iterations, void* cookie);
+static void	mkfile(char* s, size_t size);
+static void	setup_names(iter_t iterations, void* cookie);
+static void	cleanup_names(iter_t iterations, void* cookie);
+static void	setup_rm(iter_t iterations, void* cookie);
+static void	cleanup_mk(iter_t iterations, void* cookie);
+static void	benchmark_mk(iter_t iterations, void* cookie);
+static void	benchmark_rm(iter_t iterations, void* cookie);
 
 int
-main(int ac, char **av)
+lat_fs_main(int ac, char **av)
 {
 	int i;
 	int parallel = 1;
@@ -84,7 +84,7 @@ main(int ac, char **av)
 	return(0);
 }
 
-void
+static void
 measure(size_t size, int parallel, int warmup, int repetitions, void* cookie)
 {
 	fprintf(stderr, "%luk", size>>10);
@@ -108,7 +108,7 @@ measure(size_t size, int parallel, int warmup, int repetitions, void* cookie)
 	fprintf(stderr, "\n");
 }
 
-void
+static void
 mkfile(char *name, size_t size)
 {
 	size_t	chunk;
@@ -123,7 +123,7 @@ mkfile(char *name, size_t size)
 	close(fd);
 }
 
-void
+static void
 setup_names_recurse(iter_t* foff, iter_t* doff, int depth, struct _state* state)
 {
 	long	i, ndirs, count;
@@ -149,7 +149,7 @@ setup_names_recurse(iter_t* foff, iter_t* doff, int depth, struct _state* state)
 	}
 }
 
-void
+static void
 setup_names(iter_t iterations, void* cookie)
 {
 	long	i, ndirs, depth;
@@ -200,7 +200,7 @@ setup_names(iter_t iterations, void* cookie)
 	}
 }
 
-void
+static void
 cleanup_names(iter_t iterations, void* cookie)
 {
 	long	i;
@@ -224,7 +224,7 @@ cleanup_names(iter_t iterations, void* cookie)
 	state->ndirs = 0;
 }
 
-void
+static void
 setup_rm(iter_t iterations, void* cookie)
 {
 	if (!iterations) return;
@@ -233,7 +233,7 @@ setup_rm(iter_t iterations, void* cookie)
 	benchmark_mk(iterations, cookie);
 }
 
-void
+static void
 cleanup_mk(iter_t iterations, void* cookie)
 {
 	if (!iterations) return;
@@ -242,7 +242,7 @@ cleanup_mk(iter_t iterations, void* cookie)
 	cleanup_names(iterations, cookie);
 }
 
-void
+static void
 benchmark_mk(iter_t iterations, void* cookie)
 {
 	struct _state* state = (struct _state*)cookie;
@@ -256,7 +256,7 @@ benchmark_mk(iter_t iterations, void* cookie)
 	}
 }
 
-void
+static void
 benchmark_rm(iter_t iterations, void* cookie)
 {
 	struct _state* state = (struct _state*)cookie;

@@ -9,7 +9,7 @@
  * (2) the version in the sccsid below is included in the report.
  * Support for this development by Sun Microsystems is gratefully acknowledged.
  */
-char	*id = "$Id: lat_pipe.c,v 1.8 1997/06/16 05:38:58 lm Exp $\n";
+static char	*id = "$Id: lat_pipe.c,v 1.8 1997/06/16 05:38:58 lm Exp $\n";
 
 #include "bench.h"
 
@@ -40,11 +40,11 @@ struct _state {
 	int	fd2;
 };
 
-void initialize(iter_t iterations, void* cookie);
-void benchmark(iter_t iterations, void* cookie);
-void cleanup(iter_t iterations, void* cookie);
+static void initialize(iter_t iterations, void* cookie);
+static void benchmark(iter_t iterations, void* cookie);
+static void cleanup(iter_t iterations, void* cookie);
 
-void
+static void
 procA(struct _state *state)
 {
 	if (waiton(state->fd1) == -1) {
@@ -69,7 +69,7 @@ procA(struct _state *state)
 	}
 }
 
-void
+static void
 procB(struct _state *state)
 {
 	if (release(state->fd1) == -1) {
@@ -94,7 +94,7 @@ procB(struct _state *state)
 	}
 }
 
-void 
+static void
 initialize(iter_t iterations, void* cookie)
 {
 	char	buf[10000];
@@ -152,7 +152,7 @@ initialize(iter_t iterations, void* cookie)
 	}
 }
 
-void
+static void
 benchmark(iter_t iterations, void* cookie)
 {
 	struct _state* state = (struct _state*)cookie;
@@ -162,7 +162,7 @@ benchmark(iter_t iterations, void* cookie)
 	}
 }
 
-void
+static void
 cleanup(iter_t iterations, void* cookie)
 {
 	int i;
@@ -183,7 +183,7 @@ cleanup(iter_t iterations, void* cookie)
 }
 
 int
-main(int ac, char **av)
+lat_fcntl_main(int ac, char **av)
 {
 	int	i;
 	int	c;

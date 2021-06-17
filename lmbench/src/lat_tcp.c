@@ -12,7 +12,7 @@
  * (2) the version in the sccsid below is included in the report.
  * Support for this development by Sun Microsystems is gratefully acknowledged.
  */
-char	*id = "$Id$\n";
+static char	*id = "$Id$\n";
 
 #include "bench.h"
 
@@ -23,14 +23,14 @@ typedef struct _state {
 	char	*buf;
 } state_t;
 
-void	init(iter_t iterations, void* cookie);
-void	cleanup(iter_t iterations, void* cookie);
-void	doclient(iter_t iterations, void* cookie);
-void	server_main();
-void	doserver(int sock);
+static void	init(iter_t iterations, void* cookie);
+static void	cleanup(iter_t iterations, void* cookie);
+static void	doclient(iter_t iterations, void* cookie);
+static void	server_lat_tcp_main();
+static void	doserver(int sock);
 
 int
-main(int ac, char **av)
+lat_tcp_main(int ac, char **av)
 {
 	state_t state;
 	int	parallel = 1;
@@ -46,7 +46,7 @@ main(int ac, char **av)
 		switch(c) {
 		case 's': /* Server */
 			if (fork() == 0) {
-				server_main();
+				server_lat_tcp_main();
 			}
 			exit(0);
 		case 'S': /* shutdown serverhost */
@@ -89,7 +89,7 @@ main(int ac, char **av)
 	exit(0);
 }
 
-void
+static void
 init(iter_t iterations, void* cookie)
 {
 	state_t *state = (state_t *) cookie;
@@ -103,7 +103,7 @@ init(iter_t iterations, void* cookie)
 	write(state->sock, &msize, sizeof(int));
 }
 
-void
+static void
 cleanup(iter_t iterations, void* cookie)
 {
 	state_t *state = (state_t *) cookie;
@@ -114,7 +114,7 @@ cleanup(iter_t iterations, void* cookie)
 	free(state->buf);
 }
 
-void
+static void
 doclient(iter_t iterations, void* cookie)
 {
 	state_t *state = (state_t *) cookie;
@@ -126,8 +126,8 @@ doclient(iter_t iterations, void* cookie)
 	}
 }
 
-void
-server_main()
+static void
+server_lat_tcp_main()
 {
 	int     newsock, sock;
 
@@ -151,7 +151,7 @@ server_main()
 	/* NOTREACHED */
 }
 
-void
+static void
 doserver(int sock)
 {
 	int	n;

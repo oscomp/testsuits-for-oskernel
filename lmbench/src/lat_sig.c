@@ -13,7 +13,7 @@
  * (1) the benchmark is unmodified, and
  * (2) the version in the sccsid below is included in the report.
  */
-char	*id = "$Id$\n";
+static char	*id = "$Id$\n";
 
 #include "bench.h"
 #include <setjmp.h>
@@ -23,7 +23,7 @@ double	adj;
 void	handler() { }
 jmp_buf	prot_env;
 
-void
+static void
 do_send(iter_t iterations, void* cookie)
 {
 	int	me = getpid();
@@ -33,7 +33,7 @@ do_send(iter_t iterations, void* cookie)
 	}
 }
 
-void
+static void
 do_install(iter_t iterations, void* cookie)
 {
 	struct	sigaction sa, old;
@@ -46,7 +46,7 @@ do_install(iter_t iterations, void* cookie)
 	}
 }
 
-void
+static void
 do_catch(iter_t iterations, void* cookie)
 {
 	int	me = getpid();
@@ -68,7 +68,7 @@ struct _state {
 	char*	where;
 };
 
-void
+static void
 prot() {
 	if (++caught == n) {
 		caught = 0;
@@ -76,7 +76,7 @@ prot() {
 	}
 }
 
-void
+static void
 initialize(iter_t iterations, void* cookie)
 {
 	struct _state* state = (struct _state*)cookie;
@@ -99,7 +99,7 @@ initialize(iter_t iterations, void* cookie)
 	sigaction(SIGBUS, &sa, 0);
 }
 
-void
+static void
 do_prot(iter_t iterations, void* cookie)
 {
 	struct _state* state = (struct _state*)cookie;
@@ -117,7 +117,7 @@ do_prot(iter_t iterations, void* cookie)
 /*
  * Cost of catching the signal less the cost of sending it
  */
-void
+static void
 bench_catch(int parallel, int warmup, int repetitions)
 {
 	uint64 t, send_usecs, send_n;
@@ -140,7 +140,7 @@ bench_catch(int parallel, int warmup, int repetitions)
 	}
 }
 
-void
+static void
 bench_prot(char* fname, int parallel, int warmup, int repetitions)
 {
 	uint64 catch_usecs, catch_n;
@@ -167,7 +167,7 @@ bench_prot(char* fname, int parallel, int warmup, int repetitions)
 
 
 int
-main(int ac, char **av)
+lat_sig_main(int ac, char **av)
 {
 	int parallel = 1;
 	int warmup = 0;

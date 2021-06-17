@@ -10,7 +10,7 @@
  * (2) the version in the sccsid below is included in the report.
  * Support for this development by Sun Microsystems is gratefully acknowledged.
  */
-char	*id = "$Id$\n";
+static char	*id = "$Id$\n";
 
 #include "bench.h"
 
@@ -46,7 +46,7 @@ void sum(iter_t iterations, void* cookie);
  * 3) Pages are an even multiple of cache lines
  */
 int
-main(int ac, char **av)
+stream_main(int ac, char **av)
 {
 	int	i, j, l;
 	int	version = 1;

@@ -1,7 +1,7 @@
 #include "bench.h"
 
 int
-main()
+loop_o_main()
 {
 	printf("%.8f\n", l_overhead());
 	return (0);

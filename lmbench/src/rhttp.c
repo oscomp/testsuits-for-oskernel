@@ -24,12 +24,12 @@
  * (2) the version in the sccsid below is included in the report.
  * Support for this development by Silicon Graphics is gratefully acknowledged.
  */
-char	*id = "$Id$\n";
+static char	*id = "$Id$\n";
 
 #include "bench.h"
 
 int
-main(int ac, char **av)
+rhttp_main(int ac, char **av)
 {
 	char	*name = av[0], *server, *prog;
 	int     i, j;

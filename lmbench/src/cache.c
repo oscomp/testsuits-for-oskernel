@@ -10,7 +10,7 @@
  * (2) the version in the sccsid below is included in the report.
  * Support for this development by Sun Microsystems is gratefully acknowledged.
  */
-char	*id = "$Id$\n";
+static char	*id = "$Id$\n";
 
 #include "bench.h"
 
@@ -85,7 +85,7 @@ mem_benchmark(iter_t iterations, void *cookie)
  * 3) Pages are an even multiple of cache lines
  */
 int
-main(int ac, char **av)
+cache_main(int ac, char **av)
 {
 	int	c;
 	int	i, j, n, start, level, prev, min;
@@ -147,7 +147,7 @@ main(int ac, char **av)
 	     ++level, start = i + 1, prev = i) 
 	{
 		/* 
-		 * performance is not greatly improved over main memory,
+		 * performance is not greatly improved over cache_main memory,
 		 * so it is likely not a cache boundary
 		 */
 		if (r[i].latency / r[n-1].latency > 0.5) break;
@@ -199,7 +199,7 @@ main(int ac, char **av)
 		    i+1, r[levels[i]].len, r[min].latency, line, maxpar);
 	}
 
-	/* Compute memory parallelism for main memory */
+	/* Compute memory parallelism for cache_main memory */
 	j = n - 1;
 	for (i = n - 1; i >= 0; i--) {
 		if (r[i].latency < 0.) continue;

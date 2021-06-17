@@ -9,12 +9,12 @@
  * (2) the version in the sccsid below is included in the report.
  * Support for this development by Sun Microsystems is gratefully acknowledged.
  */
-char	*id = "$Id$\n";
+static char	*id = "$Id$\n";
 
 #include "bench.h"
 
-void bench(iter_t iterations, void *cookie);
-void cleanup(iter_t iterations, void *cookie);
+static void bench(iter_t iterations, void *cookie);
+static void cleanup(iter_t iterations, void *cookie);
 
 typedef struct _state {
 	char**	argv;
@@ -22,7 +22,7 @@ typedef struct _state {
 } state_t;
 
 int 
-main(int ac, char **av)
+lat_cmd_main(int ac, char **av)
 {
 	int c;
 	int i;
@@ -65,7 +65,7 @@ main(int ac, char **av)
 	return (0);
 }
 
-void
+static void
 cleanup(iter_t iterations, void* cookie)
 {
 	state_t* state = (state_t*)cookie;
@@ -79,7 +79,7 @@ cleanup(iter_t iterations, void* cookie)
 	}
 }
 	
-void 
+static void
 bench(register iter_t iterations, void *cookie)
 {
 	state_t *state = (state_t *) cookie;

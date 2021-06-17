@@ -93,7 +93,8 @@ ASMS =  $O/bw_file_rd.s $O/bw_mem.s $O/bw_mmap_rd.s $O/bw_pipe.s 	\
 	$O/rhttp.s $O/timing_o.s $O/tlb.s $O/stream.s			\
 	$O/cache.s $O/lat_dram_page.s $O/lat_pmake.s $O/lat_rand.s	\
 	$O/lat_usleep.s $O/lat_cmd.s
-EXES =	$O/bw_file_rd $O/bw_mem $O/bw_mmap_rd $O/bw_pipe $O/bw_tcp 	\
+EXES    = $O/lmbench_all
+EXEOBJ =	$O/bw_file_rd $O/bw_mem $O/bw_mmap_rd $O/bw_pipe $O/bw_tcp 	\
 	$O/bw_unix $O/hello						\
 	$O/lat_select $O/lat_pipe $O/lat_rpc $O/lat_syscall $O/lat_tcp	\
 	$O/lat_udp $O/lat_mmap $O/mhz $O/lat_proc $O/lat_pagefault	\
@@ -104,6 +105,7 @@ EXES =	$O/bw_file_rd $O/bw_mem $O/bw_mmap_rd $O/bw_pipe $O/bw_tcp 	\
 	$O/lat_fcntl $O/disk $O/lat_unix_connect $O/flushdisk		\
 	$O/lat_ops $O/line $O/tlb $O/par_mem $O/par_ops 		\
 	$O/stream
+EXEOBJS = $(addsuffix .o, $(EXEOBJ))
 OPT_EXES=$O/cache $O/lat_dram_page $O/lat_pmake $O/lat_rand 		\
 	$O/lat_usleep $O/lat_cmd
 LIBOBJS= $O/lib_tcp.o $O/lib_udp.o $O/lib_unix.o $O/lib_timing.o 	\
@@ -259,6 +261,13 @@ $O/getopt.o : getopt.c $(INCS)
 
 $(UTILS) :
 	-cd ../scripts; make get
+
+$O/lmbench_all: $(EXEOBJS) $O/lmbench.a lmbench_all.c
+	$(COMPILE) -o $O/lmbench_all $^ -lm
+
+
+$(EXEOBJS): 
+	$(COMPILE) -c -o $@ $(basename $(notdir $@)).c 
 
 # Do not remove the next line, $(MAKE) depend needs it
 # MAKEDEPEND follows

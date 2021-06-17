@@ -13,7 +13,7 @@
  * (2) the version in the sccsid below is included in the report.
  * Support for this development by Sun Microsystems is gratefully acknowledged.
  */
-char	*id = "$Id$\n";
+static char	*id = "$Id$\n";
 #include "bench.h"
 
 #define MAX_MSIZE (10 * 1024 * 1024)
@@ -28,15 +28,14 @@ typedef struct _state {
 	char	*buf;
 } state_t;
 
-void	server_main();
-void	client_main(int parallel, state_t *state);
-void	init(iter_t iterations, void *cookie);
-void	cleanup(iter_t iterations, void *cookie);
-
-void	loop_transfer(iter_t iterations, void *cookie);
+static void	server_main();
+static void	client_main(int parallel, state_t *state);
+static void	init(iter_t iterations, void *cookie);
+static void	cleanup(iter_t iterations, void *cookie);
+static void	loop_transfer(iter_t iterations, void *cookie);
 
 int
-main(int ac, char **av)
+bw_udp_main(int ac, char **av)
 {
 	int	parallel = 1;
 	int	warmup = 0;
@@ -119,7 +118,7 @@ out:	(void)fprintf(stderr, "socket UDP bandwidth using %s: ", state.server);
 	mb(state.move * get_n() * parallel);
 }
 
-void
+static void
 init(iter_t iterations, void* cookie)
 {
 	state_t *state = (state_t *) cookie;
@@ -131,7 +130,7 @@ init(iter_t iterations, void* cookie)
 	state->buf = (char*)malloc(state->msize);
 }
 
-void
+static void
 loop_transfer(iter_t iterations, void *cookie)
 {
 	state_t *state = (state_t *) cookie;
@@ -158,7 +157,7 @@ loop_transfer(iter_t iterations, void *cookie)
 	}
 }
 
-void
+static void
 cleanup(iter_t iterations, void* cookie)
 {
 	state_t *state = (state_t *) cookie;
@@ -169,7 +168,7 @@ cleanup(iter_t iterations, void* cookie)
 	free(state->buf);
 }
 
-void
+static void
 server_main()
 {
 	char	*buf = (char*)valloc(MAX_MSIZE);

@@ -10,7 +10,7 @@
  * (2) the version in the sccsid below is included in the report.
  * Support for this development by Sun Microsystems is gratefully acknowledged.
  */
-char	*id = "$Id$";
+static char	*id = "$Id$";
 
 #include "bench.h"
 
@@ -29,18 +29,18 @@ char	*id = "$Id$";
  *
  * XXX - do a 64bit version of this.
  */
-void	rd(iter_t iterations, void *cookie);
-void	wr(iter_t iterations, void *cookie);
-void	rdwr(iter_t iterations, void *cookie);
-void	mcp(iter_t iterations, void *cookie);
-void	fwr(iter_t iterations, void *cookie);
-void	frd(iter_t iterations, void *cookie);
-void	fcp(iter_t iterations, void *cookie);
-void	loop_bzero(iter_t iterations, void *cookie);
-void	loop_bcopy(iter_t iterations, void *cookie);
-void	init_overhead(iter_t iterations, void *cookie);
-void	init_loop(iter_t iterations, void *cookie);
-void	cleanup(iter_t iterations, void *cookie);
+static void	rd(iter_t iterations, void *cookie);
+static void	wr(iter_t iterations, void *cookie);
+static void	rdwr(iter_t iterations, void *cookie);
+static void	mcp(iter_t iterations, void *cookie);
+static void	fwr(iter_t iterations, void *cookie);
+static void	frd(iter_t iterations, void *cookie);
+static void	fcp(iter_t iterations, void *cookie);
+static void	loop_bzero(iter_t iterations, void *cookie);
+static void	loop_bcopy(iter_t iterations, void *cookie);
+static void	init_overhead(iter_t iterations, void *cookie);
+static void	init_loop(iter_t iterations, void *cookie);
+static void	cleanup(iter_t iterations, void *cookie);
 
 typedef struct _state {
 	double	overhead;
@@ -54,10 +54,10 @@ typedef struct _state {
 	size_t	N;
 } state_t;
 
-void	adjusted_bandwidth(uint64 t, uint64 b, uint64 iter, double ovrhd);
+static void	adjusted_bandwidth(uint64 t, uint64 b, uint64 iter, double ovrhd);
 
 int
-main(int ac, char **av)
+bw_mem_main(int ac, char **av)
 {
 	int	parallel = 1;
 	int	warmup = 0;
@@ -183,7 +183,7 @@ init_loop(iter_t iterations, void *cookie)
 	}
 }
 
-void
+static void
 cleanup(iter_t iterations, void *cookie)
 {
 	state_t *state = (state_t *) cookie;
@@ -194,7 +194,7 @@ cleanup(iter_t iterations, void *cookie)
 	if (state->buf2_orig) free(state->buf2_orig);
 }
 
-void
+static void
 rd(iter_t iterations, void *cookie)
 {	
 	state_t *state = (state_t *) cookie;
@@ -220,7 +220,7 @@ rd(iter_t iterations, void *cookie)
 #undef	DOIT
 
 void
-wr(iter_t iterations, void *cookie)
+static wr(iter_t iterations, void *cookie)
 {	
 	state_t *state = (state_t *) cookie;
 	register TYPE *lastone = state->lastone;
@@ -241,7 +241,7 @@ wr(iter_t iterations, void *cookie)
 #undef	DOIT
 
 void
-rdwr(iter_t iterations, void *cookie)
+static rdwr(iter_t iterations, void *cookie)
 {	
 	state_t *state = (state_t *) cookie;
 	register TYPE *lastone = state->lastone;
@@ -264,7 +264,7 @@ rdwr(iter_t iterations, void *cookie)
 #undef	DOIT
 
 void
-mcp(iter_t iterations, void *cookie)
+static mcp(iter_t iterations, void *cookie)
 {	
 	state_t *state = (state_t *) cookie;
 	register TYPE *lastone = state->lastone;
@@ -290,7 +290,7 @@ mcp(iter_t iterations, void *cookie)
 #undef	DOIT
 
 void
-fwr(iter_t iterations, void *cookie)
+static fwr(iter_t iterations, void *cookie)
 {	
 	state_t *state = (state_t *) cookie;
 	register TYPE *lastone = state->lastone;
@@ -331,7 +331,7 @@ fwr(iter_t iterations, void *cookie)
 #undef	DOIT
 
 void
-frd(iter_t iterations, void *cookie)
+static frd(iter_t iterations, void *cookie)
 {	
 	state_t *state = (state_t *) cookie;
 	register int sum = 0;
@@ -372,7 +372,7 @@ frd(iter_t iterations, void *cookie)
 #undef	DOIT
 
 void
-fcp(iter_t iterations, void *cookie)
+static fcp(iter_t iterations, void *cookie)
 {	
 	state_t *state = (state_t *) cookie;
 	register TYPE *lastone = state->lastone;
@@ -411,7 +411,7 @@ fcp(iter_t iterations, void *cookie)
 }
 
 void
-loop_bzero(iter_t iterations, void *cookie)
+static loop_bzero(iter_t iterations, void *cookie)
 {	
 	state_t *state = (state_t *) cookie;
 	register TYPE *p = state->buf;
@@ -424,7 +424,7 @@ loop_bzero(iter_t iterations, void *cookie)
 }
 
 void
-loop_bcopy(iter_t iterations, void *cookie)
+static loop_bcopy(iter_t iterations, void *cookie)
 {	
 	state_t *state = (state_t *) cookie;
 	register TYPE *p = state->buf;
@@ -440,7 +440,7 @@ loop_bcopy(iter_t iterations, void *cookie)
  * Almost like bandwidth() in lib_timing.c, but we need to adjust
  * bandwidth based upon loop overhead.
  */
-void adjusted_bandwidth(uint64 time, uint64 bytes, uint64 iter, double overhd)
+void static adjusted_bandwidth(uint64 time, uint64 bytes, uint64 iter, double overhd)
 {
 #define MB	(1000. * 1000.)
 	extern FILE *ftiming;

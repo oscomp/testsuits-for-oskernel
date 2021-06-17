@@ -11,7 +11,7 @@
 #include	<sys/ioctl.h>
 #include	<sys/mount.h>
 
-int
+static int
 flushdisk(int fd)
 {
 	int	ret = ioctl(fd, BLKFLSBUF, 0);
@@ -23,7 +23,7 @@ flushdisk(int fd)
 
 #ifdef	MAIN
 int
-main(int ac, char **av)
+flushdisk_main(int ac, char **av)
 {
 #ifdef	linux
 	int	fd;

@@ -10,7 +10,7 @@
  * (2) the version in the sccsid below is included in the report.
  * Support for this development by Sun Microsystems is gratefully acknowledged.
  */
-char	*id = "$Id$\n";
+static char	*id = "$Id$\n";
 
 #include "bench.h"
 
@@ -22,7 +22,7 @@ char	*id = "$Id$\n";
  * 3) Pages are an even multiple of cache lines
  */
 int
-main(int ac, char **av)
+line_main(int ac, char **av)
 {
 	int	i, j, l;
 	int	verbose = 0;

@@ -15,15 +15,15 @@
  * (2) the version in the sccsid below is included in the report.
  * Support for this development by Sun Microsystems is gratefully acknowledged.
  */
-char	*id = "$Id$\n";
+static char	*id = "$Id$\n";
 #include "bench.h"
 
-void	client_main(int ac, char **av);
-void	server_main();
-void	benchmark(iter_t iterations, void* _state);
+static void	client_lat_rpc_main(int ac, char **av);
+static void	server_lat_rpc_main();
+static void	benchmark(iter_t iterations, void* _state);
 char	*client_rpc_xact_1(char *argp, CLIENT *clnt);
 
-void
+static void
 doit(CLIENT *cl, char *server)
 {
 	char	c = 1;
@@ -53,7 +53,7 @@ typedef struct state_ {
 	CLIENT	*cl;
 } state_t;
 
-void
+static void
 initialize(iter_t iterations, void* cookie)
 {
 	struct	timeval tv;
@@ -77,7 +77,7 @@ initialize(iter_t iterations, void* cookie)
 	}
 }
 
-void
+static void
 benchmark(iter_t iterations, void* _state)
 {
 	state_t* state = (state_t*)_state;
@@ -89,7 +89,7 @@ benchmark(iter_t iterations, void* _state)
 }
 
 int
-main(int ac, char **av)
+lat_rpc_main(int ac, char **av)
 {
 	int	i;
 	int 	c;
@@ -110,7 +110,7 @@ main(int ac, char **av)
 		switch(c) {
 		case 's': /* Server */
 			if (fork() == 0) {
-				server_main();
+				server_lat_rpc_main();
 			}
 			exit(0);
 		case 'S': /* shutdown serverhost */
@@ -201,8 +201,8 @@ rpc_xact_1(msg, transp)
 
 static void xact_prog_1();
 
-void
-server_main()
+static void
+server_lat_rpc_main()
 {
 	register SVCXPRT *transp;
 

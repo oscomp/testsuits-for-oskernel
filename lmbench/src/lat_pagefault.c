@@ -10,7 +10,7 @@
  * (2) the version in the sccsid below is included in the report.
  * Support for this development by Sun Microsystems is gratefully acknowledged.
  */
-char	*id = "$Id$\n";
+static char	*id = "$Id$\n";
 
 #include "bench.h"
 
@@ -26,13 +26,13 @@ typedef struct _state {
 	size_t* pages;
 } state_t;
 
-void	initialize(iter_t iterations, void *cookie);
-void	cleanup(iter_t iterations, void *cookie);
-void	benchmark(iter_t iterations, void * cookie);
-void	benchmark_mmap(iter_t iterations, void * cookie);
+static void	initialize(iter_t iterations, void *cookie);
+static void	cleanup(iter_t iterations, void *cookie);
+static void	benchmark(iter_t iterations, void * cookie);
+static void	benchmark_mmap(iter_t iterations, void * cookie);
 
 int
-main(int ac, char **av)
+lat_pagefault_main(int ac, char **av)
 {
 	int parallel = 1;
 	int warmup = 0;
@@ -91,7 +91,7 @@ main(int ac, char **av)
 	return(0);
 }
 
-void
+static void
 initialize(iter_t iterations, void* cookie)
 {
 	int 		i, npages, pagesize;
@@ -143,7 +143,7 @@ initialize(iter_t iterations, void* cookie)
 #endif
 }
 
-void
+static void
 cleanup(iter_t iterations, void* cookie)
 {	
 	state_t *state = (state_t *) cookie;
@@ -155,7 +155,7 @@ cleanup(iter_t iterations, void* cookie)
 	free(state->pages);
 }
 
-void
+static void
 benchmark(iter_t iterations, void* cookie)
 {
 	int	i;
@@ -179,7 +179,7 @@ benchmark(iter_t iterations, void* cookie)
 	use_int(sum);
 }
 
-void
+static void
 benchmark_mmap(iter_t iterations, void* cookie)
 {
 	int	i;

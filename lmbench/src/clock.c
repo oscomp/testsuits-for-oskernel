@@ -5,10 +5,10 @@
  */
 #include "bench.h"
 
-char	*id = "$Id$";
-char	*revision = "$Revision$";
+static char	*id = "$Id$";
+static char	*revision = "$Revision$";
 
-main()
+clock_main()
 {
 	uint64	enough;
 	double	t_overhead, l_overhead;

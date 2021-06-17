@@ -10,12 +10,12 @@
  * (2) the version in the sccsid below is included in the report.
  * Support for this development by Sun Microsystems is gratefully acknowledged.
  */
-char	*id = "$Id$\n";
+static char	*id = "$Id$\n";
 
 #include "bench.h"
 
-void	dram_page_initialize(iter_t iterations, void* cookie);
-void	benchmark_loads(iter_t iterations, void *cookie);
+static void	dram_page_initialize(iter_t iterations, void* cookie);
+static void	benchmark_loads(iter_t iterations, void *cookie);
 double	loads(benchmp_f initialize, int len, int warmup, int repetitions, void* cookie);
 
 struct dram_page_state
@@ -25,7 +25,7 @@ struct dram_page_state
 };
 
 int
-main(int ac, char **av)
+lat_dram_page_main(int ac, char **av)
 {
 	int	i, j, l;
 	int	verbose = 0;

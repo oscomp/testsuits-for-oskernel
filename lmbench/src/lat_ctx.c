@@ -9,7 +9,7 @@
  * (2) the version in the sccsid below is included in the report.
  * Support for this development by Sun Microsystems is gratefully acknowledged.
  */
-char	*id = "$Id$\n";
+static char	*id = "$Id$\n";
 
 #include "bench.h"
 
@@ -21,15 +21,15 @@ char	*id = "$Id$\n";
 #define	max(a, b)	((a) > (b) ? (a) : (b))
 #endif
 
-void	doit(int rd, int wr, int process_size);
+static void	doit(int rd, int wr, int process_size);
 int	create_pipes(int **p, int procs);
 int	create_daemons(int **p, pid_t *pids, int procs, int process_size);
-void	initialize_overhead(iter_t iterations, void* cookie);
-void	cleanup_overhead(iter_t iterations, void* cookie);
-void	benchmark_overhead(iter_t iterations, void* cookie);
-void	initialize(iter_t iterations, void* cookie);
-void	cleanup(iter_t iterations, void* cookie);
-void	benchmark(iter_t iterations, void* cookie);
+static void	initialize_overhead(iter_t iterations, void* cookie);
+static void	cleanup_overhead(iter_t iterations, void* cookie);
+static void	benchmark_overhead(iter_t iterations, void* cookie);
+static void	initialize(iter_t iterations, void* cookie);
+static void	cleanup(iter_t iterations, void* cookie);
+static void	benchmark(iter_t iterations, void* cookie);
 
 struct _state {
 	int	process_size;
@@ -41,7 +41,7 @@ struct _state {
 };
 
 int
-main(int ac, char **av)
+lat_ctx_main(int ac, char **av)
 {
 	int	i, maxprocs;
 	int	c;
@@ -125,7 +125,7 @@ main(int ac, char **av)
 	return (0);
 }
 
-void
+static void
 initialize_overhead(iter_t iterations, void* cookie)
 {
 	int i;
@@ -154,7 +154,7 @@ initialize_overhead(iter_t iterations, void* cookie)
 	}
 }
 
-void
+static void
 cleanup_overhead(iter_t iterations, void* cookie)
 {
 	int i;
@@ -171,7 +171,7 @@ cleanup_overhead(iter_t iterations, void* cookie)
 	if (pState->data) free(pState->data);
 }
 
-void
+static void
 benchmark_overhead(iter_t iterations, void* cookie)
 {
 	struct _state* pState = (struct _state*)cookie;
@@ -194,7 +194,7 @@ benchmark_overhead(iter_t iterations, void* cookie)
 	}
 }
 
-void 
+static void
 initialize(iter_t iterations, void* cookie)
 {
 	int procs;
@@ -216,7 +216,7 @@ initialize(iter_t iterations, void* cookie)
 	}
 }
 
-void
+static void
 cleanup(iter_t iterations, void* cookie)
 {
 	int i;
@@ -239,7 +239,7 @@ cleanup(iter_t iterations, void* cookie)
 	pState->pids = NULL;
 }
 
-void
+static void
 benchmark(iter_t iterations, void* cookie)
 {
 	struct _state* pState = (struct _state*)cookie;
@@ -264,7 +264,7 @@ benchmark(iter_t iterations, void* cookie)
 }
 
 
-void
+static void
 doit(int rd, int wr, int process_size)
 {
 	int	msg;

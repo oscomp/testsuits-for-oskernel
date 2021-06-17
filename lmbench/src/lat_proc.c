@@ -11,7 +11,7 @@
  * (2) the version in the sccsid below is included in the report.
  * Support for this development by Sun Microsystems is gratefully acknowledged.
  */
-char	*id = "$Id$\n";
+static char	*id = "$Id$\n";
 
 #include "bench.h"
 
@@ -24,15 +24,15 @@ char	*id = "$Id$\n";
 #define STATIC_PREFIX ""
 #endif
 
-void do_shell(iter_t iterations, void* cookie);
-void do_forkexec(iter_t iterations,void* cookie);
-void do_fork(iter_t iterations, void* cookie);
-void do_procedure(iter_t iterations, void* cookie);
+static void do_shell(iter_t iterations, void* cookie);
+static void do_forkexec(iter_t iterations,void* cookie);
+static void do_fork(iter_t iterations, void* cookie);
+static void do_procedure(iter_t iterations, void* cookie);
 
 pid_t child_pid;
 
 
-void
+static void
 cleanup(iter_t iterations, void* cookie)
 {
 	if (iterations) return;
@@ -45,7 +45,7 @@ cleanup(iter_t iterations, void* cookie)
 }
 	
 int
-main(int ac, char **av)
+lat_proc_main(int ac, char **av)
 {
 	int parallel = 1;
 	int warmup = 0;
@@ -97,7 +97,7 @@ main(int ac, char **av)
 	return(0);
 }
 
-void 
+static void
 do_shell(iter_t iterations, void* cookie)
 {
 	signal(SIGCHLD, SIG_DFL);
@@ -121,7 +121,7 @@ do_shell(iter_t iterations, void* cookie)
 	}
 }
 
-void 
+static void
 do_forkexec(iter_t iterations, void* cookie)
 {
 	char	*nav[2];
@@ -149,7 +149,7 @@ do_forkexec(iter_t iterations, void* cookie)
 	}
 }
 	
-void 
+static void
 do_fork(iter_t iterations, void* cookie)
 {
 	signal(SIGCHLD, SIG_DFL);
@@ -171,7 +171,7 @@ do_fork(iter_t iterations, void* cookie)
 	}
 }
 	
-void 
+static void
 do_procedure(iter_t iterations, void* cookie)
 {
 	int r = *(int *) cookie;

@@ -10,15 +10,15 @@
  * (2) the version in the sccsid below is included in the report.
  * Support for this development by Sun Microsystems is gratefully acknowledged.
  */
-char	*id = "$Id$\n";
+static char	*id = "$Id$\n";
 
 #include "bench.h"
 #include <sys/sem.h>
 
-void initialize(iter_t iterations, void *cookie);
-void cleanup(iter_t iterations, void *cookie);
-void doit(iter_t iterations, void *cookie);
-void writer(int sid);
+static void initialize(iter_t iterations, void *cookie);
+static void cleanup(iter_t iterations, void *cookie);
+static void doit(iter_t iterations, void *cookie);
+static void writer(int sid);
 
 typedef struct _state {
 	int	pid;
@@ -26,7 +26,7 @@ typedef struct _state {
 } state_t;
 
 int 
-main(int ac, char **av)
+lat_sem_main(int ac, char **av)
 {
 	state_t state;
 	int parallel = 1;
@@ -64,7 +64,7 @@ main(int ac, char **av)
 	return (0);
 }
 
-void 
+static void
 initialize(iter_t iterations, void* cookie)
 {
 	char	c;
@@ -93,7 +93,7 @@ initialize(iter_t iterations, void* cookie)
 	}
 }
 
-void 
+static void
 cleanup(iter_t iterations, void* cookie)
 {
 	state_t * state = (state_t *)cookie;
@@ -109,7 +109,7 @@ cleanup(iter_t iterations, void* cookie)
 	semctl(state->semid, 0, IPC_RMID);
 }
 
-void 
+static void
 doit(register iter_t iterations, void *cookie)
 {
 	state_t *state = (state_t *) cookie;
@@ -131,7 +131,7 @@ doit(register iter_t iterations, void *cookie)
 	}
 }
 
-void 
+static void
 writer(register int sid)
 {
 	struct sembuf sop[2];

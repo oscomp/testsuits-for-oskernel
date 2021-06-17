@@ -9,15 +9,15 @@
  * (2) the version in the sccsid below is included in the report.
  * Support for this development by Sun Microsystems is gratefully acknowledged.
  */
-char	*id = "$Id$\n";
+static char	*id = "$Id$\n";
 
 #include "bench.h"
 
-char	*buf;
-int	debug;
-int	echo;
+static char	*buf;
+static int	debug;
+static int	echo;
 
-int
+static int
 http(char *server, char *file, int prog)
 {
 	int     sock;
@@ -43,7 +43,7 @@ http(char *server, char *file, int prog)
 	return (b);
 }
 
-void
+static void
 killhttp(char *server, int prog)
 {
 	int     sock;
@@ -53,10 +53,10 @@ killhttp(char *server, int prog)
 	close(sock);
 }
 
-void chop(register char *s) { while (*s && *s != '\n') s++; *s = 0; }
+static void chop(register char *s) { while (*s && *s != '\n') s++; *s = 0; }
 
 int
-main(int ac, char **av)
+lat_http_main(int ac, char **av)
 {
 	char	*server;
 	int     i, prog;

@@ -2,7 +2,7 @@
 #include "bench.h"
 
 int
-main()
+timing_o_main()
 {
 	putenv("LOOP_O=0.0");
 	printf("%lu\n", (unsigned long)t_overhead());

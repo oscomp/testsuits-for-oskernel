@@ -12,14 +12,14 @@
  * (2) the version in the sccsid below is included in the report.
  * Support for this development by Sun Microsystems is gratefully acknowledged.
  */
-char	*id = "$Id$\n";
+static char	*id = "$Id$\n";
 #include "bench.h"
 
 #define CONNAME "/tmp/af_unix"
 
-void server_main(void);
+static void server_lat_unix_connect_main(void);
 
-void benchmark(iter_t iterations, void* cookie)
+static void benchmark(iter_t iterations, void* cookie)
 {
 	while (iterations-- > 0) {
 		int	sock = unix_connect(CONNAME);
@@ -29,7 +29,7 @@ void benchmark(iter_t iterations, void* cookie)
 	}
 }
 
-int main(int ac, char **av)
+int lat_unix_connect_main(int ac, char **av)
 {
 	int parallel = 1;
 	int warmup = 0;
@@ -41,7 +41,7 @@ int main(int ac, char **av)
 	if (ac == 2) {
 		if (!strcmp(av[1], "-s")) {
 			if (fork() == 0) {
-				server_main();
+				server_lat_unix_connect_main();
 			}
 			exit(0);
 		}
@@ -82,7 +82,7 @@ int main(int ac, char **av)
 	micro("UNIX connection cost", get_n());
 }
 
-void server_main(void)
+void server_lat_unix_connect_main(void)
 {
 	int     newsock, sock;
 	char	c;

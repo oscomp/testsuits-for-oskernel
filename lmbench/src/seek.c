@@ -1,4 +1,4 @@
-char	*id = "$Id$\n";
+static char	*id = "$Id$\n";
 /*
  * Seek - calculate seeks as a function of distance.
  *
@@ -11,7 +11,7 @@ char	*id = "$Id$\n";
 
 #define	STRIDE	1024*1024
 
-main(ac, av)
+seek_main(ac, av)
 	int	ac;
 	char  	*av[];
 {

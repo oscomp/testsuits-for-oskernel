@@ -14,7 +14,7 @@
  * (2) the version in the sccsid below is included in the report.
  * Support for this development by Sun Microsystems is gratefully acknowledged.
  */
-char	*id = "$Id$\n";
+static char	*id = "$Id$\n";
 
 #include "bench.h"
 #ifdef MAP_FILE
@@ -35,14 +35,14 @@ typedef struct _state {
 	void	*buf;
 } state_t;
 
-void time_no_open(iter_t iterations, void * cookie);
-void time_with_open(iter_t iterations, void * cookie);
-void initialize(iter_t iterations, void *cookie);
-void init_open(iter_t iterations, void *cookie);
-void cleanup(iter_t iterations, void *cookie);
+static void time_no_open(iter_t iterations, void * cookie);
+static void time_with_open(iter_t iterations, void * cookie);
+static void initialize(iter_t iterations, void *cookie);
+static void init_open(iter_t iterations, void *cookie);
+static void cleanup(iter_t iterations, void *cookie);
 
 int
-main(int ac, char **av)
+bw_mmap_rd_main(int ac, char **av)
 {
 	int	fd;
 	struct	stat sbuf;
@@ -105,7 +105,7 @@ main(int ac, char **av)
 	return (0);
 }
 
-void
+static void
 initialize(iter_t iterations, void* cookie)
 {
 	state_t	*state = (state_t *) cookie;
@@ -132,7 +132,7 @@ initialize(iter_t iterations, void* cookie)
 	}
 }
 
-void
+static void
 init_open(iter_t iterations, void *cookie)
 {
 	state_t *state = (state_t *) cookie;
@@ -145,7 +145,7 @@ init_open(iter_t iterations, void *cookie)
 				     MMAP_FLAGS, state->fd, 0));
 }
 
-void
+static void
 cleanup(iter_t iterations, void *cookie)
 {
 	state_t *state = (state_t *) cookie;
@@ -156,7 +156,7 @@ cleanup(iter_t iterations, void *cookie)
 	if (state->clone) unlink(state->filename);
 }
 
-void
+static void
 time_no_open(iter_t iterations, void * cookie)
 {
 	state_t *state = (state_t *) cookie;
@@ -166,7 +166,7 @@ time_no_open(iter_t iterations, void * cookie)
 	}
 }
 
-void
+static void
 time_with_open(iter_t iterations, void *cookie)
 {
 	state_t *state    = (state_t *) cookie;

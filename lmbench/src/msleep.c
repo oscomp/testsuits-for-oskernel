@@ -1,7 +1,7 @@
 #include "bench.h"
 
 int
-main(int ac, char **av)
+msleep_main(int ac, char **av)
 {
 #if	defined(sgi) || defined(sun) || defined(linux)
 	usleep(atoi(av[1]) * 1000);

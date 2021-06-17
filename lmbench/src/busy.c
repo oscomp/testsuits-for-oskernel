@@ -1,6 +1,6 @@
 volatile int i;
 
-main()
+busy_main()
 {
 
 	nice(10);

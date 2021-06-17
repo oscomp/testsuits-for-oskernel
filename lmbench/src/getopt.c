@@ -29,7 +29,7 @@ int     optind;		/* next arg in argv we process */
 char   *optarg;		/* argument to an option */
 static int n;
 
-int
+ int
 getopt(int ac, char **av, char *opts)
 {
 	char	*t;
@@ -118,7 +118,7 @@ getopt(int ac, char **av, char *opts)
 #ifdef	TEST
 
 /* XXX a.out -y file */
-main(int ac, char **av)
+getopt_main(int ac, char **av)
 {
 	extern	char *optarg;
 	extern	int optind;

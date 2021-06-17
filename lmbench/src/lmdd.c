@@ -1,4 +1,4 @@
-char	*id = "$Id: lmdd.c,v 1.23 1997/12/01 23:47:59 lm Exp $\n";
+static char	*id = "$Id: lmdd.c,v 1.23 1997/12/01 23:47:59 lm Exp $\n";
 /*
  * defaults:
  *	bs=8k
@@ -162,7 +162,7 @@ extern int dbg;
 #endif
 
 int 
-main(int ac, char **av)
+lmdd_main(int ac, char **av)
 {
 	uint  *buf;
 	uint  *bufs[10];

@@ -11,7 +11,7 @@
  * (2) the version in the sccsid below is included in the report.
  * Other authors: Steve Alexander, sca@sgi.com.
  */
-char	*id = "$Id$\n";
+static char	*id = "$Id$\n";
 
 #include "bench.h"
 #ifdef MAP_FILE
@@ -22,26 +22,26 @@ char	*id = "$Id$\n";
 #define	MMAPS_BETTER	(4<<10)	/* mmap is faster for sizes >= this */
 #define	LOGFILE		"/usr/tmp/lmhttp.log"
 
-char	*buf;
-char	*bufs[3];
-int	Dflg, dflg, nflg, lflg, fflg, zflg;
-int	data, logfile;
-void	die();
-void	worker();
-char	*http_time(void);
-char	*date(time_t *tt);
-char	*type(char *name);
-int	source(int sock);
-int	isdir(char *name);
-void	dodir(char *name, int sock);
-void	fake(int sock, char *buf, int size);
-void	rdwr(int fd, int sock, char *buf);
-int	mmap_rdwr(int from, int to, int size);
-void	logit(int sock, char *name, int size);
+static char	*buf;
+static char	*bufs[3];
+static int	Dflg, dflg, nflg, lflg, fflg, zflg;
+static int	data, logfile;
+static void	die();
+static void	worker();
+static char	*http_time(void);
+static char	*date(time_t *tt);
+static char	*type(char *name);
+static int	source(int sock);
+static int	isdir(char *name);
+static void	dodir(char *name, int sock);
+static void	fake(int sock, char *buf, int size);
+static void	rdwr(int fd, int sock, char *buf);
+static int	mmap_rdwr(int from, int to, int size);
+static void	logit(int sock, char *name, int size);
 
 
 int
-main(int ac, char **av)
+lmhttp_main(int ac, char **av)
 {
 	int	i, prog;
 #ifdef	sgi
@@ -98,7 +98,7 @@ main(int ac, char **av)
 	return(0);
 }
 
-void
+static void
 worker()
 {
 	int	newdata;
@@ -117,7 +117,7 @@ worker()
  * "Tue, 28 Jan 97 01:20:30 GMT";
  *  012345678901234567890123456
  */
-char	*http_time()
+static char	*http_time()
 {
 	time_t	tt;
 	static	time_t save_tt;
@@ -152,13 +152,13 @@ char	*http_time()
  * Since it costs 150 usecs or so to do this on an Indy, it may pay to
  * optimize this.  
  */
-char	*
+static char	*
 date(time_t	*tt)
 {
 	return "Tue, 28 Jan 97 01:20:30 GMT";
 }
 
-char	*
+static char	*
 type(char *name)
 {
 	int	len = strlen(name);
@@ -183,7 +183,7 @@ type(char *name)
  * Write that file on the data socket.
  * The caller closes the socket.
  */
-int
+static int
 source(int sock)
 {
 	int	fd, n, size;
@@ -252,7 +252,7 @@ error:		perror(name);
 #undef	name
 
 
-int
+static int
 isdir(char *name)
 {
 	struct	stat sb;
@@ -273,7 +273,7 @@ isdir(char *name)
 <IMG SRC="/icons/text.gif" ALT="[TXT]"> <A HREF="!INDEX.html">!INDEX.html</A>            19-Sep-97 03:20     6k  
 #endif
 
-void
+static void
 dodir(char *name, int sock)
 {
 	FILE	*p;
@@ -301,7 +301,7 @@ dodir(char *name, int sock)
 	pclose(p);
 }
 
-void
+static void
 fake(int sock, char *buf, int size)
 {
 	int	n;
@@ -316,7 +316,7 @@ fake(int sock, char *buf, int size)
 	}
 }
 
-void
+static void
 rdwr(int fd, int sock, char *buf)
 {
 	int	nread;
@@ -335,7 +335,7 @@ rdwr(int fd, int sock, char *buf)
 	}
 }
 
-int
+static int
 mmap_rdwr(int from, int to, int size)
 {
 	char	*buf;
@@ -366,7 +366,7 @@ static	int nbytes;		/* bytes buffered */
 /*
  * HTTP server logging, compressed format.
  */
-void
+static void
 logit(int sock, char *name, int size)
 {
 	struct	sockaddr_in sin;
@@ -387,7 +387,7 @@ logit(int sock, char *name, int size)
 	nbytes += len;
 }
 
-void die()
+static void die()
 {
 	if (nbytes) {
 		write(logfile, logbuf, nbytes);
