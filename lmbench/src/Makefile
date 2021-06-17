@@ -106,8 +106,10 @@ EXEOBJ =	$O/bw_file_rd $O/bw_mem $O/bw_mmap_rd $O/bw_pipe $O/bw_tcp 	\
 	$O/lat_ops $O/line $O/tlb $O/par_mem $O/par_ops 		\
 	$O/stream
 EXEOBJS = $(addsuffix .o, $(EXEOBJ))
-OPT_EXES=$O/cache $O/lat_dram_page $O/lat_pmake $O/lat_rand 		\
+O_OPT_EXES=$O/cache $O/lat_dram_page $O/lat_pmake $O/lat_rand 		\
 	$O/lat_usleep $O/lat_cmd
+OPT_EXES = 
+EXEOBJS += $(addsuffix .o, $(O_OPT_EXES))
 LIBOBJS= $O/lib_tcp.o $O/lib_udp.o $O/lib_unix.o $O/lib_timing.o 	\
 	$O/lib_mem.o $O/lib_stats.o $O/lib_debug.o $O/getopt.o		\
 	$O/lib_sched.o

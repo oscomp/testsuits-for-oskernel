@@ -34,7 +34,7 @@ static char           *id = "$Id$\n";
 
 typedef     enum {USLEEP, NANOSLEEP, SELECT, PSELECT, ITIMER} timer_e;
 
-uint64          caught,
+static uint64          caught,
                 n;
 struct itimerval value;
 

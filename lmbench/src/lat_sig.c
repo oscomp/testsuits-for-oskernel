@@ -18,7 +18,7 @@ static char	*id = "$Id$\n";
 #include "bench.h"
 #include <setjmp.h>
 
-uint64	caught, n;
+static uint64	caught, n;
 double	adj;
 void	handler() { }
 jmp_buf	prot_env;
