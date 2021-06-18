@@ -2,7 +2,7 @@
 
 尽力支持busybox, lua, lmbench三个示例程序。
 
-[busybox cmd](docs/busybox_cmd.txt)里给出了50个常用或容易支持的命令，可以先试着支持这50个命令。这些命令所使用的系统调用请参考[这个目录](docs/busybox_cmd_syscalls)所对应的文件，这些命令所依赖的系统调用都是用`strace -f -c`命令得到的。
+[busybox cmd](docs/busybox_cmd.txt)里给出了常用或容易支持的命令操作的列表，可以先试着支持这部分命令。这些命令所使用的系统调用请参考[这个目录](docs/busybox_cmd_syscalls)所对应的文件，这些命令所依赖的系统调用都可用`strace -f -c <CMD>`  得到。
 
 获取lua所使用的系统调用的两个例子：
 
@@ -19,6 +19,8 @@ print.lua的内容如下：
 > print("Hello World!")
 
 lmbench依次执行了一些小程序来测试系统的性能，可分析`bin/lmbench`来依次执行这些小程序，以达到对lmbench逐步的支持。
+
+**！注：不要求支持网络，所以和socket相关的系统调用不必支持。**
 
 ## 示例程序所包含的系统调用
 文档每行中前半部分`li a7,[NUM]`是二进制文件里使用系统调用时，系统调用号所对应的那条指令。后半部分`__NR_xxx [NUM]` 是头文件`unistd.h`里系统调用的名称及编号。

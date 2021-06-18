@@ -3,6 +3,8 @@ sh -c exit
 basename /aaa/bbb
 cal
 touch abc
+echo "hello world" > abc
+grep hello busybox_cmd.txt
 cat abc 
 clear 
 cp busybox busybox_bak
@@ -15,19 +17,16 @@ dirname /aaa/bbb
 dmesg 
 du
 echo "abc"
-expr 1 - 1
+expr 1 + 1
 false
 true 
 find -name "busybox"
 free 
-grep "abc" abc
 head abc
 tail abc 
 hexdump -C abc 
 hwclock
 kill 10
-link abc abc1
-unlink abc1
 ls
 md5sum abc
 mkdir test_dir
@@ -37,14 +36,18 @@ printf "abc\n"
 ps
 pwd
 sleep 1
-sort abc
+echo "aaaaaaa" >> abc
+echo "bbbbbbb" >> abc
+echo "ccccccc" >> abc
+echo "1111111" >> abc
+echo "2222222" >> abc
+sort abc | uniq
 stat abc
 strings abc 
 uname
-uniq abc
 uptime
 wc abc
 which ls
-[
+[ -f abc ]
 more abc
 rm abc
