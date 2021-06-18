@@ -114,6 +114,7 @@ LIBOBJS= $O/lib_tcp.o $O/lib_udp.o $O/lib_unix.o $O/lib_timing.o 	\
 	$O/lib_mem.o $O/lib_stats.o $O/lib_debug.o $O/getopt.o		\
 	$O/lib_sched.o
 
+
 lmbench: $(UTILS)
 	@env CFLAGS=-O MAKE="$(MAKE)" MAKEFLAGS="$(MAKEFLAGS)" CC="$(CC)" OS="$(OS)" ../scripts/build all
 	-@env CFLAGS=-O MAKE="$(MAKE)" MAKEFLAGS="-k $(MAKEFLAGS)" CC="$(CC)" OS="$(OS)" ../scripts/build opt
@@ -266,6 +267,7 @@ $(UTILS) :
 
 $O/lmbench_all: $(EXEOBJS) $O/lmbench.a lmbench_all.c
 	$(COMPILE) -o $O/lmbench_all $^ -lm
+	cat lmexes.txt | xargs -n 1 -I {} ../scripts/mklink.sh {} $(abspath $O)
 
 
 $(EXEOBJS): 
