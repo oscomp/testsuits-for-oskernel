@@ -2,7 +2,7 @@
 
 尽力支持busybox, lua, lmbench三个示例程序。
 
-[busybox cmd](docs/busybox_cmd.txt)里给出了常用或容易支持的命令操作的列表，可以先试着支持这部分命令。这些命令所使用的系统调用请参考[这个目录](docs/busybox_cmd_syscalls)所对应的文件，这些命令所依赖的系统调用都可用`strace -f -c <CMD>`  得到。
+[busybox cmd](scripts/busybox/busybox_cmd.txt)里给出了常用或容易支持的命令操作的列表，可以先试着支持这部分命令。这些命令所使用的系统调用请参考[这个目录](docs/busybox_cmd_syscalls)所对应的文件，这些命令所依赖的系统调用都可用`strace -f -c <CMD>`  得到。
 
 获取lua所使用的系统调用的两个例子：
 
@@ -100,5 +100,19 @@ cd lmbench
 make results CC="gcc-10"	# 动态编译并执行
 make results CC="gcc-10 -static"	# 静态编译并执行
 make see CC="gcc-10"		# 查看结果
+```
+
+## 运行示例程序
+
+```bash
+# busybox
+cd scripts/busybox
+cp ../../busybox/busybox .
+./busybox_testcode.sh	# 运行busybox的测试代码。如某条命令执行失败，结果会输出到文件result.txt
+
+# lua
+cd scripts/lua
+cp ../../lua/src/lua .
+./lua <file>	# 运行lua脚本
 ```
 
