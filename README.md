@@ -113,6 +113,6 @@ cp ../../busybox/busybox .
 # lua
 cd scripts/lua
 cp ../../lua/src/lua .
-./lua <file>	# 运行lua脚本
+./test.sh <file>	# 运行lua脚本。
 ```
 

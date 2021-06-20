@@ -2,12 +2,9 @@
 
 local tbCurrentTime = os.date("*t")
 
- 
-
-for k, v in pairs(tbCurrentTime) do
-
-    print(k .. "=" .. tostring(v))
-
+if tbCurrentTime ~= nil then
+	return 0
+else
+	return -1
 end
-
 

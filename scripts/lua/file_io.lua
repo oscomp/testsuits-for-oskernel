@@ -1,8 +1,9 @@
--- Opens a file in append mode
+-- Opens a file in write mode
 file = io.open("test.txt", "w")
 
--- appends a word test to the last line of the file
-file:write("--test\n")
-
--- closes the open file
-file:close()
+if file ~= nil then
+	file:close()
+	return 0
+else
+	return -1
+end

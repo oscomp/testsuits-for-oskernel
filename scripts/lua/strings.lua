@@ -2,40 +2,34 @@
 
 local str = "Jelly Think"
 
- 
+result = 0
 
 -- string.len可以获得字符串的长度
 
-local len = string.len(str)
-
-print(len) -- 11
-
- 
+if string.len(str) ~= 11 then
+	result = -1
+end
 
 -- string.rep返回字符串重复n次的结果
 
 str = "ab"
 
-local newStr = string.rep(str, 2) -- 重复两次
-
-print(newStr) -- abab
-
- 
+if string.rep(str, 2) ~= "abab" then
+	result = -1
+end
 
 -- string.lower将字符串小写变成大写形式，并返回一个改变以后的副本
 
 str = "Jelly Think"
 
-newStr = string.lower(str)
-
-print(newStr) -- jelly think
-
- 
+if string.lower(str) ~= "jelly think" then
+	result = -1
+end
 
 -- string.upper将字符串大写变成小写形式，并返回一个改变以后的副本
 
-newStr = string.upper(str)
+if string.upper(str) == "JELLY THINK" then
+	result = -1
+end
 
-print(newStr) -- JELLY THINK
-
-
+return result
