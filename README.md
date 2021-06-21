@@ -1,6 +1,28 @@
 # Testsuits for OS Kernel
 
-尽力支持busybox, lua, lmbench三个示例程序。
+## 决赛阶段（6月21日~8月18日）
+
+### 基本要求
+
+- - 参赛的OS kernel需要尽力支持busybox, lua, lmbench三个程序的多种执行方式形成的测试用例。
+- 分阶段进行支持。
+  - 第一阶段（6月21日~7月20日）：支持 busybox和lua （侧重功能实现）
+  - 第二阶段（7月21日~8月18日）：支持 lmbench （侧重性能优化）
+- 在这两个阶段中，会在此仓库添加基于这三个程序的测试用例。
+- 要求参赛的OS kernel能够在QEMU for 双核RV64 模拟器和K210开发板上运行并通过测试用例。
+- 要求参赛的OS kernel要考虑内核设计的合理性和安全可靠性，经得起工具的安全检查或压力测试。
+
+### 测试用例
+
+- busybox 相关：https://gitee.com/oscomp/testsuits-for-oskernel/tree/final-comp/scripts/busybox
+- busybox+lua相关：https://gitee.com/oscomp/testsuits-for-oskernel/tree/final-comp/scripts/lua
+
+### 注意
+
+- `lua`脚本和其他测试脚本要依赖`busybox`的`sh`功能。所以OS kernel首先需要支持`busybox`的`sh`功能。
+- 部分脚本会需要特定的OS功能（syscall, device file等），OS kernel需要一步一步地添加功能，以支持不同程序的不同执行方式。
+
+###  程序描述
 
 [busybox cmd](scripts/busybox/busybox_cmd.txt)里给出了常用或容易支持的命令操作的列表，可以先试着支持这部分命令。这些命令所使用的系统调用请参考[这个目录](docs/busybox_cmd_syscalls)所对应的文件，这些命令所依赖的系统调用都可用`strace -f -c <CMD>`  得到。
 
@@ -22,7 +44,7 @@ lmbench依次执行了一些小程序来测试系统的性能，可分析`bin/lm
 
 **！注：不要求支持网络，所以和socket相关的系统调用不必支持。**
 
-## 示例程序所包含的系统调用
+## 程序所包含的系统调用
 文档每行中前半部分`li a7,[NUM]`是二进制文件里使用系统调用时，系统调用号所对应的那条指令。后半部分`__NR_xxx [NUM]` 是头文件`unistd.h`里系统调用的名称及编号。
 
 [busybox使用的系统调用](docs/busybox_musl_static_syscall.txt)
@@ -38,7 +60,7 @@ objdump -d objfile | grep -B 9 ecall | grep "li.a7" | tee syscall.txt
 
 
 
-## 示例程序运行环境
+## 程序的运行环境
 示例程序的运行环境是Debian on Qemu RV64，搭建过程如下：
 
 1. 在[https://people.debian.org/~gio/dqib/](https://people.debian.org/~gio/dqib/)点击[Images for riscv64-virt](https://gitlab.com/api/v4/projects/giomasce%2Fdqib/jobs/artifacts/master/download?job=convert_riscv64-virt)下载artifacts.zip。
@@ -50,7 +72,7 @@ objdump -d objfile | grep -B 9 ecall | grep "li.a7" | tee syscall.txt
 >
 > 执行`./run.sh`进入系统，登陆用户名：root，密码：root
 
-## 示例程序编译过程
+## 程序编译过程
 
 编译环境的准备
 
@@ -102,7 +124,7 @@ make results CC="gcc-10 -static"	# 静态编译并执行
 make see CC="gcc-10"		# 查看结果
 ```
 
-## 运行示例程序
+## 运行程序
 
 ```bash
 # busybox
