@@ -15,7 +15,10 @@ do
 	./busybox $line
 	RTN=$?
 	if [[ $RTN -ne 0 && $line != "false" ]] ;then
+		echo "testcase busybox $line fail"
 		echo "return: $RTN, cmd: $line" >> $RST
+	else
+		echo "testcase busybox $line success"
 	fi	
 done
 
