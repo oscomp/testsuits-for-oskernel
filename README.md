@@ -14,8 +14,8 @@
 
 ### 测试用例
 
-- busybox 相关：https://gitee.com/oscomp/testsuits-for-oskernel/tree/final-comp/scripts/busybox
-- busybox+lua相关：https://gitee.com/oscomp/testsuits-for-oskernel/tree/final-comp/scripts/lua
+- busybox 相关：[scripts/busybox](scripts/busybox)
+- busybox+lua相关：[scripts/lua](scripts/lua)
 
 ### 注意
 
@@ -124,7 +124,7 @@ make results CC="gcc-10 -static"	# 静态编译并执行
 make see CC="gcc-10"		# 查看结果
 ```
 
-## 运行程序
+## 运行测试代码
 
 ```bash
 # busybox
