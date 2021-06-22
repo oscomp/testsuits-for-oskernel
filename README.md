@@ -58,7 +58,7 @@ lmbench依次执行了一些小程序来测试系统的性能，可分析`bin/lm
 objdump -d objfile | grep -B 9 ecall | grep "li.a7" | tee syscall.txt
 ```
 
-
+> 关于系统调用的详细信息，请参考[Linux手册](https://man7.org/linux/man-pages/man2/syscalls.2.html)。
 
 ## 程序的运行环境
 示例程序的运行环境是Debian on Qemu RV64，搭建过程如下：
