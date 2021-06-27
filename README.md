@@ -81,13 +81,6 @@ objdump -d objfile | grep -B 9 ecall | grep "li.a7" | tee syscall.txt
 sudo apt install build-essential
 sudo apt install musl-tools
 apt-get install libncurses5-dev libncursesw5-dev
-
-# gcc是到gcc-10的链接，现在要让它变成musl-gcc的链接
-rm /usr/bin/gcc	
-ln -s /usr/bin/musl-gcc /usr/bin/gcc
-# musl-gcc使用了cc，要让cc链接到正确的编译器gcc-10
-rm /usr/bin/cc	
-ln -s /usr/bin/gcc-10 /usr/bin/cc
 ```
 
 编译busybox
@@ -101,27 +94,25 @@ cp /usr/include/riscv64-linux-gnu/asm/byteorder.h /usr/include/asm-generic
 
 # 编译busybox
  cd busybox
-vi menuconfig	# 把"CC = gcc"改为"CC = gcc-10"，为了使下一条命令正确执行
 make menuconfig	# 默认动态编译，如需静态编译则设置CONFIG_STATIC=y
-vi menuconfig	# 把"CC = gcc-10"改为"CC = gcc"，为了基于musl库编译busybox
-make
+make CC="musl-gcc"
 ```
 
 编译lua
 
 ```bash
 cd lua
-make posix	# 动态编译。由于之前的准备，现在gcc就是musl-gcc
-make posix CC="gcc -static"	# 静态编译
+make posix CC="musl-gcc"	# 动态编译。由于之前的准备，现在gcc就是musl-gcc
+make posix CC="musl-gcc -static"	# 静态编译
 ```
 
 编译lmbench
 
 ```bash
 cd lmbench
-make results CC="gcc-10"	# 动态编译并执行
-make results CC="gcc-10 -static"	# 静态编译并执行
-make see CC="gcc-10"		# 查看结果
+make results	# 动态编译并执行
+make results CC="gcc -static"	# 静态编译并执行
+make see		# 查看结果
 ```
 
 ## 运行测试代码
