@@ -119,6 +119,9 @@ lmbench: $(UTILS)
 	@env CFLAGS=-O MAKE="$(MAKE)" MAKEFLAGS="$(MAKEFLAGS)" CC="$(CC)" OS="$(OS)" ../scripts/build all
 	-@env CFLAGS=-O MAKE="$(MAKE)" MAKEFLAGS="-k $(MAKEFLAGS)" CC="$(CC)" OS="$(OS)" ../scripts/build opt
 
+oscomp: lmbench
+	env OS="${OS}" ../scripts/oscomp.sh
+
 results: lmbench
 	@env OS="${OS}" ../scripts/config-run
 	@env OS="${OS}" ../scripts/results

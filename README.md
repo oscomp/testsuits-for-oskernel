@@ -110,9 +110,8 @@ make posix CC="musl-gcc -static"	# 静态编译
 
 ```bash
 cd lmbench
-make results	# 动态编译并执行
-make results CC="gcc -static"	# 静态编译并执行
-make see		# 查看结果
+make build	# 动态编译并执行
+make build CC="gcc -static"	# 静态编译并执行
 ```
 
 ## 运行测试代码
@@ -127,5 +126,9 @@ cp ../../busybox/busybox .
 cd scripts/lua
 cp ../../lua/src/lua .
 ./test.sh <file>	# 运行lua脚本。
+
+# lmbench
+cd lmbench
+make oscomp
 ```
 

@@ -19,6 +19,9 @@ SHELL=/bin/sh
 build: 
 	cd src && $(MAKE)
 
+oscomp:
+	cd src && $(MAKE) oscomp
+
 results: FRC
 	cd src && $(MAKE) results
 
