@@ -53,6 +53,8 @@ lmbench依次执行了一些小程序来测试系统的性能，可分析`bin/lm
 
 [lmbench使用的系统调用](docs/lmbench_libc_syscall.txt)
 
+[大赛使用的lmbench各子命令所使用的系统调用](docs/lmbench_cmd_syscalls)
+
 ```
 # 从二进制文件中获取系统调用号
 objdump -d objfile | grep -B 9 ecall | grep "li.a7" | tee syscall.txt

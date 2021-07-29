@@ -1,0 +1,73 @@
+strace: Process 9210 attached
+strace: Process 9211 attached
+strace: Process 9212 attached
+strace: Process 9213 attached
+strace: Process 9214 attached
+strace: Process 9215 attached
+strace: Process 9216 attached
+strace: Process 9217 attached
+strace: Process 9218 attached
+strace: Process 9219 attached
+strace: Process 9220 attached
+strace: Process 9221 attached
+strace: Process 9222 attached
+strace: Process 9223 attached
+strace: Process 9224 attached
+strace: Process 9225 attached
+strace: Process 9226 attached
+strace: Process 9227 attached
+strace: Process 9228 attached
+strace: Process 9229 attached
+strace: Process 9230 attached
+strace: Process 9231 attached
+strace: Process 9232 attached
+strace: Process 9233 attached
+strace: Process 9234 attached
+strace: Process 9235 attached
+strace: Process 9236 attached
+strace: Process 9237 attached
+strace: Process 9238 attached
+strace: Process 9239 attached
+strace: Process 9240 attached
+strace: Process 9241 attached
+strace: Process 9242 attached
+strace: Process 9243 attached
+strace: Process 9244 attached
+strace: Process 9245 attached
+strace: Process 9246 attached
+strace: Process 9247 attached
+strace: Process 9248 attached
+strace: Process 9249 attached
+Process fork+/bin/sh -c: 117749.0000 microseconds
+% time     seconds  usecs/call     calls    errors syscall
+------ ----------- ----------- --------- --------- ----------------
+ 90.61    1.463756       22178        66        26 wait4
+  4.45    0.071839        1355        53        13 execve
+  0.83    0.013376          55       242           mmap
+  0.59    0.009566          79       120           openat
+  0.47    0.007562         189        40           clone
+  0.37    0.005967          44       134           mprotect
+  0.35    0.005731          26       217           rt_sigaction
+  0.31    0.005046          97        52           newfstatat
+  0.30    0.004888          10       456           getrusage
+  0.27    0.004422          44        99           read
+  0.26    0.004190          28       145           close
+  0.21    0.003413          36        94           fstat
+  0.16    0.002657          66        40        40 faccessat
+  0.16    0.002620          27        94           brk
+  0.15    0.002474          61        40           munmap
+  0.08    0.001262          48        26           rt_sigreturn
+  0.07    0.001129          14        78           rt_sigprocmask
+  0.06    0.000994          24        40           getppid
+  0.05    0.000866          16        52           geteuid
+  0.04    0.000665          33        20        13 write
+  0.03    0.000538          20        26           getegid
+  0.03    0.000519          19        26           getuid
+  0.03    0.000498          19        26           getgid
+  0.03    0.000493          18        26           getpid
+  0.03    0.000455          17        26           fcntl
+  0.02    0.000373          53         7           pselect6
+  0.01    0.000148          74         2           setitimer
+  0.00    0.000004           1         4           pipe2
+------ ----------- ----------- --------- --------- ----------------
+100.00    1.615451         717      2251        92 total

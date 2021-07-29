@@ -1,0 +1,29 @@
+strace: Process 8896 attached
+strace: Process 8897 attached
+Signal handler overhead: 592.6631 microseconds
+% time     seconds  usecs/call     calls    errors syscall
+------ ----------- ----------- --------- --------- ----------------
+ 68.46    8.486460     4243230         2           wait4
+ 21.95    2.720668          55     48723           kill
+  9.43    1.168808          86     13446           rt_sigreturn
+  0.06    0.007194          15       466           getrusage
+  0.03    0.003378          96        35           pselect6
+  0.02    0.002470        2470         1           execve
+  0.01    0.001388          46        30           getppid
+  0.01    0.001275          45        28           getpid
+  0.01    0.001237          41        30           rt_sigaction
+  0.01    0.000978          75        13           write
+  0.01    0.000802          57        14           read
+  0.01    0.000790          29        27           close
+  0.01    0.000702         351         2           clone
+  0.00    0.000287          71         4           setitimer
+  0.00    0.000169          21         8           mmap
+  0.00    0.000158          39         4           mprotect
+  0.00    0.000062          20         3           openat
+  0.00    0.000062          62         1           munmap
+  0.00    0.000038          12         3           brk
+  0.00    0.000027           9         3           fstat
+  0.00    0.000003           0         8           pipe2
+  0.00    0.000000           0         1         1 faccessat
+------ ----------- ----------- --------- --------- ----------------
+100.00   12.396956         197     62852         1 total

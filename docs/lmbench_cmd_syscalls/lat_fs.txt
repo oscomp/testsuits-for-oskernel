@@ -1,0 +1,39 @@
+0kstrace: Process 9274 attached
+	1044	982strace: Process 9275 attached
+	1697
+1kstrace: Process 9276 attached
+	708	647strace: Process 9277 attached
+	1503
+4kstrace: Process 9278 attached
+	703	639strace: Process 9279 attached
+	1523
+10kstrace: Process 9280 attached
+	613	552strace: Process 9281 attached
+	1437
+% time     seconds  usecs/call     calls    errors syscall
+------ ----------- ----------- --------- --------- ----------------
+ 54.63  120.962289    15120286         8           wait4
+ 15.33   33.953428         302    112166           unlinkat
+ 15.23   33.724864         304    110894           openat
+ 10.81   23.931447         306     77975           write
+  3.75    8.310557          74    110990           close
+  0.19    0.411640         322      1275           mkdirat
+  0.02    0.033978         119       284           pselect6
+  0.01    0.031523         135       232       116 newfstatat
+  0.01    0.018609          30       602           getrusage
+  0.00    0.010990          58       188           rt_sigaction
+  0.00    0.008741          37       232           getpid
+  0.00    0.004774          38       124           getppid
+  0.00    0.003619          72        50           read
+  0.00    0.003593         449         8           clone
+  0.00    0.003049          95        32           pipe2
+  0.00    0.002362        2362         1           execve
+  0.00    0.000898          56        16           setitimer
+  0.00    0.000431         107         4           mprotect
+  0.00    0.000356          44         8           mmap
+  0.00    0.000145          48         3           brk
+  0.00    0.000123         123         1           munmap
+  0.00    0.000084          28         3           fstat
+  0.00    0.000057          57         1         1 faccessat
+------ ----------- ----------- --------- --------- ----------------
+100.00  221.417557         533    415097       117 total

@@ -1,0 +1,29 @@
+strace: Process 9261 attached
+strace: Process 9262 attached
+Pagefaults on /var/tmp/XXX: 9.6556 microseconds
+% time     seconds  usecs/call     calls    errors syscall
+------ ----------- ----------- --------- --------- ----------------
+ 94.17   20.137841    10068920         2           wait4
+  5.67    1.211910        8656       140           munmap
+  0.04    0.009403          63       147           mmap
+  0.03    0.006837          17       398           getrusage
+  0.02    0.005280          38       137           msync
+  0.01    0.002491          77        32           pselect6
+  0.01    0.002354          52        45           rt_sigaction
+  0.01    0.001151          37        31           getppid
+  0.00    0.001039         519         2           clone
+  0.00    0.001033          73        14           read
+  0.00    0.000975          33        29           close
+  0.00    0.000907          69        13           write
+  0.00    0.000857         107         8           pipe2
+  0.00    0.000561         112         5           openat
+  0.00    0.000320          80         4           mprotect
+  0.00    0.000239          47         5           fstat
+  0.00    0.000162          40         4           setitimer
+  0.00    0.000147          49         3           brk
+  0.00    0.000143         143         1           newfstatat
+  0.00    0.000115         115         1         1 faccessat
+  0.00    0.000104          26         4           getpid
+  0.00    0.000000           0         1           execve
+------ ----------- ----------- --------- --------- ----------------
+100.00   21.383869       20841      1026         1 total

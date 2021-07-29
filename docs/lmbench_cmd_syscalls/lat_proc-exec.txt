@@ -1,0 +1,193 @@
+strace: Process 9035 attached
+strace: Process 9036 attached
+strace: Process 9037 attached
+strace: Process 9038 attached
+strace: Process 9039 attached
+strace: Process 9040 attached
+strace: Process 9041 attached
+strace: Process 9042 attached
+strace: Process 9043 attached
+strace: Process 9044 attached
+strace: Process 9045 attached
+strace: Process 9046 attached
+strace: Process 9047 attached
+strace: Process 9048 attached
+strace: Process 9049 attached
+strace: Process 9050 attached
+strace: Process 9051 attached
+strace: Process 9052 attached
+strace: Process 9053 attached
+strace: Process 9054 attached
+strace: Process 9055 attached
+strace: Process 9056 attached
+strace: Process 9057 attached
+strace: Process 9058 attached
+strace: Process 9059 attached
+strace: Process 9060 attached
+strace: Process 9061 attached
+strace: Process 9062 attached
+strace: Process 9063 attached
+strace: Process 9064 attached
+strace: Process 9065 attached
+strace: Process 9066 attached
+strace: Process 9067 attached
+strace: Process 9068 attached
+strace: Process 9069 attached
+strace: Process 9070 attached
+strace: Process 9071 attached
+strace: Process 9072 attached
+strace: Process 9073 attached
+strace: Process 9074 attached
+strace: Process 9075 attached
+strace: Process 9076 attached
+strace: Process 9077 attached
+strace: Process 9078 attached
+strace: Process 9079 attached
+strace: Process 9080 attached
+strace: Process 9081 attached
+strace: Process 9082 attached
+strace: Process 9083 attached
+strace: Process 9084 attached
+strace: Process 9085 attached
+strace: Process 9086 attached
+strace: Process 9087 attached
+strace: Process 9088 attached
+strace: Process 9089 attached
+strace: Process 9090 attached
+strace: Process 9091 attached
+strace: Process 9092 attached
+strace: Process 9093 attached
+strace: Process 9094 attached
+strace: Process 9095 attached
+strace: Process 9096 attached
+strace: Process 9097 attached
+strace: Process 9098 attached
+strace: Process 9099 attached
+strace: Process 9100 attached
+strace: Process 9101 attached
+strace: Process 9102 attached
+strace: Process 9103 attached
+strace: Process 9104 attached
+strace: Process 9105 attached
+strace: Process 9106 attached
+strace: Process 9107 attached
+strace: Process 9108 attached
+strace: Process 9109 attached
+strace: Process 9110 attached
+strace: Process 9111 attached
+strace: Process 9112 attached
+strace: Process 9113 attached
+strace: Process 9114 attached
+strace: Process 9115 attached
+strace: Process 9116 attached
+strace: Process 9117 attached
+strace: Process 9118 attached
+strace: Process 9119 attached
+strace: Process 9120 attached
+strace: Process 9121 attached
+strace: Process 9122 attached
+strace: Process 9123 attached
+strace: Process 9124 attached
+strace: Process 9125 attached
+strace: Process 9126 attached
+strace: Process 9127 attached
+strace: Process 9128 attached
+strace: Process 9129 attached
+strace: Process 9130 attached
+strace: Process 9131 attached
+strace: Process 9132 attached
+strace: Process 9133 attached
+strace: Process 9134 attached
+strace: Process 9135 attached
+strace: Process 9136 attached
+strace: Process 9137 attached
+strace: Process 9138 attached
+strace: Process 9139 attached
+strace: Process 9140 attached
+strace: Process 9141 attached
+strace: Process 9142 attached
+strace: Process 9143 attached
+strace: Process 9144 attached
+strace: Process 9145 attached
+strace: Process 9146 attached
+strace: Process 9147 attached
+strace: Process 9148 attached
+strace: Process 9149 attached
+strace: Process 9150 attached
+strace: Process 9151 attached
+strace: Process 9152 attached
+strace: Process 9153 attached
+strace: Process 9154 attached
+strace: Process 9155 attached
+strace: Process 9156 attached
+strace: Process 9157 attached
+strace: Process 9158 attached
+strace: Process 9159 attached
+strace: Process 9160 attached
+strace: Process 9161 attached
+strace: Process 9162 attached
+strace: Process 9163 attached
+strace: Process 9164 attached
+strace: Process 9165 attached
+strace: Process 9166 attached
+strace: Process 9167 attached
+strace: Process 9168 attached
+strace: Process 9169 attached
+strace: Process 9170 attached
+strace: Process 9171 attached
+strace: Process 9172 attached
+strace: Process 9173 attached
+strace: Process 9174 attached
+strace: Process 9175 attached
+strace: Process 9176 attached
+strace: Process 9177 attached
+strace: Process 9178 attached
+strace: Process 9179 attached
+strace: Process 9180 attached
+strace: Process 9181 attached
+strace: Process 9182 attached
+strace: Process 9183 attached
+strace: Process 9184 attached
+strace: Process 9185 attached
+strace: Process 9186 attached
+strace: Process 9187 attached
+strace: Process 9188 attached
+strace: Process 9189 attached
+strace: Process 9190 attached
+strace: Process 9191 attached
+strace: Process 9192 attached
+strace: Process 9193 attached
+strace: Process 9194 attached
+strace: Process 9195 attached
+strace: Process 9196 attached
+strace: Process 9197 attached
+strace: Process 9198 attached
+strace: Process 9199 attached
+strace: Process 9200 attached
+strace: Process 9201 attached
+strace: Process 9202 attached
+strace: Process 9203 attached
+Process fork+execve: 6850.2667 microseconds
+% time     seconds  usecs/call     calls    errors syscall
+------ ----------- ----------- --------- --------- ----------------
+ 83.49    0.771996        4568       169           wait4
+  9.61    0.088856         525       169           clone
+  5.58    0.051581         305       169       168 execve
+  0.41    0.003776           7       478           getrusage
+  0.35    0.003259          17       183           close
+  0.23    0.002155          58        37           rt_sigaction
+  0.07    0.000683          45        15           getppid
+  0.06    0.000586          83         7           write
+  0.06    0.000530          66         8           read
+  0.03    0.000306          38         8           mmap
+  0.03    0.000246         246         1           munmap
+  0.02    0.000207          69         3           openat
+  0.02    0.000158          22         7           pselect6
+  0.02    0.000147          73         2           setitimer
+  0.01    0.000083          20         4           mprotect
+  0.01    0.000055          18         3           fstat
+  0.00    0.000001           0         4           pipe2
+  0.00    0.000001           0         3           brk
+  0.00    0.000000           0         1         1 faccessat
+------ ----------- ----------- --------- --------- ----------------
+100.00    0.924626         727      1271       169 total
