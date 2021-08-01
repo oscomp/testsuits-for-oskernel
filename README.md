@@ -16,6 +16,7 @@
 
 - busybox 相关：[scripts/busybox](scripts/busybox)
 - busybox+lua相关：[scripts/lua](scripts/lua)
+- lmbench相关: [scripts/lua](scripts/lmbench)
 
 ### 注意
 
