@@ -3,7 +3,7 @@ echo latency measurements
 lmbench_all lat_syscall -P 1 null
 lmbench_all lat_syscall -P 1 read
 lmbench_all lat_syscall -P 1 write
-busybox mkdir -P /var/tmp
+busybox mkdir -p /var/tmp
 busybox touch /var/tmp/lmbench
 lmbench_all lat_syscall -P 1 stat /var/tmp/lmbench
 lmbench_all lat_syscall -P 1 fstat /var/tmp/lmbench
