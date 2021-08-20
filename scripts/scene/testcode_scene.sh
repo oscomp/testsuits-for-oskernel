@@ -7,7 +7,7 @@ lmbench_all bw_file_rd -P 1 512k io_only /var/tmp/XXX
 busybox echo END bw_file_rd io_only $?
 
 busybox echo START bw_file_rd_open2close
-lmbench_all bw_mmap_rd -P 1 512k open2close /var/tmp/XXX
+lmbench_all bw_file_rd -P 1 512k open2close /var/tmp/XXX
 busybox echo END bw_file_rd open2close $?
 
 busybox echo START lat_ctx
