@@ -61,7 +61,8 @@ static: $(COMMON_OBJS) $(STATIC_PREFIXED_OBJS) entry.c src/functional/tls_align_
 	$(CC) $(LDFLAGS) -DSTATIC $^ -static -o entry-static.exe
 
 dynamic: $(DYNAMIC_PREFIXED_OBJS) $(DSO_SOS) $(COMMON_OBJS) entry.c
-	$(CC) $(LDFLAGS) entry.c -DDYNAMIC $(COMMON_OBJS) $(DYNAMIC_PREFIXED_OBJS) -Lsrc/functional -Lsrc/regression -ltls_align_dso -ltls_init_dso -ldlopen_dso -ltls_get_new-dtv_dso -o entry-dynamic.exe
+	# $(CC) $(LDFLAGS) entry.c -DDYNAMIC $(COMMON_OBJS) $(DYNAMIC_PREFIXED_OBJS) -Lsrc/functional -Lsrc/regression -ltls_align_dso -ltls_init_dso -ldlopen_dso -ltls_get_new-dtv_dso -o entry-dynamic.exe
+	$(CC) $(LDFLAGS) entry.c -DDYNAMIC $(COMMON_OBJS) $(DYNAMIC_PREFIXED_OBJS) -Lsrc/functional -Lsrc/regression  -o entry-dynamic.exe -rdynamic
 
 common: $(COMMON_OBJS)
 
@@ -72,7 +73,7 @@ common: $(COMMON_OBJS)
 	$(CC) $(CFLAGS) -c $^ -o $@
 
 %.so : %.c
-	$(CC) $(CFLAGS) -shared -fPIC $^ -o $(dir $@)/lib$(notdir $@)
+	$(CC) $(CFLAGS) -shared -fPIC $^ -o $@ #$(dir $@)/lib$(notdir $@)
 
 run-all.sh: static dynamic runtest
 	cat static.txt | xargs -I AA basename AA .exe | sed 's/-/_/g' | xargs -I BB printf "./runtest.exe -w entry-static.exe %s\n" BB > run-static.sh

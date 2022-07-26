@@ -35,7 +35,7 @@ int main(int argc, char *argv[])
 	s = dlerror();
 	if (i2 || s == 0)
 		t_error("dlsym i should have failed\n");
-	if (dlsym(g, "main") != (void*)main)
+	if (dlsym(g, "dlopen_main") != (void*)main)
 		t_error("dlsym main failed: %s\n", dlerror());
 
 	/* close+open reinitializes the dso with glibc but not with musl */
