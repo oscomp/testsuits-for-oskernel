@@ -13,3 +13,61 @@ X86本机测试：
 1. export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:src/functional:src/regression
 2. 修改Makefile中CC=musl-gcc，OBJCOPY=objcopy
 3. make run
+
+如果 x86 本机测试失败，可尝试以下步骤：
+
+1. 复制以下脚本到当前目录
+
+```py
+# fix.py
+file_path = "./entry.h"
+with open( file_path,'r') as open_file:
+    content = open_file.read()
+    content = content.replace("exe\n\"", "exe\"")
+with open(file_path, 'w') as open_file:
+    open_file.write(content)
+
+with open( file_path,'r') as open_file:
+    content = open_file.read()
+    content = content.replace(".exe\n_main", "_main")
+with open(file_path, 'w') as open_file:
+    open_file.write(content)
+
+with open( file_path,'r') as open_file:
+    content = open_file.read()
+    content = content.replace(".exe\"", "\"")
+with open(file_path, 'w') as open_file:
+    open_file.write(content)
+```
+
+2. 修改 Makefile
+
+```diff
++ .PHONY: entry.h
+
+so: $(DSO_SOS)
+
+entry.c: entry.h
+
+entry.h: dynamic.txt static.txt
+-	printf "#ifdef STATIC\n" >> entry.h
++	printf "#ifdef STATIC\n" > entry.h
+	cat static.txt | xargs -I AA basename AA .exe | sed 's/-/_/g' | xargs -I BB printf "int %s_main(int, char **);\n" BB >> entry.h
+	printf "struct {const char *name; int (*func)(int, char**);} table [] = {\n" >> entry.h
+	cat static.txt | xargs -I AA basename AA .exe | sed 's/-/_/g' | xargs -I BB printf "\t{\"%s\", %s_main},\n" BB BB >> entry.h
+	printf "\t{0, 0}\n" >> entry.h
+	printf "};\n" >> entry.h
+	printf "#endif\n\n" >> entry.h
+
+	printf "#ifdef DYNAMIC\n" >> entry.h
+	cat dynamic.txt | xargs -I AA basename AA .exe | sed 's/-/_/g' | xargs -I BB printf "int %s_main(int, char **);\n" BB >> entry.h
+	printf "struct {const char *name; int (*func)(int, char**);} table [] = {\n" >> entry.h
+	cat dynamic.txt | xargs -I AA basename AA .exe | sed 's/-/_/g' | xargs -I BB printf "\t{\"%s\", %s_main},\n" BB BB >> entry.h
+	printf "\t{0, 0}\n" >> entry.h
+	printf "};\n" >> entry.h
+	printf "#endif\n\n" >> entry.h
+
++	python3.8 fix.py
+```
+
+然后再重新运行 `make run` 即可
