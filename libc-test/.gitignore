@@ -1,0 +1,12 @@
+*.err
+*.o
+*.so
+*.a
+*.exe
+config.mak
+REPORT
+*.obj
+test
+entry.h
+run-all.sh
+.vscode
