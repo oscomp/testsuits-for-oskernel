@@ -3,7 +3,7 @@ MUSL_PREFIX = riscv64-linux
 MUSL_GCC = $(MUSL_PREFIX)-gcc
 MUSL_STRIP = $(MUSL_PREFIX)-strip
 
-build_all: busybox lua lmbench libctest
+build_all: busybox lua lmbench libctest iozone
 
 busybox: .PHONY
 	cp busybox-config busybox/.config
@@ -26,10 +26,15 @@ libctest: .PHONY
 	cp libc-test/disk/* sdcard/
 	mv sdcard/run-all.sh sdcard/libctest_testcode.sh
 
+iozone: .PHONY
+	make -C iozone linux CC="$(MUSL_GCC) -static" -j $(NPROC)
+	cp iozone/iozone sdcard/
+
 clean: .PHONY
 	make -C busybox clean
 	make -C lua clean
 	make -C lmbench clean
 	make -C libc-test clean
+	make -C iozone clean
 
 .PHONY:
