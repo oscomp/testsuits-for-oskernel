@@ -1,16 +1,4 @@
-# Testsuits for OS Kernel
-
-## 决赛阶段（6月21日~8月18日）
-
-### 基本要求
-
-- - 参赛的OS kernel需要尽力支持busybox, lua, lmbench三个程序的多种执行方式形成的测试用例。
-- 分阶段进行支持。
-  - 第一阶段（6月21日~7月20日）：支持 busybox和lua （侧重功能实现）
-  - 第二阶段（7月21日~8月18日）：支持 lmbench （侧重性能优化）
-- 在这两个阶段中，会在此仓库添加基于这三个程序的测试用例。
-- 要求参赛的OS kernel能够在QEMU for 双核RV64 模拟器和K210开发板上运行并通过测试用例。
-- 要求参赛的OS kernel要考虑内核设计的合理性和安全可靠性，经得起工具的安全检查或压力测试。
+# Testsuits for OS Kernel 2023
 
 ### 测试用例
 
@@ -72,66 +60,8 @@ objdump -d objfile | grep -B 9 ecall | grep "li.a7" | tee syscall.txt
 4. 参考`artifacts/readme.txt`里的指令启动debian。
 
 > 也可选择使用搭建好的镜像，下载地址：[debian-oscomp](https://cloud.tsinghua.edu.cn/f/1ffc4bc9149645a896ea/?dl=1)
->
 > 执行`./run.sh`进入系统，登陆用户名：root，密码：root
 
-## 程序编译过程
+下载好镜像之后，将oscomp-debian放在本目录下，修改oscomp-debina/run.sh，在其中加入`-drive file=../sdcard.img,if=none,format=raw,id=x0 -device virtio-blk-device,drive=x0,bus=virtio-mmio-bus.0`参数。执行make qemu进入系统。
 
-编译环境的准备
-
-```bash
-# 安装必要的软件
-sudo apt install build-essential
-sudo apt install musl-tools
-apt-get install libncurses5-dev libncursesw5-dev
-```
-
-编译busybox
-
-```bash
-# 需要包含一些linux头文件
-ln -s /usr/include/linux /usr/include/riscv64-linux-musl/linux
-ln -s /usr/include/asm-generic /usr/include/riscv64-linux-musl/asm
-ln -s /usr/include/mtd /usr/include/riscv64-linux-musl/mtd
-cp /usr/include/riscv64-linux-gnu/asm/byteorder.h /usr/include/asm-generic
-
-# 编译busybox
- cd busybox
-make menuconfig	# 默认动态编译，如需静态编译则设置CONFIG_STATIC=y
-make CC="musl-gcc"
-```
-
-编译lua
-
-```bash
-cd lua
-make posix CC="musl-gcc"	# 动态编译。由于之前的准备，现在gcc就是musl-gcc
-make posix CC="musl-gcc -static"	# 静态编译
-```
-
-编译lmbench
-
-```bash
-cd lmbench
-make build	# 动态编译并执行
-make build CC="gcc -static"	# 静态编译并执行
-```
-
-## 运行测试代码
-
-```bash
-# busybox
-cd scripts/busybox
-cp ../../busybox/busybox .
-./busybox_testcode.sh	# 运行busybox的测试代码。如某条命令执行失败，结果会输出到文件result.txt
-
-# lua
-cd scripts/lua
-cp ../../lua/src/lua .
-./test.sh <file>	# 运行lua脚本。
-
-# lmbench
-cd lmbench
-make oscomp
-```
-
+进入系统后将/dev/sdb挂载至/mnt，随后可以进入/mnt目录运行测试程序。

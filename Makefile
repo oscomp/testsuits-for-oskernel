@@ -30,6 +30,17 @@ iozone: .PHONY
 	make -C iozone linux CC="$(MUSL_GCC) -static" -j $(NPROC)
 	cp iozone/iozone sdcard/
 
+sdcard: .PHONY
+	dd if=/dev/zero of=sdcard.img count=32768 bs=1K
+	mkfs.vfat -F 32 sdcard.img
+	mkdir -p mnt
+	guestmount -a sdcard.img -m /dev/sda --rw mnt
+	cp sdcard/* mnt
+	umount mnt
+
+qemu: .PHONY
+	cd oscomp-debian && ./run.sh
+
 clean: .PHONY
 	make -C busybox clean
 	make -C lua clean
