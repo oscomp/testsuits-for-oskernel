@@ -65,3 +65,7 @@ objdump -d objfile | grep -B 9 ecall | grep "li.a7" | tee syscall.txt
 下载好镜像之后，将oscomp-debian放在本目录下，修改oscomp-debina/run.sh，在其中加入`-drive file=../sdcard.img,if=none,format=raw,id=x0 -device virtio-blk-device,drive=x0,bus=virtio-mmio-bus.0`参数。执行make qemu进入系统。
 
 进入系统后将/dev/sdb挂载至/mnt，随后可以进入/mnt目录运行测试程序。
+
+## 构建测试用例
+
+docker run --rm -it -v $(pwd):/code --privileged --entrypoint make alphamj/os-contest:v7.5 -C /code sdcard

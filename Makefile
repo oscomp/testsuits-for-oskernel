@@ -3,7 +3,7 @@ MUSL_PREFIX = riscv64-linux
 MUSL_GCC = $(MUSL_PREFIX)-gcc
 MUSL_STRIP = $(MUSL_PREFIX)-strip
 
-build_all: busybox lua lmbench libctest iozone
+build_all: busybox lua lmbench libctest iozone libc-bench
 
 busybox: .PHONY
 	cp busybox-config busybox/.config
@@ -30,7 +30,11 @@ iozone: .PHONY
 	make -C iozone linux CC="$(MUSL_GCC) -static" -j $(NPROC)
 	cp iozone/iozone sdcard/
 
-sdcard: .PHONY
+libc-bench: .PHONY
+	make -C libc-bench CC="$(MUSL_GCC) -static" -j $(NPROC)
+	cp libc-bench/libc-bench sdcard/libc-bench
+
+sdcard: build_all
 	dd if=/dev/zero of=sdcard.img count=32768 bs=1K
 	mkfs.vfat -F 32 sdcard.img
 	mkdir -p mnt
@@ -47,5 +51,8 @@ clean: .PHONY
 	make -C lmbench clean
 	make -C libc-test clean
 	make -C iozone clean
+	make -C libc-bench clean
+	- rm sdcard.img
+	- rm sdcard.img.gz
 
 .PHONY:
