@@ -5,6 +5,7 @@
 - busybox 相关：[scripts/busybox](scripts/busybox)
 - busybox+lua相关：[scripts/lua](scripts/lua)
 - lmbench相关: [scripts/lua](scripts/lmbench)
+- iozone相关：[scripts/iozone](scripts/iozone)
 
 ### 注意
 
@@ -30,6 +31,8 @@ print.lua的内容如下：
 > print("Hello World!")
 
 lmbench依次执行了一些小程序来测试系统的性能，可分析`bin/lmbench`来依次执行这些小程序，以达到对lmbench逐步的支持。
+
+iozone测试了文件系统的读写性能，以及多线程情况下的吞吐量。
 
 **！注：不要求支持网络，所以和socket相关的系统调用不必支持。**
 

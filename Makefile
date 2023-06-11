@@ -29,13 +29,14 @@ libctest: .PHONY
 iozone: .PHONY
 	make -C iozone linux CC="$(MUSL_GCC) -static" -j $(NPROC)
 	cp iozone/iozone sdcard/
+	cp scripts/iozone/* sdcard/
 
 libc-bench: .PHONY
 	make -C libc-bench CC="$(MUSL_GCC) -static" -j $(NPROC)
 	cp libc-bench/libc-bench sdcard/libc-bench
 
 sdcard: build_all
-	dd if=/dev/zero of=sdcard.img count=32768 bs=1K
+	dd if=/dev/zero of=sdcard.img count=62768 bs=1K
 	mkfs.vfat -F 32 sdcard.img
 	mkdir -p mnt
 	guestmount -a sdcard.img -m /dev/sda --rw mnt
