@@ -1,0 +1,41 @@
+latency measurements
+Simple syscall: 0.6153 microseconds
+Simple read: 12.0149 microseconds
+Simple write: 1.0466 microseconds
+Simple stat: 78.1327 microseconds
+Simple fstat: 13.1307 microseconds
+Simple open/close: 107.3298 microseconds
+Select on 100 fd's: 32.0582 microseconds
+Signal handler installation: 11.6689 microseconds
+Signal handler overhead: 83.1713 microseconds
+mmap: Bad file descriptor
+Pipe latency: 133.1555 microseconds
+Process fork+exit: 1706.1551 microseconds
+Process fork+execve: 5575.7300 microseconds
+cp: can't stat 'hello': No such file or directory
+Process fork+/bin/sh -c: 32353.1714 microseconds
+File /var/tmp/XXX write bandwidth:8922 KB/sec
+Pagefaults on /var/tmp/XXX: 8.1596 microseconds
+0.524288 205
+file system latency
+0k      4679    4319   6001
+1k      2903    2541   4622
+4k      2799    2511   4737
+10k     1778    1654   4029
+Bandwidth measurements
+Pipe bandwidth: 111.26 MB/sec
+0.524288 382.18
+0.524288 350.71
+0.524288 12837.49
+0.524288 412.08
+context switch overhead
+
+"size=32k ovr=43.64
+2 30.90
+4 30.42
+8 31.96
+16 35.56
+24 35.75
+32 40.30
+64 40.08
+96 37.98
