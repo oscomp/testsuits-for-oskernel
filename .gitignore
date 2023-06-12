@@ -3,3 +3,17 @@ sdcard/*
 sdcard.img
 sdcard.img.gz
 oscomp-debian
+
+iozone/fileop
+iozone/iozone
+iozone/pit_server
+libc-bench/libc-bench
+libc-test/disk/
+libc-test/run-dynamic.sh
+libc-test/run-static.sh
+lmbench/bin/
+lmbench/src/bk.ver
+lua/src/liblua.a
+lua/src/lua
+lua/src/luac
+time-test/time-test
