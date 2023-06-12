@@ -71,4 +71,4 @@ objdump -d objfile | grep -B 9 ecall | grep "li.a7" | tee syscall.txt
 
 ## 构建测试用例
 
-docker run --rm -it -v $(pwd):/code --privileged --entrypoint make alphamj/os-contest:v7.5 -C /code sdcard
+docker run --rm -it -v $(pwd):/code --privileged --entrypoint make alphamj/os-contest:v7.6 -C /code sdcard
