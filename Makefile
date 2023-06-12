@@ -39,7 +39,7 @@ sdcard: build_all
 	dd if=/dev/zero of=sdcard.img count=62768 bs=1K
 	mkfs.vfat -F 32 sdcard.img
 	mkdir -p mnt
-	guestmount -a sdcard.img -m /dev/sda --rw mnt
+	mount -t vfat -o user,umask=000,utf8=1 --source sdcard.img --target mnt
 	cp sdcard/* mnt
 	umount mnt
 
