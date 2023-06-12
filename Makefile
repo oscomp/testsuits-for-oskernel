@@ -3,7 +3,7 @@ MUSL_PREFIX = riscv64-linux
 MUSL_GCC = $(MUSL_PREFIX)-gcc
 MUSL_STRIP = $(MUSL_PREFIX)-strip
 
-build_all: busybox lua lmbench libctest iozone libc-bench netperf unix-bench time-test
+build_all: busybox lua lmbench libctest iozone libc-bench netperf unix-bench time-test test_all
 
 busybox: .PHONY
 	cp busybox-config busybox/.config
@@ -43,16 +43,18 @@ unix-bench: .PHONY
 netperf: .PHONY
 	cd netperf && ./autogen.sh
 	cd netperf && ac_cv_func_setpgrp_void=yes ./configure --host riscv64 CC=$(MUSL_GCC) CFLAGS="-static"
-	cd netperf && make
+	cd netperf && make -j $(NPROC)
 	cp netperf/src/netperf netperf/src/netserver sdcard/
 	cp scripts/netperf/* sdcard/
 
 time-test: .PHONY
-	make -C time-test all
+	make CC=$(MUSL_GCC) -C time-test all
 	cp time-test/time-test sdcard
 
-sdcard: build_all
+test_all: .PHONY
 	cp scripts/test_all.sh sdcard/test_all.sh
+
+sdcard: build_all .PHONY
 	dd if=/dev/zero of=sdcard.img count=62768 bs=1K
 	mkfs.vfat -F 32 sdcard.img
 	mkdir -p mnt
@@ -70,7 +72,9 @@ clean: .PHONY
 	make -C libc-test clean
 	make -C iozone clean
 	make -C libc-bench clean
+	make -C netperf clean
 	make -C UnixBench clean
+	make -C time-test clean
 	- rm sdcard.img
 	- rm sdcard.img.gz
 
