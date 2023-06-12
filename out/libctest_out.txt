@@ -1,0 +1,771 @@
+========== START entry-static.exe argv ==========
+Pass!
+========== END entry-static.exe argv ==========
+========== START entry-static.exe basename ==========
+Pass!
+========== END entry-static.exe basename ==========
+========== START entry-static.exe clocale_mbfuncs ==========
+Pass!
+========== END entry-static.exe clocale_mbfuncs ==========
+========== START entry-static.exe clock_gettime ==========
+Pass!
+========== END entry-static.exe clock_gettime ==========
+========== START entry-static.exe crypt ==========
+Pass!
+========== END entry-static.exe crypt ==========
+========== START entry-static.exe dirname ==========
+Pass!
+========== END entry-static.exe dirname ==========
+========== START entry-static.exe env ==========
+Pass!
+========== END entry-static.exe env ==========
+========== START entry-static.exe fdopen ==========
+Pass!
+========== END entry-static.exe fdopen ==========
+========== START entry-static.exe fnmatch ==========
+Pass!
+========== END entry-static.exe fnmatch ==========
+========== START entry-static.exe fscanf ==========
+Pass!
+========== END entry-static.exe fscanf ==========
+========== START entry-static.exe fwscanf ==========
+Pass!
+========== END entry-static.exe fwscanf ==========
+========== START entry-static.exe iconv_open ==========
+Pass!
+========== END entry-static.exe iconv_open ==========
+========== START entry-static.exe inet_pton ==========
+Pass!
+========== END entry-static.exe inet_pton ==========
+========== START entry-static.exe mbc ==========
+Pass!
+========== END entry-static.exe mbc ==========
+========== START entry-static.exe memstream ==========
+Pass!
+========== END entry-static.exe memstream ==========
+========== START entry-static.exe pthread_cancel_points ==========
+Pass!
+========== END entry-static.exe pthread_cancel_points ==========
+========== START entry-static.exe pthread_cancel ==========
+Pass!
+========== END entry-static.exe pthread_cancel ==========
+========== START entry-static.exe pthread_cond ==========
+Pass!
+========== END entry-static.exe pthread_cond ==========
+========== START entry-static.exe pthread_tsd ==========
+Pass!
+========== END entry-static.exe pthread_tsd ==========
+========== START entry-static.exe qsort ==========
+Pass!
+========== END entry-static.exe qsort ==========
+========== START entry-static.exe random ==========
+Pass!
+========== END entry-static.exe random ==========
+========== START entry-static.exe search_hsearch ==========
+Pass!
+========== END entry-static.exe search_hsearch ==========
+========== START entry-static.exe search_insque ==========
+Pass!
+========== END entry-static.exe search_insque ==========
+========== START entry-static.exe search_lsearch ==========
+Pass!
+========== END entry-static.exe search_lsearch ==========
+========== START entry-static.exe search_tsearch ==========
+Pass!
+========== END entry-static.exe search_tsearch ==========
+========== START entry-static.exe setjmp ==========
+Pass!
+========== END entry-static.exe setjmp ==========
+========== START entry-static.exe snprintf ==========
+Pass!
+========== END entry-static.exe snprintf ==========
+========== START entry-static.exe socket ==========
+Pass!
+========== END entry-static.exe socket ==========
+========== START entry-static.exe sscanf ==========
+Pass!
+========== END entry-static.exe sscanf ==========
+========== START entry-static.exe sscanf_long ==========
+Pass!
+========== END entry-static.exe sscanf_long ==========
+========== START entry-static.exe stat ==========
+Pass!
+========== END entry-static.exe stat ==========
+========== START entry-static.exe strftime ==========
+Pass!
+========== END entry-static.exe strftime ==========
+========== START entry-static.exe string ==========
+Pass!
+========== END entry-static.exe string ==========
+========== START entry-static.exe string_memcpy ==========
+Pass!
+========== END entry-static.exe string_memcpy ==========
+========== START entry-static.exe string_memmem ==========
+Pass!
+========== END entry-static.exe string_memmem ==========
+========== START entry-static.exe string_memset ==========
+Pass!
+========== END entry-static.exe string_memset ==========
+========== START entry-static.exe string_strchr ==========
+Pass!
+========== END entry-static.exe string_strchr ==========
+========== START entry-static.exe string_strcspn ==========
+Pass!
+========== END entry-static.exe string_strcspn ==========
+========== START entry-static.exe string_strstr ==========
+Pass!
+========== END entry-static.exe string_strstr ==========
+========== START entry-static.exe strptime ==========
+Pass!
+========== END entry-static.exe strptime ==========
+========== START entry-static.exe strtod ==========
+Pass!
+========== END entry-static.exe strtod ==========
+========== START entry-static.exe strtod_simple ==========
+Pass!
+========== END entry-static.exe strtod_simple ==========
+========== START entry-static.exe strtof ==========
+Pass!
+========== END entry-static.exe strtof ==========
+========== START entry-static.exe strtol ==========
+Pass!
+========== END entry-static.exe strtol ==========
+========== START entry-static.exe strtold ==========
+Pass!
+========== END entry-static.exe strtold ==========
+========== START entry-static.exe swprintf ==========
+Pass!
+========== END entry-static.exe swprintf ==========
+========== START entry-static.exe tgmath ==========
+Pass!
+========== END entry-static.exe tgmath ==========
+========== START entry-static.exe time ==========
+Pass!
+========== END entry-static.exe time ==========
+========== START entry-static.exe tls_align ==========
+Pass!
+========== END entry-static.exe tls_align ==========
+========== START entry-static.exe udiv ==========
+Pass!
+========== END entry-static.exe udiv ==========
+========== START entry-static.exe ungetc ==========
+Pass!
+========== END entry-static.exe ungetc ==========
+========== START entry-static.exe utime ==========
+Pass!
+========== END entry-static.exe utime ==========
+========== START entry-static.exe wcsstr ==========
+Pass!
+========== END entry-static.exe wcsstr ==========
+========== START entry-static.exe wcstol ==========
+Pass!
+========== END entry-static.exe wcstol ==========
+========== START entry-static.exe pleval ==========
+Pass!
+========== END entry-static.exe pleval ==========
+========== START entry-static.exe daemon_failure ==========
+Pass!
+========== END entry-static.exe daemon_failure ==========
+========== START entry-static.exe dn_expand_empty ==========
+Pass!
+========== END entry-static.exe dn_expand_empty ==========
+========== START entry-static.exe dn_expand_ptr_0 ==========
+Pass!
+========== END entry-static.exe dn_expand_ptr_0 ==========
+========== START entry-static.exe fflush_exit ==========
+Pass!
+========== END entry-static.exe fflush_exit ==========
+========== START entry-static.exe fgets_eof ==========
+Pass!
+========== END entry-static.exe fgets_eof ==========
+========== START entry-static.exe fgetwc_buffering ==========
+Pass!
+========== END entry-static.exe fgetwc_buffering ==========
+========== START entry-static.exe fpclassify_invalid_ld80 ==========
+Pass!
+========== END entry-static.exe fpclassify_invalid_ld80 ==========
+========== START entry-static.exe ftello_unflushed_append ==========
+Pass!
+========== END entry-static.exe ftello_unflushed_append ==========
+========== START entry-static.exe getpwnam_r_crash ==========
+Pass!
+========== END entry-static.exe getpwnam_r_crash ==========
+========== START entry-static.exe getpwnam_r_errno ==========
+Pass!
+========== END entry-static.exe getpwnam_r_errno ==========
+========== START entry-static.exe iconv_roundtrips ==========
+Pass!
+========== END entry-static.exe iconv_roundtrips ==========
+========== START entry-static.exe inet_ntop_v4mapped ==========
+Pass!
+========== END entry-static.exe inet_ntop_v4mapped ==========
+========== START entry-static.exe inet_pton_empty_last_field ==========
+Pass!
+========== END entry-static.exe inet_pton_empty_last_field ==========
+========== START entry-static.exe iswspace_null ==========
+Pass!
+========== END entry-static.exe iswspace_null ==========
+========== START entry-static.exe lrand48_signextend ==========
+Pass!
+========== END entry-static.exe lrand48_signextend ==========
+========== START entry-static.exe lseek_large ==========
+Pass!
+========== END entry-static.exe lseek_large ==========
+========== START entry-static.exe malloc_0 ==========
+Pass!
+========== END entry-static.exe malloc_0 ==========
+========== START entry-static.exe mbsrtowcs_overflow ==========
+Pass!
+========== END entry-static.exe mbsrtowcs_overflow ==========
+========== START entry-static.exe memmem_oob_read ==========
+Pass!
+========== END entry-static.exe memmem_oob_read ==========
+========== START entry-static.exe memmem_oob ==========
+Pass!
+========== END entry-static.exe memmem_oob ==========
+========== START entry-static.exe mkdtemp_failure ==========
+Pass!
+========== END entry-static.exe mkdtemp_failure ==========
+========== START entry-static.exe mkstemp_failure ==========
+Pass!
+========== END entry-static.exe mkstemp_failure ==========
+========== START entry-static.exe printf_1e9_oob ==========
+Pass!
+========== END entry-static.exe printf_1e9_oob ==========
+========== START entry-static.exe printf_fmt_g_round ==========
+Pass!
+========== END entry-static.exe printf_fmt_g_round ==========
+========== START entry-static.exe printf_fmt_g_zeros ==========
+Pass!
+========== END entry-static.exe printf_fmt_g_zeros ==========
+========== START entry-static.exe printf_fmt_n ==========
+Pass!
+========== END entry-static.exe printf_fmt_n ==========
+========== START entry-static.exe pthread_robust_detach ==========
+Pass!
+========== END entry-static.exe pthread_robust_detach ==========
+========== START entry-static.exe pthread_cancel_sem_wait ==========
+Pass!
+========== END entry-static.exe pthread_cancel_sem_wait ==========
+========== START entry-static.exe pthread_cond_smasher ==========
+Pass!
+========== END entry-static.exe pthread_cond_smasher ==========
+========== START entry-static.exe pthread_condattr_setclock ==========
+Pass!
+========== END entry-static.exe pthread_condattr_setclock ==========
+========== START entry-static.exe pthread_exit_cancel ==========
+Pass!
+========== END entry-static.exe pthread_exit_cancel ==========
+========== START entry-static.exe pthread_once_deadlock ==========
+Pass!
+========== END entry-static.exe pthread_once_deadlock ==========
+========== START entry-static.exe pthread_rwlock_ebusy ==========
+Pass!
+========== END entry-static.exe pthread_rwlock_ebusy ==========
+========== START entry-static.exe putenv_doublefree ==========
+Pass!
+========== END entry-static.exe putenv_doublefree ==========
+========== START entry-static.exe regex_backref_0 ==========
+Pass!
+========== END entry-static.exe regex_backref_0 ==========
+========== START entry-static.exe regex_bracket_icase ==========
+Pass!
+========== END entry-static.exe regex_bracket_icase ==========
+========== START entry-static.exe regex_ere_backref ==========
+Pass!
+========== END entry-static.exe regex_ere_backref ==========
+========== START entry-static.exe regex_escaped_high_byte ==========
+Pass!
+========== END entry-static.exe regex_escaped_high_byte ==========
+========== START entry-static.exe regex_negated_range ==========
+Pass!
+========== END entry-static.exe regex_negated_range ==========
+========== START entry-static.exe regexec_nosub ==========
+Pass!
+========== END entry-static.exe regexec_nosub ==========
+========== START entry-static.exe rewind_clear_error ==========
+Pass!
+========== END entry-static.exe rewind_clear_error ==========
+========== START entry-static.exe rlimit_open_files ==========
+Pass!
+========== END entry-static.exe rlimit_open_files ==========
+========== START entry-static.exe scanf_bytes_consumed ==========
+Pass!
+========== END entry-static.exe scanf_bytes_consumed ==========
+========== START entry-static.exe scanf_match_literal_eof ==========
+Pass!
+========== END entry-static.exe scanf_match_literal_eof ==========
+========== START entry-static.exe scanf_nullbyte_char ==========
+Pass!
+========== END entry-static.exe scanf_nullbyte_char ==========
+========== START entry-static.exe setvbuf_unget ==========
+Pass!
+========== END entry-static.exe setvbuf_unget ==========
+========== START entry-static.exe sigprocmask_internal ==========
+Pass!
+========== END entry-static.exe sigprocmask_internal ==========
+========== START entry-static.exe sscanf_eof ==========
+Pass!
+========== END entry-static.exe sscanf_eof ==========
+========== START entry-static.exe statvfs ==========
+Pass!
+========== END entry-static.exe statvfs ==========
+========== START entry-static.exe strverscmp ==========
+Pass!
+========== END entry-static.exe strverscmp ==========
+========== START entry-static.exe syscall_sign_extend ==========
+Pass!
+========== END entry-static.exe syscall_sign_extend ==========
+========== START entry-static.exe uselocale_0 ==========
+Pass!
+========== END entry-static.exe uselocale_0 ==========
+========== START entry-static.exe wcsncpy_read_overflow ==========
+Pass!
+========== END entry-static.exe wcsncpy_read_overflow ==========
+========== START entry-static.exe wcsstr_false_negative ==========
+Pass!
+========== END entry-static.exe wcsstr_false_negative ==========
+========== START entry-dynamic.exe argv ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL argv [status 1]
+========== END entry-dynamic.exe argv ==========
+========== START entry-dynamic.exe basename ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL basename [status 1]
+========== END entry-dynamic.exe basename ==========
+========== START entry-dynamic.exe clocale_mbfuncs ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL clocale_mbfuncs [status 1]
+========== END entry-dynamic.exe clocale_mbfuncs ==========
+========== START entry-dynamic.exe clock_gettime ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL clock_gettime [status 1]
+========== END entry-dynamic.exe clock_gettime ==========
+========== START entry-dynamic.exe crypt ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL crypt [status 1]
+========== END entry-dynamic.exe crypt ==========
+========== START entry-dynamic.exe dirname ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL dirname [status 1]
+========== END entry-dynamic.exe dirname ==========
+========== START entry-dynamic.exe dlopen ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL dlopen [status 1]
+========== END entry-dynamic.exe dlopen ==========
+========== START entry-dynamic.exe env ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL env [status 1]
+========== END entry-dynamic.exe env ==========
+========== START entry-dynamic.exe fdopen ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL fdopen [status 1]
+========== END entry-dynamic.exe fdopen ==========
+========== START entry-dynamic.exe fnmatch ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL fnmatch [status 1]
+========== END entry-dynamic.exe fnmatch ==========
+========== START entry-dynamic.exe fscanf ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL fscanf [status 1]
+========== END entry-dynamic.exe fscanf ==========
+========== START entry-dynamic.exe fwscanf ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL fwscanf [status 1]
+========== END entry-dynamic.exe fwscanf ==========
+========== START entry-dynamic.exe iconv_open ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL iconv_open [status 1]
+========== END entry-dynamic.exe iconv_open ==========
+========== START entry-dynamic.exe inet_pton ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL inet_pton [status 1]
+========== END entry-dynamic.exe inet_pton ==========
+========== START entry-dynamic.exe mbc ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL mbc [status 1]
+========== END entry-dynamic.exe mbc ==========
+========== START entry-dynamic.exe memstream ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL memstream [status 1]
+========== END entry-dynamic.exe memstream ==========
+========== START entry-dynamic.exe pthread_cancel_points ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL pthread_cancel_points [status 1]
+========== END entry-dynamic.exe pthread_cancel_points ==========
+========== START entry-dynamic.exe pthread_cancel ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL pthread_cancel [status 1]
+========== END entry-dynamic.exe pthread_cancel ==========
+========== START entry-dynamic.exe pthread_cond ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL pthread_cond [status 1]
+========== END entry-dynamic.exe pthread_cond ==========
+========== START entry-dynamic.exe pthread_tsd ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL pthread_tsd [status 1]
+========== END entry-dynamic.exe pthread_tsd ==========
+========== START entry-dynamic.exe qsort ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL qsort [status 1]
+========== END entry-dynamic.exe qsort ==========
+========== START entry-dynamic.exe random ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL random [status 1]
+========== END entry-dynamic.exe random ==========
+========== START entry-dynamic.exe search_hsearch ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL search_hsearch [status 1]
+========== END entry-dynamic.exe search_hsearch ==========
+========== START entry-dynamic.exe search_insque ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL search_insque [status 1]
+========== END entry-dynamic.exe search_insque ==========
+========== START entry-dynamic.exe search_lsearch ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL search_lsearch [status 1]
+========== END entry-dynamic.exe search_lsearch ==========
+========== START entry-dynamic.exe search_tsearch ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL search_tsearch [status 1]
+========== END entry-dynamic.exe search_tsearch ==========
+========== START entry-dynamic.exe sem_init ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL sem_init [status 1]
+========== END entry-dynamic.exe sem_init ==========
+========== START entry-dynamic.exe setjmp ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL setjmp [status 1]
+========== END entry-dynamic.exe setjmp ==========
+========== START entry-dynamic.exe snprintf ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL snprintf [status 1]
+========== END entry-dynamic.exe snprintf ==========
+========== START entry-dynamic.exe socket ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL socket [status 1]
+========== END entry-dynamic.exe socket ==========
+========== START entry-dynamic.exe sscanf ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL sscanf [status 1]
+========== END entry-dynamic.exe sscanf ==========
+========== START entry-dynamic.exe sscanf_long ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL sscanf_long [status 1]
+========== END entry-dynamic.exe sscanf_long ==========
+========== START entry-dynamic.exe stat ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL stat [status 1]
+========== END entry-dynamic.exe stat ==========
+========== START entry-dynamic.exe strftime ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL strftime [status 1]
+========== END entry-dynamic.exe strftime ==========
+========== START entry-dynamic.exe string ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL string [status 1]
+========== END entry-dynamic.exe string ==========
+========== START entry-dynamic.exe string_memcpy ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL string_memcpy [status 1]
+========== END entry-dynamic.exe string_memcpy ==========
+========== START entry-dynamic.exe string_memmem ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL string_memmem [status 1]
+========== END entry-dynamic.exe string_memmem ==========
+========== START entry-dynamic.exe string_memset ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL string_memset [status 1]
+========== END entry-dynamic.exe string_memset ==========
+========== START entry-dynamic.exe string_strchr ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL string_strchr [status 1]
+========== END entry-dynamic.exe string_strchr ==========
+========== START entry-dynamic.exe string_strcspn ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL string_strcspn [status 1]
+========== END entry-dynamic.exe string_strcspn ==========
+========== START entry-dynamic.exe string_strstr ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL string_strstr [status 1]
+========== END entry-dynamic.exe string_strstr ==========
+========== START entry-dynamic.exe strptime ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL strptime [status 1]
+========== END entry-dynamic.exe strptime ==========
+========== START entry-dynamic.exe strtod ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL strtod [status 1]
+========== END entry-dynamic.exe strtod ==========
+========== START entry-dynamic.exe strtod_simple ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL strtod_simple [status 1]
+========== END entry-dynamic.exe strtod_simple ==========
+========== START entry-dynamic.exe strtof ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL strtof [status 1]
+========== END entry-dynamic.exe strtof ==========
+========== START entry-dynamic.exe strtol ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL strtol [status 1]
+========== END entry-dynamic.exe strtol ==========
+========== START entry-dynamic.exe strtold ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL strtold [status 1]
+========== END entry-dynamic.exe strtold ==========
+========== START entry-dynamic.exe swprintf ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL swprintf [status 1]
+========== END entry-dynamic.exe swprintf ==========
+========== START entry-dynamic.exe tgmath ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL tgmath [status 1]
+========== END entry-dynamic.exe tgmath ==========
+========== START entry-dynamic.exe time ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL time [status 1]
+========== END entry-dynamic.exe time ==========
+========== START entry-dynamic.exe tls_init ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL tls_init [status 1]
+========== END entry-dynamic.exe tls_init ==========
+========== START entry-dynamic.exe tls_local_exec ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL tls_local_exec [status 1]
+========== END entry-dynamic.exe tls_local_exec ==========
+========== START entry-dynamic.exe udiv ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL udiv [status 1]
+========== END entry-dynamic.exe udiv ==========
+========== START entry-dynamic.exe ungetc ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL ungetc [status 1]
+========== END entry-dynamic.exe ungetc ==========
+========== START entry-dynamic.exe utime ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL utime [status 1]
+========== END entry-dynamic.exe utime ==========
+========== START entry-dynamic.exe wcsstr ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL wcsstr [status 1]
+========== END entry-dynamic.exe wcsstr ==========
+========== START entry-dynamic.exe wcstol ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL wcstol [status 1]
+========== END entry-dynamic.exe wcstol ==========
+========== START entry-dynamic.exe daemon_failure ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL daemon_failure [status 1]
+========== END entry-dynamic.exe daemon_failure ==========
+========== START entry-dynamic.exe dn_expand_empty ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL dn_expand_empty [status 1]
+========== END entry-dynamic.exe dn_expand_empty ==========
+========== START entry-dynamic.exe dn_expand_ptr_0 ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL dn_expand_ptr_0 [status 1]
+========== END entry-dynamic.exe dn_expand_ptr_0 ==========
+========== START entry-dynamic.exe fflush_exit ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL fflush_exit [status 1]
+========== END entry-dynamic.exe fflush_exit ==========
+========== START entry-dynamic.exe fgets_eof ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL fgets_eof [status 1]
+========== END entry-dynamic.exe fgets_eof ==========
+========== START entry-dynamic.exe fgetwc_buffering ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL fgetwc_buffering [status 1]
+========== END entry-dynamic.exe fgetwc_buffering ==========
+========== START entry-dynamic.exe fpclassify_invalid_ld80 ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL fpclassify_invalid_ld80 [status 1]
+========== END entry-dynamic.exe fpclassify_invalid_ld80 ==========
+========== START entry-dynamic.exe ftello_unflushed_append ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL ftello_unflushed_append [status 1]
+========== END entry-dynamic.exe ftello_unflushed_append ==========
+========== START entry-dynamic.exe getpwnam_r_crash ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL getpwnam_r_crash [status 1]
+========== END entry-dynamic.exe getpwnam_r_crash ==========
+========== START entry-dynamic.exe getpwnam_r_errno ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL getpwnam_r_errno [status 1]
+========== END entry-dynamic.exe getpwnam_r_errno ==========
+========== START entry-dynamic.exe iconv_roundtrips ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL iconv_roundtrips [status 1]
+========== END entry-dynamic.exe iconv_roundtrips ==========
+========== START entry-dynamic.exe inet_ntop_v4mapped ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL inet_ntop_v4mapped [status 1]
+========== END entry-dynamic.exe inet_ntop_v4mapped ==========
+========== START entry-dynamic.exe inet_pton_empty_last_field ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL inet_pton_empty_last_field [status 1]
+========== END entry-dynamic.exe inet_pton_empty_last_field ==========
+========== START entry-dynamic.exe iswspace_null ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL iswspace_null [status 1]
+========== END entry-dynamic.exe iswspace_null ==========
+========== START entry-dynamic.exe lrand48_signextend ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL lrand48_signextend [status 1]
+========== END entry-dynamic.exe lrand48_signextend ==========
+========== START entry-dynamic.exe lseek_large ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL lseek_large [status 1]
+========== END entry-dynamic.exe lseek_large ==========
+========== START entry-dynamic.exe malloc_0 ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL malloc_0 [status 1]
+========== END entry-dynamic.exe malloc_0 ==========
+========== START entry-dynamic.exe mbsrtowcs_overflow ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL mbsrtowcs_overflow [status 1]
+========== END entry-dynamic.exe mbsrtowcs_overflow ==========
+========== START entry-dynamic.exe memmem_oob_read ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL memmem_oob_read [status 1]
+========== END entry-dynamic.exe memmem_oob_read ==========
+========== START entry-dynamic.exe memmem_oob ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL memmem_oob [status 1]
+========== END entry-dynamic.exe memmem_oob ==========
+========== START entry-dynamic.exe mkdtemp_failure ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL mkdtemp_failure [status 1]
+========== END entry-dynamic.exe mkdtemp_failure ==========
+========== START entry-dynamic.exe mkstemp_failure ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL mkstemp_failure [status 1]
+========== END entry-dynamic.exe mkstemp_failure ==========
+========== START entry-dynamic.exe printf_1e9_oob ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL printf_1e9_oob [status 1]
+========== END entry-dynamic.exe printf_1e9_oob ==========
+========== START entry-dynamic.exe printf_fmt_g_round ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL printf_fmt_g_round [status 1]
+========== END entry-dynamic.exe printf_fmt_g_round ==========
+========== START entry-dynamic.exe printf_fmt_g_zeros ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL printf_fmt_g_zeros [status 1]
+========== END entry-dynamic.exe printf_fmt_g_zeros ==========
+========== START entry-dynamic.exe printf_fmt_n ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL printf_fmt_n [status 1]
+========== END entry-dynamic.exe printf_fmt_n ==========
+========== START entry-dynamic.exe pthread_robust_detach ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL pthread_robust_detach [status 1]
+========== END entry-dynamic.exe pthread_robust_detach ==========
+========== START entry-dynamic.exe pthread_cond_smasher ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL pthread_cond_smasher [status 1]
+========== END entry-dynamic.exe pthread_cond_smasher ==========
+========== START entry-dynamic.exe pthread_condattr_setclock ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL pthread_condattr_setclock [status 1]
+========== END entry-dynamic.exe pthread_condattr_setclock ==========
+========== START entry-dynamic.exe pthread_exit_cancel ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL pthread_exit_cancel [status 1]
+========== END entry-dynamic.exe pthread_exit_cancel ==========
+========== START entry-dynamic.exe pthread_once_deadlock ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL pthread_once_deadlock [status 1]
+========== END entry-dynamic.exe pthread_once_deadlock ==========
+========== START entry-dynamic.exe pthread_rwlock_ebusy ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL pthread_rwlock_ebusy [status 1]
+========== END entry-dynamic.exe pthread_rwlock_ebusy ==========
+========== START entry-dynamic.exe putenv_doublefree ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL putenv_doublefree [status 1]
+========== END entry-dynamic.exe putenv_doublefree ==========
+========== START entry-dynamic.exe regex_backref_0 ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL regex_backref_0 [status 1]
+========== END entry-dynamic.exe regex_backref_0 ==========
+========== START entry-dynamic.exe regex_bracket_icase ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL regex_bracket_icase [status 1]
+========== END entry-dynamic.exe regex_bracket_icase ==========
+========== START entry-dynamic.exe regex_ere_backref ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL regex_ere_backref [status 1]
+========== END entry-dynamic.exe regex_ere_backref ==========
+========== START entry-dynamic.exe regex_escaped_high_byte ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL regex_escaped_high_byte [status 1]
+========== END entry-dynamic.exe regex_escaped_high_byte ==========
+========== START entry-dynamic.exe regex_negated_range ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL regex_negated_range [status 1]
+========== END entry-dynamic.exe regex_negated_range ==========
+========== START entry-dynamic.exe regexec_nosub ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL regexec_nosub [status 1]
+========== END entry-dynamic.exe regexec_nosub ==========
+========== START entry-dynamic.exe rewind_clear_error ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL rewind_clear_error [status 1]
+========== END entry-dynamic.exe rewind_clear_error ==========
+========== START entry-dynamic.exe rlimit_open_files ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL rlimit_open_files [status 1]
+========== END entry-dynamic.exe rlimit_open_files ==========
+========== START entry-dynamic.exe scanf_bytes_consumed ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL scanf_bytes_consumed [status 1]
+========== END entry-dynamic.exe scanf_bytes_consumed ==========
+========== START entry-dynamic.exe scanf_match_literal_eof ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL scanf_match_literal_eof [status 1]
+========== END entry-dynamic.exe scanf_match_literal_eof ==========
+========== START entry-dynamic.exe scanf_nullbyte_char ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL scanf_nullbyte_char [status 1]
+========== END entry-dynamic.exe scanf_nullbyte_char ==========
+========== START entry-dynamic.exe setvbuf_unget ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL setvbuf_unget [status 1]
+========== END entry-dynamic.exe setvbuf_unget ==========
+========== START entry-dynamic.exe sigprocmask_internal ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL sigprocmask_internal [status 1]
+========== END entry-dynamic.exe sigprocmask_internal ==========
+========== START entry-dynamic.exe sscanf_eof ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL sscanf_eof [status 1]
+========== END entry-dynamic.exe sscanf_eof ==========
+========== START entry-dynamic.exe statvfs ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL statvfs [status 1]
+========== END entry-dynamic.exe statvfs ==========
+========== START entry-dynamic.exe strverscmp ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL strverscmp [status 1]
+========== END entry-dynamic.exe strverscmp ==========
+========== START entry-dynamic.exe syscall_sign_extend ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL syscall_sign_extend [status 1]
+========== END entry-dynamic.exe syscall_sign_extend ==========
+========== START entry-dynamic.exe tls_get_new_dtv ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL tls_get_new_dtv [status 1]
+========== END entry-dynamic.exe tls_get_new_dtv ==========
+========== START entry-dynamic.exe uselocale_0 ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL uselocale_0 [status 1]
+========== END entry-dynamic.exe uselocale_0 ==========
+========== START entry-dynamic.exe wcsncpy_read_overflow ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL wcsncpy_read_overflow [status 1]
+========== END entry-dynamic.exe wcsncpy_read_overflow ==========
+========== START entry-dynamic.exe wcsstr_false_negative ==========
+src/common/runtest.c:29: entry-dynamic.exe exec failed: No such file or directory
+FAIL wcsstr_false_negative [status 1]
+========== END entry-dynamic.exe wcsstr_false_negative ==========
