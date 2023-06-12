@@ -3,7 +3,7 @@ MUSL_PREFIX = riscv64-linux
 MUSL_GCC = $(MUSL_PREFIX)-gcc
 MUSL_STRIP = $(MUSL_PREFIX)-strip
 
-build_all: busybox lua lmbench libctest iozone libc-bench
+build_all: busybox lua lmbench libctest iozone libc-bench netperf
 
 busybox: .PHONY
 	cp busybox-config busybox/.config
@@ -34,6 +34,12 @@ iozone: .PHONY
 libc-bench: .PHONY
 	make -C libc-bench CC="$(MUSL_GCC) -static" -j $(NPROC)
 	cp libc-bench/libc-bench sdcard/libc-bench
+
+netperf: .PHONY
+	cd netperf && ac_cv_func_setpgrp_void=yes ./configure --host riscv64 CC=$(MUSL_GCC) CFLAGS="-static"
+	cd netperf && make
+	cp netperf/src/netperf netperf/src/netserver sdcard/
+	cp scripts/netperf/* sdcard/
 
 sdcard: build_all
 	dd if=/dev/zero of=sdcard.img count=62768 bs=1K
