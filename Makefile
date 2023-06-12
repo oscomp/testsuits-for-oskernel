@@ -3,7 +3,7 @@ MUSL_PREFIX = riscv64-linux
 MUSL_GCC = $(MUSL_PREFIX)-gcc
 MUSL_STRIP = $(MUSL_PREFIX)-strip
 
-build_all: busybox lua lmbench libctest iozone libc-bench netperf unix-bench time-test test_all
+build_all: busybox lua lmbench libctest iozone libc-bench netperf iperf unix-bench time-test test_all
 
 busybox: .PHONY
 	cp busybox-config busybox/.config
@@ -48,6 +48,11 @@ netperf: .PHONY
 	cp netperf/src/netperf netperf/src/netserver sdcard/
 	cp scripts/netperf/* sdcard/
 
+iperf: .PHONY
+	cd iperf &&	./configure --host=riscv64-linux-musl CC=$(MUSL_GCC) --enable-static-bin --without-sctp && make
+	cp iperf/src/iperf3 sdcard/
+	cp scripts/iperf/iperf_testcode.sh sdcard/
+
 time-test: .PHONY
 	make CC=$(MUSL_GCC) -C time-test all
 	cp time-test/time-test sdcard
@@ -74,6 +79,7 @@ clean: .PHONY
 	make -C iozone clean
 	make -C libc-bench clean
 	make -C netperf clean
+	make -C iperf clean
 	make -C UnixBench clean
 	make -C time-test clean
 	- rm sdcard.img

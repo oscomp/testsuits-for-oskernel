@@ -19,3 +19,5 @@ lua/src/luac
 time-test/time-test
 UnixBench/pgms
 netperf/doc/netperf.info
+UnixBench/pgms/
+time-test/time-test
