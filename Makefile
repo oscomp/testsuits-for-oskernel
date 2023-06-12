@@ -3,7 +3,7 @@ MUSL_PREFIX = riscv64-linux
 MUSL_GCC = $(MUSL_PREFIX)-gcc
 MUSL_STRIP = $(MUSL_PREFIX)-strip
 
-build_all: busybox lua lmbench libctest iozone libc-bench netperf
+build_all: busybox lua lmbench libctest iozone libc-bench netperf time-test
 
 busybox: .PHONY
 	cp busybox-config busybox/.config
@@ -40,6 +40,10 @@ netperf: .PHONY
 	cd netperf && make
 	cp netperf/src/netperf netperf/src/netserver sdcard/
 	cp scripts/netperf/* sdcard/
+
+time-test: .PHONY
+	make -C time-test all
+	cp time-test/time-test sdcard
 
 sdcard: build_all
 	dd if=/dev/zero of=sdcard.img count=62768 bs=1K
