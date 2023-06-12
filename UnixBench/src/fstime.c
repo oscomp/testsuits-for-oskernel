@@ -305,8 +305,8 @@ int w_test(int timeSecs)
         /*
          * Output the test results. Use the true time.
          */
-        fprintf(stderr, "WRITE COUNT|%ld|0|KBps\n", write_score);
-        fprintf(stderr, "TIME|%.1f\n", end - start);
+        fprintf(stdout, "WRITE COUNT|%ld|0|KBps\n", write_score);
+        fprintf(stdout, "TIME|%.1f\n", end - start);
 
         return(0);
 }
@@ -369,8 +369,8 @@ int r_test(int timeSecs)
         /*
          * Output the test results. Use the true time.
          */
-        fprintf(stderr, "READ COUNT|%ld|0|KBps\n", read_score);
-        fprintf(stderr, "TIME|%.1f\n", end - start);
+        fprintf(stdout, "READ COUNT|%ld|0|KBps\n", read_score);
+        fprintf(stdout, "TIME|%.1f\n", end - start);
 
         return(0);
 }
@@ -451,8 +451,8 @@ int c_test(int timeSecs)
         /*
          * Output the test results. Use the true time.
          */
-        fprintf(stderr, "COPY COUNT|%ld|0|KBps\n", copy_score);
-        fprintf(stderr, "TIME|%.1f\n", end - start);
+        fprintf(stdout, "COPY COUNT|%ld|0|KBps\n", copy_score);
+        fprintf(stdout, "TIME|%.1f\n", end - start);
 
         return(0);
 }

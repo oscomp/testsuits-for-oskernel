@@ -40,7 +40,7 @@ volatile unsigned long iter;
 /* this function is called when the alarm expires */
 void report()
 {
-	fprintf(stderr,"COUNT|%ld|1|lps\n", iter);
+	fprintf(stdout, "COUNT|%lu|1|lps\n", iter);
 	exit(0);
 }
 

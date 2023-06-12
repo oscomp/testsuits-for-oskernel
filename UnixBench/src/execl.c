@@ -87,7 +87,7 @@ char	*argv[];
 	sprintf(start_str, "%lu", (unsigned long) start_time);
 	time(&this_time);
 	if (this_time - start_time >= duration) { /* time has run out */
-		fprintf(stderr, "COUNT|%lu|1|lps\n", iter);
+		fprintf(stdout, "COUNT|%lu|1|lps\n", iter);
 		exit(0);
 		}
 	execl(fullpath, fullpath, "0", dur_str, count_str, start_str, (void *) 0);

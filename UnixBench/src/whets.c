@@ -564,8 +564,8 @@ char	*argv[];
  printf ("Roy_Longbottom@compuserve.com\n\n");
 
 #else	/* Unixbench */
-	fprintf (stderr, "COUNT|%.3f|0|MWIPS\n", mwips);
-        fprintf (stderr, "TIME|%.3f\n", TimeUsed);
+	fprintf (stdout, "COUNT|%.3f|0|MWIPS\n", mwips);
+        fprintf (stdout, "TIME|%.3f\n", TimeUsed);
 	exit(0);
 #endif
 }

@@ -44,7 +44,7 @@ unsigned long Run_Index;
 
 void report()
 {
-	fprintf(stderr,"COUNT|%ld|1|lps\n", Run_Index);
+	fprintf(stdout,"COUNT|%ld|1|lps\n", Run_Index);
 	exit(0);
 }
 
