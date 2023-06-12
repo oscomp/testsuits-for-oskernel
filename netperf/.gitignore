@@ -1,4 +1,8 @@
 *.in
+!/config.h.in
+!/netperf.spec.in
+!/src/netperf_version.h.in
+!/Makefile.in
 /aclocal.m4
 /autom4te.cache/
 /compile

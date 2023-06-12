@@ -41,6 +41,7 @@ unix-bench: .PHONY
 	cp scripts/unixbench/*.sh sdcard
 
 netperf: .PHONY
+	cd netperf && ./autogen.sh
 	cd netperf && ac_cv_func_setpgrp_void=yes ./configure --host riscv64 CC=$(MUSL_GCC) CFLAGS="-static"
 	cd netperf && make
 	cp netperf/src/netperf netperf/src/netserver sdcard/
