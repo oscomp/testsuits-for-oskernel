@@ -16,4 +16,5 @@ lmbench/src/bk.ver
 lua/src/liblua.a
 lua/src/lua
 lua/src/luac
+UnixBench/pgms/
 time-test/time-test
