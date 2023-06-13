@@ -1,0 +1,48 @@
+.\"
+.TH SIGNALTEST 8 "October 1, 2015"
+.\" Please adjust this date whenever updating this manpage
+.SH NAME
+signaltest \- signal roundtrip test software
+.SH SYNOPSIS
+.B signaltest
+.RI "[ \-b USEC ] [ \-l LOOPS ] [ \-p PRIO] [ \-q ] [ \-t NUM ] [ \-m ] [ \-v ] [ \-\-help ]"
+.SH OPTIONS
+These programs follow the usual GNU command line syntax, with long options
+starting with two dashes ('\-\-').
+.TP
+.B \-b, \-\-breaktrace=USEC
+Send break trace command when latency > USEC
+.TP
+.B \-l, \-\-loops=LOOPS
+Number of loops: default=0 (endless)
+.TP
+.B \-p, \-\-priority=PRIO
+Priority of highest priority thread
+.TP
+.B \-q, \-\-quiet
+print a summary only on exit
+.TP
+.B \-t, \-\-threads=NUM
+number of threads: default=2
+.TP
+.B \-m, \-\-mlockall
+lock current and future memory allocations
+.TP
+.B \-v, \-\-verbose
+output values on stdout for statistics
+.br
+format: n:c:v n=tasknum c=count v=value in us
+.TP
+.B \-\-help
+display usage information
+.SH AUTHOR
+signaltest was written by Thomas Gleixner <tglx@linuxtronix.de>.
+.PP
+This manual page was originally written by
+.br
+John Kacur <jkacur@redhat.com>
+.PP
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.  This file is offered as-is,
+without any warranty.

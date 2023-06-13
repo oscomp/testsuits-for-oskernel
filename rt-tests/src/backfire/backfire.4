@@ -1,0 +1,36 @@
+.TH "backfire" "4" "0.1" "" "Driver"
+.SH "NAME"
+.LP
+backfire \- send a signal from driver to user
+.SH "DESCRIPTION"
+.LP
+The \fBbackfire\fR driver reads a numerical string that is sent to the
+\fB/dev/backfire\fR device and sends the corresponding signal to the calling
+user program. Reading from \fB/dev/backfire\fR returns the time of the day
+when the most recent sent request was serviced or 0, if a sent request was
+not yet received. The time of the day is displayed in seconds since
+1970-01-01 00:00:00 UTC followed by the fraction of the second in
+microseconds separated by a comma.
+.SH "PURPOSE"
+.LP
+The \fBbackfire\fR driver is normally used in combination with the program
+\fBsendme\fR to benchmark the performance of the kernel's signal sending
+capabilities.
+.SH "EXAMPLES"
+.LP
+.nf
+head -1 /dev/backfire
+0,0
+trap "echo Got signal 7" 7
+echo 7 >/dev/backfire
+Got signal 7
+head -1 /dev/backfire
+1234567890,123456
+.fi
+.LP
+.SH "AUTHORS"
+.LP
+Carsten Emde <C.Emde@osadl.org>
+.SH "SEE ALSO"
+.LP
+sendme(8)

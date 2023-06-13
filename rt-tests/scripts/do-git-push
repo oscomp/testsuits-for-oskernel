@@ -1,0 +1,115 @@
+#!/bin/sh
+#
+# script to automate pushing rt-tests tarball and git branch to
+# kernel.org.
+#
+# This won't work if you aren't me :)
+#
+#   Copyright 2009 Clark Williams <williams@redhat.com>
+#
+
+testing=0
+TEMP=$(getopt -o t -l test -n do-git-push -- "$@")
+if [ $? != 0 ] ; then echo "Terminating..." >&2 ; exit 1 ; fi
+eval set -- "$TEMP"
+while true; do
+    case "$1" in
+	-t|--test) testing=1 ; shift ;;
+	--) shift ; break ;;
+	*) echo "Internal Error!"; exit 1 ;;
+    esac
+done
+
+if [ $# -lt 1 ]
+then
+    echo "usage: do-git-push <version>"
+    exit -1
+fi
+
+version=$1
+accnt=clrkwllms@master.kernel.org
+destpath=/pub/linux/kernel/people/clrkwllms/
+branch=$(git symbolic-ref -q HEAD)
+
+if [ $testing -eq 1 ]; then
+    echo "version:  $version"
+    echo "accnt:    $accnt"
+    echo "destpath: $destpath"
+    echo "branch:   $branch"
+fi
+
+# sanity check
+if [ ! -d .git ]
+then
+    echo "No .git directory found!"
+    echo "cwd: $(pwd)"
+    exit -1
+fi
+
+# make sure we're on the master branch
+if [ $branch != 'refs/heads/master' ]; then
+   echo "must be on master branch to push!"
+   echo "(currently on branch: $branch)"
+   exit -1
+fi
+
+# double sanity check
+mkver=$(awk '$1 == "VERSION_STRING" {print $3; exit 0}' Makefile)
+if [ $version != $mkver ]
+then
+    echo "parameter mismatch with Makefile!"
+    echo "input parameter:  $version"
+    echo "Makefile version: $mkver"
+    exit -1
+fi
+
+# check the git tag
+tag="v$version"
+if rev=$(git rev-parse --verify -q "$tag")
+then
+	if [ "tag" = "$(git cat-file -t $rev)" ]; then
+		echo "using existing tag $tag"
+	else
+		echo "$tag is not a tag"
+		exit -1
+	fi
+else
+	echo "Generating annotated tag $tag"
+	if [ $testing -eq 0 ]; then
+	    git tag -a $tag
+	    if [ $? != 0 ]; then
+		echo "No tag message; aborting!"
+		exit -1
+	    fi
+	else
+	    echo "testing: Generate Tag"
+	fi
+fi
+
+# copy the tarball if it isn't already there
+tar=rt-tests-$version.tar.gz
+asc=rt-tests-$version.tar.asc
+
+if [ ! -e $tar ];
+then
+    echo "Generating tarfile $tar"
+    make release
+else
+    echo "Using existing tarfile $tar"
+fi
+
+if kup ls $destpath | grep $tar > /dev/null 2>&1
+then
+    echo "Tarfile $tar is already on kernel.org"
+else
+    echo "Copying tarfile $tar to kernel.org"
+    if [ $testing -eq 0 ]; then
+	kup put $tar $asc $destpath/$tar
+    else
+	echo "testing: copy tarfile"
+    fi
+fi
+
+[ $testing -eq 1 ] && dryrun=--dry-run
+echo "Pushing master and tags to kernel.org"
+git push $dryrun --tags origin master
