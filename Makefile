@@ -19,7 +19,7 @@ lua: .PHONY
 lmbench: .PHONY
 	make -C lmbench build CC="riscv64-linux-gnu-gcc -static" OS=riscv64 -j $(NPROC)
 	cp lmbench/bin/riscv64/lmbench_all sdcard/
-	cp lmbench/bin/riscv64/hello sd
+	cp lmbench/bin/riscv64/hello sdcard/
 	cp scripts/lmbench/* sdcard/
 
 libctest: .PHONY
@@ -37,7 +37,7 @@ libc-bench: .PHONY
 	cp libc-bench/libc-bench sdcard/libc-bench
 
 unix-bench: .PHONY
-	make -C UnixBench CC="riscv64-linux-gnu-gcc" ARCH=riscv64 -j $(NPROC) all
+	make -C UnixBench -j $(NPROC) all
 	cp UnixBench/pgms/* sdcard
 	cp scripts/unixbench/*.sh sdcard
 
@@ -82,6 +82,7 @@ clean: .PHONY
 	make -C iperf clean
 	make -C UnixBench clean
 	make -C time-test clean
+	- rm sdcard/*
 	- rm sdcard.img
 	- rm sdcard.img.gz
 
