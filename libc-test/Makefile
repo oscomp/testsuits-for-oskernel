@@ -2,8 +2,6 @@ MUSL_LIB?=/opt/riscv64--musl--bleeding-edge-2020.08-1/riscv64-buildroot-linux-mu
 PREFIX?=riscv64-buildroot-linux-musl-
 CC=$(PREFIX)gcc
 OBJCOPY=$(PREFIX)objcopy
-# CC=musl-gcc
-# OBJCOPY=objcopy
 
 STATIC_EXES = $(shell cat static.txt)
 STATIC_OBJS = $(STATIC_EXES:%.exe=%.obj)
