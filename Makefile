@@ -54,8 +54,8 @@ iperf: .PHONY
 	cp scripts/iperf/iperf_testcode.sh sdcard/
 
 cyclictest: .PHONY
-	make -C rt-tests cyclictest
-	cp rt-tests/cyclictest sdcard/
+	make -C rt-tests cyclictest hackbench
+	cp rt-tests/cyclictest rt-tests/hackbench sdcard/
 	cp scripts/cyclictest/cyclictest_testcode.sh sdcard/
 
 time-test: .PHONY
