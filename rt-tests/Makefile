@@ -1,6 +1,6 @@
 VERSION = 1.0
-CC?=$(CROSS_COMPILE)gcc
-AR?=$(CROSS_COMPILE)ar
+CC =riscv64-linux-gcc -static
+AR =riscv64-linux-ar
 
 OBJDIR = bld
 
@@ -26,7 +26,7 @@ bindir  ?= $(prefix)/bin
 mandir	?= $(prefix)/share/man
 srcdir	?= $(prefix)/src
 
-CFLAGS ?= -Wall -Wno-nonnull
+CFLAGS ?= -Wall -Wno-nonnull 
 CPPFLAGS += -D_GNU_SOURCE -Isrc/include
 LDFLAGS ?=
 

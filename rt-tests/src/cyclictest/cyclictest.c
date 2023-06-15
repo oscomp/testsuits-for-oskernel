@@ -19,7 +19,6 @@
 #include <fcntl.h>
 #include <getopt.h>
 #include <pthread.h>
-#include <signal.h>
 #include <sched.h>
 #include <string.h>
 #include <time.h>
@@ -37,7 +36,7 @@
 #include <sys/mman.h>
 #include <sys/syscall.h>
 #include "rt_numa.h"
-
+#include "rt_signal.h"
 #include "rt-utils.h"
 
 #include <bionic.h>
@@ -56,7 +55,8 @@
 
 /* Ugly, but .... */
 #define gettid() syscall(__NR_gettid)
-#define sigev_notify_thread_id _sigev_un._tid
+// #define sigev_notify_thread_id __sev_fields.sigev_notify_thread_id
+// #define SIGEV_THREAD_ID 4
 
 #ifdef __UCLIBC__
 #define MAKE_PROCESS_CPUCLOCK(pid, clock) \

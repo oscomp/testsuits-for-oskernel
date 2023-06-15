@@ -3,7 +3,7 @@ MUSL_PREFIX = riscv64-linux
 MUSL_GCC = $(MUSL_PREFIX)-gcc
 MUSL_STRIP = $(MUSL_PREFIX)-strip
 
-build_all: busybox lua lmbench libctest iozone libc-bench netperf iperf unix-bench time-test test_all
+build_all: busybox lua lmbench libctest iozone libc-bench netperf iperf unix-bench cyclictest time-test test_all 
 
 busybox: .PHONY
 	cp busybox-config busybox/.config
@@ -53,6 +53,11 @@ iperf: .PHONY
 	cp iperf/src/iperf3 sdcard/
 	cp scripts/iperf/iperf_testcode.sh sdcard/
 
+cyclictest: .PHONY
+	make -C rt-tests cyclictest
+	cp rt-tests/cyclictest sdcard/
+	cp scripts/cyclictest/cyclictest_testcode.sh sdcard/
+
 time-test: .PHONY
 	make CC=$(MUSL_GCC) -C time-test all
 	cp time-test/time-test sdcard
@@ -82,6 +87,7 @@ clean: .PHONY
 	make -C iperf clean
 	make -C UnixBench clean
 	make -C time-test clean
+	make -C rt-tests clean
 	- rm sdcard/*
 	- rm sdcard.img
 	- rm sdcard.img.gz
