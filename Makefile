@@ -37,7 +37,7 @@ libc-bench: .PHONY
 	cp libc-bench/libc-bench sdcard/libc-bench
 
 unix-bench: .PHONY
-	make -C UnixBench CC="riscv64-linux-gnu-gcc" ARCH=riscv64 -j $(NPROC) all
+	make -C UnixBench ARCH=riscv64 -j $(NPROC) all
 	cp UnixBench/pgms/* sdcard
 	cp scripts/unixbench/*.sh sdcard
 
