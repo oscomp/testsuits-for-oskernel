@@ -1,0 +1,111 @@
+.\"                                      Hey, EMACS: -*- nroff -*-
+.TH HWLATDETECT 8 "May  12, 2009"
+.\" Please adjust this date whenever revising the manpage.
+.\"
+.\" Some roff macros, for reference:
+.\" .nh        disable hyphenation
+.\" .hy        enable hyphenation
+.\" .ad l      left justify
+.\" .ad b      justify to both left and right margins
+.\" .nf        disable filling
+.\" .fi        enable filling
+.\" .br        insert line break
+.\" .sp <n>    insert n+1 empty lines
+.\" for manpage-specific macros, see man(7)
+.SH NAME
+hwlatdetect \- program to control the kernel hardware latency detection module
+.SH SYNOPSIS
+.B hwlatdetect
+.RI "[ \-\-duration=<time> ] [\-\-threshold=<usecs> ] \
+[\-\-window=<time interval> ] [\-\-width=<time interval> ] [\-\-report=<path> ] \
+[\-\-cleanup ] [\-\-debug ] [\-\-quiet ] [--watch]
+
+.\" .SH DESCRIPTION
+.\" This manual page documents briefly the
+.\" .B hwlatdetect commands.
+.\" .PP
+.\" \fI<whatever>\fP escape sequences to invoke bold face and italics, respectively.
+.\" \fBhwlatdetect\fP is a program that...
+.SH DESCRIPTION
+\fBhwlatdetect\fP is a program that controls the kernel hardware
+latency detector module (hwlat_detector.ko). The module is a special
+purpose kernel module that is used to detect large system latencies
+induced by the behavior of certain underlying hardware or firmware,
+independent of Linux itself. The code was developed originally to
+detect SMIs (System Management Interrupts) on x86 systems, however
+there is nothing x86 specific about this patchset. It was originally
+written for use by the "RT" patch since the Real Time kernel is highly
+latency sensitive. 
+
+SMIs are usually not serviced by the Linux kernel, which typically does not
+even know that they are occurring. SMIs are instead are set up by BIOS code
+and are serviced by BIOS code, usually for "critical" events such as
+management of thermal sensors and fans. Sometimes though, SMIs are used for
+other tasks and those tasks can spend an inordinate amount of time in the
+handler (sometimes measured in milliseconds). Obviously this is a problem if
+you are trying to keep event service latencies down in the microsecond range.
+
+The hardware latency detector module works by hogging all of the cpus
+for configurable amounts of time (by calling stop_machine()), polling
+the CPU Time Stamp Counter for some period, then looking for gaps in
+the TSC data. Any gap indicates a time when the polling was
+interrupted and since the machine is stopped and interrupts turned off
+the only thing that could do that would be an SMI. 
+
+The hwlatdetector script manages the mounting/unmounting of the
+debugfs as well as the loading/unloading of the hwlat_detector
+module. If the debugfs is already mounted then hwlatdetector will not
+unmount it after a run. Likewise, if the hwlat_detector module is
+already loaded, it will not be unloaded after a run. 
+
+.SH OPTIONS
+.TP
+.B \-\-duration=<time>{s,m,d}
+Run the detector logic in for the specified duration. The duration is
+a base 10 integer number that defaults to a value in seconds. An
+optional suffix may be specified to indicate minutes, hours or days.
+
+.TP
+.B \-\-threshold=<microsecond value>
+Specify the TSC gap used to detect an SMI. Any gap value greater than
+<threshold> is considered to be the result of an SMI occurring. 
+
+.TP
+.B \-\-window=<time value>{us,ms,s,m,d}
+specify the size of the sample window. Converted to microseconds when
+passed to the kernel module.
+
+.TP
+.B \-\-width=<time value>{us,ms,s,m,d}
+The amount of time within the sample window where the detector is
+actually sampling. Must be less than the \-\-window value.
+.TP
+.B \-\-report=FILENAME
+Specify the output filename of the detector report. Default
+behavior is to print to standard output
+.TP
+.B \-\-cleanup
+Force unload of hwlat_detector.ko and unmounting of debugfs filesystem.
+.TP
+.B \-\-debug
+Turn on debug prints
+.TP
+.B \-\-quiet
+Turn off all information prints
+.TP
+.B \-\-watch
+print sample data to stdout as it arrives
+
+.\" .SH SEE ALSO
+.\" .BR bar (1),
+.\" .BR baz (1).
+.\" .br
+.\" The programs are documented fully by
+.\" .IR "The Rise and Fall of a Fooish Bar" ,
+.\" available via the Info system.
+.SH AUTHOR
+.B hwlatdetect
+was written by Clark Williams <williams@redhat.com>
+.br
+.B hwlat_detector.ko
+was written by Jon Masters <jcm@redhat.com>

@@ -1,0 +1,89 @@
+.\" Process this file with
+.\" groff -man -Tascii pi_stress.8
+.\"
+.\"{{{}}}
+.\"{{{  Title
+.TH pi_stress 8 "Nov 27, 2006" "" "Linux System Administrator's Manual"
+.\"}}}
+.\"{{{ Name
+.SH NAME
+pi_stress \- a stress test for POSIX Priority Inheritance mutexes
+.\"}}}
+.\"{{{ Synopsis
+.\" Usage:  pi_stress [-i n ] [-g n] [-v] [-d] [-s] [-r] [-p] [-u] [-m]
+.SH SYNOPSIS
+.B pi_stress
+.RB [ \-i|\-\-inversions
+.IR inversions ]
+.RB [ \-t|\-\-duration
+.IR seconds ]
+.RB [ \-g|\-\-groups
+.IR groups
+.RB [ \-d|\-\-debug ]
+.RB [ \-v|\-\-verbose ]
+.RB [ \-s|\-\-signal ]
+.RB [ \-r|\-\-rr ]
+.RB [ \-p|\-\-prompt ]
+.RB [ \-m|\-\-mlockall ]
+.RB [ \-u|\-\-uniprocessor ]
+.br
+.\" help
+.B pi_stress
+.RB \-h|\-\-help
+.SH DESCRIPTION
+.B pi_stress
+is a program used to stress the
+.IR priority-inheritance
+code paths for POSIX mutexes, in both the Linux kernel and the C
+library. It runs as a realtime-priority task and launches
+.IR "inversion machine"
+thread groups. Each inversion group causes a
+.IR "priority inversion"
+condition that will deadlock if 
+.IR "priority inheritance"
+doesn't work.
+
+.SH OPTIONS
+.IP "\-i n|\-\-inversions=n"
+Run for
+.I n
+number of inversion conditions. This is the total number of inversions
+for all inversion groups. Default is \-1 for infinite.
+.IP "\-t n|\-\-duration=n"
+Run the test for 
+.I n
+seconds and then terminate.
+.IP "\-g n|\-\-groups=n"
+The number of inversion groups to run. Defaults to 10.
+.IP \-d|\-\-debug
+Run in debug mode; lots of extra prints
+.IP \-v|\-\-verbose
+Run with verbose messages
+.IP \-s|\-\-signal
+Terminate on receipt of SIGTERM (Ctrl-C). Default is to terminate on
+any keypress.
+.IP \-r|\-\-rr
+Run inversion group threads as SCHED_RR (round-robin). The default is
+to run the inversion threads as SCHED_FIFO.
+.IP \-p|\-\-prompt
+Prompt before actually starting the stress test
+.IP \-u|\-\-uniprocessor
+Run all threads on one processor. The default is to run all inversion
+group threads on one processor and the admin threads (reporting
+thread, keyboard reader, etc.) on a different processor.
+.IP \-m|\-\-mlockall
+Call mlockall to lock current and future memory allocations and
+prevent being paged out
+.IP \-h|\-\-help
+Display a short help message and options.
+.SH CAVEATS
+The pi_stress test threads run as SCHED_FIFO or SCHED_RR threads,
+which means that they can starve critical system threads. It is
+advisable to change the scheduling policy of critical system threads
+to be SCHED_FIFO prior to running pi_stress and use a priority of 10
+or higher, to prevent those threads from being starved by the stress
+test. 
+.SH BUGS
+No documented bugs. 
+.SH AUTHOR
+Clark Williams <williams@redhat.com>

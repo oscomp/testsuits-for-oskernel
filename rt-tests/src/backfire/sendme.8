@@ -1,0 +1,42 @@
+.TH "sendme" "8" "0.2" "" ""
+.SH "NAME"
+.LP
+\fBsendme\fR \- Send a signal from driver to user and measure time intervals
+.SH "SYNTAX"
+.LP
+sendme [-a|-a PROC] [-b USEC] [-l loops] [-p PRIO]
+.br
+.SH "DESCRIPTION"
+.LP
+The program \fBsendme\fR uses the \fBbackfire\fR driver to send a signal from driver to user. It then reads the timestamp from the driver and calculates the time intervals to call the driver and to receive the signal from the driver.
+.SH "OPTIONS"
+.TP
+.B \-a, \-\-affinity[=PROC]
+Run on processor number PROC. If PROC is not specified, run on current processor.
+.TP
+.B \-b, \-\-breaktrace=USEC
+Send break trace command when latency > USEC. This is a debugging option to control the latency tracer in the realtime preemption patch.
+It is useful to track down unexpected large latencies on a system.
+.TP
+.B \-l, \-\-loops=LOOPS
+Set the number of loops. The default is 0 (endless). This option is useful for automated tests with a given number of test cycles. Sendme is stopped once the number of timer intervals has been reached.
+.TP
+.B \-p, \-\-prio=PRIO
+Set the priority of the process.
+.SH "FILES"
+backfire.ko
+.SH "EXAMPLES"
+.LP
+.nf
+# modprobe backfire
+# sendme -a -p99 -l1000000
+Samples:  1000000
+To:   Min    0, Cur    0, Avg    1, Max   11
+From: Min    2, Cur    3, Avg    3, Max   43
+.fi
+.SH "AUTHORS"
+.LP
+Carsten Emde <C.Emde@osadl.org>
+.SH "SEE ALSO"
+.LP
+backfire(4)

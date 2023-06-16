@@ -1,0 +1,56 @@
+.\"
+.TH RT-MIGRATE-TEST 8 "April 21, 2016"
+.\" Please adjust this date whenever editing this manpage
+.SH NAME
+rt-migrate-test \- real-time task migration program
+.SH SYNOPSIS
+.B rt-migrate-test 
+.RI "[\-ceh] [\-p prio] [\-r time] [\-s time] [\-m time] [\-l loops] [nr_tasks]
+.SH DESCRIPTION
+Test real-time multiprocessor scheduling of tasks to ensure the highest priority tasks are running on all available CPUs
+.SH OPTIONS
+This program follows the usual GNU command line syntax, with long options starting with two dashes ('\-\-').
+.br
+.TP
+In the summary of options, a value in brackets (), indicates a default value
+.br
+.TP
+.B \-p, \-\-prio=prio
+base priority to start RT tasks with (2)
+.br
+.TP
+.B \-r, \-\-run\-time=time
+Run time (ms) to busy loop the threads (20)
+.br
+.TP
+.B \-s, \-\-sleep\-time=time
+Sleep time (ms) between intervals (100)
+.br
+.TP
+.B \-m, \-\-maxerr=time
+Max allowed error (microsecs)
+.br
+.TP
+.B \-l \-\-loops=loops
+Number of iterations to run (50)
+.br
+.TP
+.B \-e
+Use equal prio for #CPU-1 tasks (requires > 2 CPUS)
+.br
+.TP
+.B \-c, \-\-check
+Stop if lower prio task is quicker than higher (off)
+.br
+.TP
+.B \-h, \-\-help
+Display usage
+.br
+.TP
+.B [nr\-tasks]
+number of tasks to run (number of cpus + 1)
+.br
+.SH AUTHOR
+rt-migrate-test was written by Steven Rostedt <srostedt@redhat.com>
+.TP
+This manual page was written by John Kacur <jkacur@redhat.com>

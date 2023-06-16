@@ -1,0 +1,80 @@
+DESCRIPTION
+
+The pi_stress program is a stress test that is intended to exercise
+kernel and C library code paths for POSIX mutexes using the Priority
+Inheritance attribute (PTHREAD_PRIO_INHERIT). 
+
+The program consists of an admin thread (main), a reporter thread and
+some number of groups of three threads called "inversion
+groups". These thread groups are called that because they cause a
+condition called Priority Inversion, where a high priority thread is
+blocked due to a low-priority thread holding a shared
+resource. Priority inversion with no contravening logic is a deadlock
+condition. 
+
+Each inversion group consists of three threads:
+
+1. A high-priority thread
+2. A medium-priority thread
+3. A low-priority thread
+
+The threads run through a state machine designed to guarantee that a
+low-priority thread holds a mutex while a medium priority thread runs
+(keeping the low-priority thread from releasing the mutex). The
+high-priority thread attempts to acquire the mutex and is blocked
+because of the low-priority thread holding it. If priority inheritence
+is working, the low-priority thread will receive a priority boost
+(will inherit the high-priority thread's priority) and will then run
+and release the mutex, averting a deadlock.
+
+On a multi-processor system, the admin and reporter threads are run
+one one processor while the inversion groups are run on another
+processor. 
+
+
+STEPS TO RUN
+
+Install the pi_tests rpm. If you are running Fedora Core, the simplest
+way do to that is to fetchthe rt-userspace.repo file from:
+
+http://people.redhat.com/~williams/rt-userspace.repo
+
+and install that file in /etc/yum.repos.d, then run:
+
+$ yum install pi_stress
+
+If you are not running Fedora, you can fetch the SRPM and build it, or 
+fetch the tarball from:
+
+http://people.redhat.com/~williams/tests
+
+Once you've installed it, to see the options provided by pi_stress you
+can run it with the --help option to get a usage message or read the
+man page for more detail. 
+
+Since the stress test runs as a number of realtime threads, it's
+usually a good idea to run the test while logged into the test machine
+from another system. Its always a good idea to have a window up
+that's either a serial console to the test machine or something that's
+continually printing the contents of the test system's syslog 
+(e.g. 'tail -f /var/log/messages'). 
+
+Login to the test machine and run pi_stress as root:
+
+$ sudo /usr/sbin/pi_stress
+
+This will run the test with the defaults of:
+
+     - no stop time
+     - 10 inversion groups
+
+A banner will be printed indicating what defaults are in use and then
+a display will be updated showing the current number of inversions
+that have been performed. To stop the test, press any key and a
+summary will be printed to show how many inversions were performed and
+how long the test ran.
+
+To run the test for a specifed time, use the --duraton=<seconds>
+option.
+
+

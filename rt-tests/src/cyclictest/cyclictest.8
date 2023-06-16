@@ -1,0 +1,220 @@
+.\"                                      Hey, EMACS: -*- nroff -*-
+.TH CYCLICTEST 8 "April 22, 2016"
+.\" Please adjust this date whenever revising the manpage.
+.\"
+.\" Some roff macros, for reference:
+.\" .nh        disable hyphenation
+.\" .hy        enable hyphenation
+.\" .ad l      left justify
+.\" .ad b      justify to both left and right margins
+.\" .nf        disable filling
+.\" .fi        enable filling
+.\" .br        insert line break
+.\" .sp <n>    insert n+1 empty lines
+.\" for manpage-specific macros, see man(7)
+.SH NAME
+cyclictest \- High resolution test program
+.SH SYNOPSIS
+.B cyclictest
+.RI "[ \-hfmnqrsvMS ] [\-a " proc " ] [\-A " align " ] [\-b " usec " ] [\-c " clock " ] [\-d " dist " ] \
+[\-h " histogram " ] [\-i " intv " ] [\-l " loop " ] [\-o " red " ] [\-p " prio " ] \
+[\-t " num " ] [\-D " time "] [\-w] [\-W] [\-y " policy " ] [ \-S | \-U ]"
+
+.\" .SH DESCRIPTION
+.\" This manual page documents briefly the
+.\" .B cyclictest commands.
+.\" .PP
+.\" \fI<whatever>\fP escape sequences to invode bold face and italics, respectively.
+.\" \fBcyclictest\fP is a program that...
+.SH OPTIONS
+These programs follow the usual GNU command line syntax, with long
+options starting with two dashes ('\-\-').
+.br
+A summary of options is included below.
+.\" For a complete description, see the Info files.
+.TP
+.B \-a, \-\-affinity[=PROC-SET]
+Run threads on the set of processors given by PROC-SET.  If PROC-SET is not
+specified, all processors will be used.  Threads will be assigned to processors
+in the set in numeric order, in a round\-robin fashion.
+.br
+The set of processors can be specified as A,B,C, or A-C, or A-B,D-F, and so on*.
+The ! character can be used to negate a set.  For example, !B-D means to use all
+available CPUs except B through D.  The cpu numbers are the same as shown in the 
+.I processor
+field in /proc/cpuinfo.  See numa(3) for more information on specifying CPU sets.
+* Support for CPU sets requires libnuma version >= 2.  For libnuma v1, PROC-SET,
+if specified, must be a single CPU number.
+.TP
+.B \-A, \-\-align=USEC
+Align thread wakeups to a specific offset in microseconds
+.TP
+.B \-b, \-\-breaktrace=USEC
+Send break trace command when latency > USEC
+.TP
+.B \-B, \-\-preemptirqs
+Both preempt and irqsoff tracing (used with -b)
+.TP
+.B \-c, \-\-clock=CLOCK
+select clock
+.br
+0 = CLOCK_MONOTONIC (default)
+.br
+1 = CLOCK_REALTIME
+.TP
+.B \-C, \-\-context
+context switch tracing (used with \-b)
+.TP
+.B \-d, \-\-distance=DIST
+Distance of thread intervals in us, default = 500
+.TP
+.B \-D, \-\-duration=TIME
+Specify a length for the test run.
+.br
+Append 'm', 'h', or 'd' to specify minutes, hours or days.
+.TP
+.B \-E, \-\-event
+event tracing (used with \-b)
+.TP
+.B \-f, \-\-ftrace
+Enable function tracing using ftrace as tracer. This option is available only with \-b.
+.TP
+.B \-F, \-\-fifo=<path>
+Create a named pipe at path and write stats to it
+.TP
+.B \-h, \-\-histogram=US
+Dump latency histogram to stdout after the run. US is the max latency time to be be tracked in microseconds. This option runs all threads at the same priority.
+.TP
+.B \-H, \-\-histofall=MAXLATENCYINUS
+Same as -h except that an additional histogram column is displayed at the right that contains summary data of all thread histograms. If cyclictest runs a single thread only, the -H option is equivalent to -h.
+.TP
+.B \-\-histfile=<path>
+Dump the latency histogram to <path> instead of stdout.
+.TP
+.B \-i, \-\-interval=INTV
+Set the base interval of the thread(s) in microseconds (default is 1000us). This sets the interval of the first thread. See also \-d.
+.TP
+.B \-I, \-\-irqsoff
+Irgsoff tracing (used with \-b)
+.TP
+.B \-l, \-\-loops=LOOPS
+Set the number of loops. The default is 0 (endless). This option is useful for automated tests with a given number of test cycles. Cyclictest is stopped once the number of timer intervals has been reached.
+.TP
+.B \-\-laptop
+Save battery when running cyclictest. This will give you poorer realtime results, but will not drain your battery so quickly.
+.TP
+.B \-m, \-\-mlockall
+Lock current and future memory allocations to prevent being paged out
+.TP
+.B \\-M, \-\-refresh_on_max
+Delay updating the screen until a new max latency is hit. (useful for
+running cyclictest on low-bandwidth connections)
+.TP
+.B \-n, \-\-nanosleep
+Use clock_nanosleep instead of posix interval timers. Setting this option runs the tests with clock_nanosleep instead of posix interval timers.
+.TP
+.B \-\-notrace
+suppress tracing
+.TP
+.B \-N, \-\-nsecs
+Show results in nanoseconds instead of microseconds, which is the default unit.
+.TP
+.B \-o, \-\-oscope=RED
+Oscilloscope mode, reduce verbose output by RED.
+.TP
+.B \-O, \-\-traceopt=TRACING_OPTION
+Used to pass tracing options to ftrace tracers. May be invoked multiple
+times for multiple trace options. For example trace options look at /sys/kernel/debug/tracing/trace_options
+.TP
+.B \-p, \-\-prio=PRIO
+Set the priority of the first thread. The given priority is set to the first test thread. Each further thread gets a lower priority:
+Priority(Thread N) = max(Priority(Thread N\-1) \- 1, 0)
+.TP
+.B \-P, \-\-preemptoff
+Preempt off tracing (used with -b)
+.TP
+.B \-\-policy=NAME
+set the scheduler policy of the measurement threads
+where NAME is one of: other, normal, batch, idle, fifo, rr
+.TP
+.B \-\-priospread
+spread priority levels starting at a specified value
+.TP
+.B \-q, \-\-quiet
+Print a summary only on exit. Useful for automated tests, where only the summary output needs to be captured.
+.TP
+.B \-r, \-\-relative
+Use relative timers instead of absolute. The default behaviour of the tests is to use absolute timers. This option is there for completeness and should not be used for reproducible tests.
+.TP
+.B \-R, \-\-resolution
+Check clock resolution, calling clock_gettime() many times. List of lock_gettime() values will be reported with -X
+.TP
+.B \-\-secaligned [USEC]
+align thread wakeups to the next full second and apply the optional offset.
+.TP
+.B \-s, \-\-system
+Use sys_nanosleep and sys_setitimer instead of posix timers. Note, that \-s can only be used with one thread because itimers are per process and not per thread. \-s in combination with \-n uses the nanosleep syscall and is not restricted to one thread.
+.TP
+.B \\-S, \-\-smp
+Set options for standard testing on SMP systems. Equivalent to using
+the options: "\-t \-a \-n" as well keeping any specified priority
+equal across all threads
+.TP
+.B \-\-spike=<trigger>
+record all spikes > trigger
+.TP
+.B \-\-spike-nodes=[num of nodes]
+These are the maximum number of spikes we can record.
+.br
+The default is 1024 if not specified.
+.TP
+.B \\-\-smi
+Enable SMI count/detection on processors with SMI count support.
+.TP
+.B \-t, \-\-threads[=NUM]
+Set the number of test threads (default is 1). Create NUM test threads. If NUM is not specified, NUM is set to
+the number of available CPUs. See \-d, \-i and \-p for further information.
+.TP
+.B \-\-tracemark
+write a trace mark when \-b latency is exceeded.
+.TP
+.B \-T, \-\-tracer=TRACEFUNC
+set the ftrace tracer function. Used with the \-b option. Must be one
+of the trace functions available from <debugfs-mountpoint>/kernel/debug/tracing/available_tracers
+.TP
+.B \-u, \-\-unbuffered
+force unbuffered output for live processing
+.TP
+.B \-U, --numa
+Standard NUMA testing (similar to SMP option) thread data structures allocated from local node.
+.TP
+.B \-v, \-\-verbose
+Output values on stdout for statistics. This option is used to gather statistical information about the latency distribution. The output is sent to stdout. The output format is:
+
+n:c:v
+
+where n=task number c=count v=latency value in us.
+.TP
+.B \\-w, \-\-wakeup
+task wakeup tracing (used with \-b)
+.TP
+.B \\-W, \-\-wakeuprt
+rt-task wakeup tracing (used with \-b)
+.TP
+.B \-\-dbg_cyclictest
+Print info userful for debugging cyclictest
+
+.SH SEE ALSO
+.BR numa (3),
+.BR numactl (8),
+.\" .br
+.\" The programs are documented fully by
+.\" .IR "The Rise and Fall of a Fooish Bar" ,
+.\" available via the Info system.
+.SH AUTHOR
+cyclictest was written by Thomas Gleixner <tglx@linuxtronix.de>.
+.PP
+This manual page was written by Alessio Igor Bogani <abogani@texware.it>,
+for the Debian project (but may be used by others).
+.br
+Updated by John Kacur <jkacur@redhat.com>

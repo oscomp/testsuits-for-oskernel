@@ -1,0 +1,105 @@
+.TH "hackbench" "8" "February  23, 2010" "" ""
+.SH "NAME"
+hackbench \- scheduler benchmark/stress test
+.SH "SYNOPSIS"
+.B hackbench
+.RI "[\-p|\-\-pipe] [\-s|\-\-datasize " <bytes> "] " 
+.RI "[\-l|\-\-loops " <num\-loops> "] "
+.RI "[\-g|\-\-groups "<num\-groups> "] "
+.RI "[\-f|\-\-fds <num\-fds>] "
+.RI "[\-T|\-\-threads] [\-P|\-\-process] [\-\-help]"
+
+.SH "DESCRIPTION"
+Hackbench is both a benchmark and a stress test for the Linux kernel
+scheduler. It's main job is to create a specified number of pairs of
+schedulable entities (either threads or traditional processes) which
+communicate via either sockets or pipes and time how long it takes for
+each pair to send data back and forth.
+
+.SH "OPTIONS"
+These programs follow the usual GNU command line syntax, with long
+options starting with two dashes ("\-\-").
+.br 
+A summary of options is included below.
+.TP 
+.B \-p, \-\-pipe
+Sends the data via a pipe instead of the socket (default)
+.TP 
+.B \-s, \-\-datasize=<size in bytes>
+Sets the amount of data to send in each message
+.TP 
+.B \-l, \-\-loops=<number of loops>
+How many messages each sender/receiver pair should send
+.TP 
+.B \-g, \-\-groups=<number of groups>
+Defines how many groups of senders and receivers should be started
+.TP 
+.B \-f, \-\-fds=<number of file descriptors>
+Defines how many file descriptors each child should use. 
+Note that the effective number will be twice the amount you set here,
+as the sender and receiver children will each open the given amount of 
+file descriptors.
+.TP 
+.B \-T, \-\-threads
+Each sender/receiver child will be a POSIX thread of the parent.
+.TP 
+.B \-P, \-\-process
+Hackbench will use fork() on all children (default behaviour)
+.TP 
+.B \-\-help
+.br 
+Shows a simple help screen
+.SH "EXAMPLES"
+.LP 
+Running hackbench without any options will give default behaviour,
+using fork() and sending data between senders and receivers via sockets.
+.LP 
+user@host: ~ $ hackbench
+.br 
+Running in process mode with 10 groups using 40 file descriptors each (== 400 tasks)
+.br 
+Each sender will pass 100 messages of 100 bytes
+.br 
+Time: 0.890
+.LP 
+To use pipes between senders and receivers and using threads instead of fork(), run
+.LP 
+user@host: ~ $ hackbench \-\-pipe \-\-threads   (or hackbench \-p \-T)
+.br 
+Running in threaded mode with 10 groups using 40 file descriptors each (== 400 tasks)
+.br 
+Each sender will pass 100 messages of 100 bytes
+.br 
+Time: 0.497
+.LP 
+Set the datasize to 512 bytes, do 200 messages per sender/receiver pairs and use 15 groups
+using 25 file descriptors per child, in process mode.
+.LP 
+user@host: ~ $ hackbench \-s 512 \-l 200 \-g 15 \-f 25 \-P
+.br 
+Running in process mode with 15 groups using 50 file descriptors each (== 750 tasks)
+.br 
+Each sender will pass 200 messages of 512 bytes
+.br 
+Time: 4.497
+.SH "AUTHORS"
+.LP 
+hackbench was written by Rusty Russell <rusty@rustcorp.com.au>
+with contributions from Yanmin Zhang <yanmin_zhang@linux.intel.com>,
+Ingo Molnar <mingo@elte.hu> and David Sommerseth <davids@redhat.com>
+
+This manual page was written by Clark Williams <williams@redhat.com> 
+and David Sommerseth <davids@redhat.com>
+.SH "HISTORY"
+This version of hackbench is based on the code downloaded from http://people.redhat.com/mingo/cfs\-scheduler/tools/hackbench.c. 
+Yanmin Zhang merged the original hackbench code from
+.br 
+http://devresources.linuxfoundation.org/craiger/hackbench/src/hackbench.c
+which uses fork() and a modified version from
+.br 
+http://www.bullopensource.org/posix/pi\-futex/hackbench_pth.c
+which uses pthread only and gave the possibility to change 
+behaviour at run time.  Hackbench have since then gone through some
+more rewriting to improve error handling and proper tracking of fork()ed
+children, to avoid leaving zombies on the system if hackbench stops
+unexpectedly.
