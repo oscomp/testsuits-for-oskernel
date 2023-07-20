@@ -3,21 +3,25 @@ MUSL_PREFIX = riscv64-linux
 MUSL_GCC = $(MUSL_PREFIX)-gcc
 MUSL_STRIP = $(MUSL_PREFIX)-strip
 
-build_all: busybox lua lmbench libctest iozone libc-bench netperf iperf unix-bench cyclictest time-test test_all 
+build_all: busybox lua lmbench libctest iozone libc-bench netperf iperf unix-bench cyclictest time-test test_all true
 
 busybox: .PHONY
 	cp busybox-config busybox/.config
 	make -C busybox CC="$(MUSL_GCC) -static" STRIP=$(MUSL_STRIP) -j$(NPROC)
+	$(MUSL_STRIP) busybox/busybox
 	cp busybox/busybox sdcard/
 	cp scripts/busybox/* sdcard/
 
 lua: .PHONY
 	make -C lua CC="$(MUSL_GCC) -static" -j $(NPROC)
+	$(MUSL_STRIP) lua/src/lua
 	cp lua/src/lua sdcard/
 	cp scripts/lua/* sdcard/
 
 lmbench: .PHONY
 	make -C lmbench build CC="riscv64-linux-gnu-gcc -static" OS=riscv64 -j $(NPROC)
+	riscv64-linux-gnu-strip lmbench/bin/riscv64/lmbench_all
+	# riscv64-linux-gnu-strip lmbench/bin/riscv64/hello
 	cp lmbench/bin/riscv64/lmbench_all sdcard/
 	cp lmbench/bin/riscv64/hello sdcard/
 	cp scripts/lmbench/* sdcard/
@@ -29,11 +33,13 @@ libctest: .PHONY
 
 iozone: .PHONY
 	make -C iozone linux CC="$(MUSL_GCC) -static" -j $(NPROC)
+	$(MUSL_STRIP) iozone/iozone
 	cp iozone/iozone sdcard/
 	cp scripts/iozone/* sdcard/
 
 libc-bench: .PHONY
 	make -C libc-bench CC="$(MUSL_GCC) -static" -j $(NPROC)
+	$(MUSL_STRIP) libc-bench/libc-bench
 	cp libc-bench/libc-bench sdcard/libc-bench
 
 unix-bench: .PHONY
@@ -65,12 +71,24 @@ time-test: .PHONY
 test_all: .PHONY
 	cp scripts/test_all.sh sdcard/test_all.sh
 
+true: .PHONY
+	make CC=$(MUSL_GCC) -C true
+	$(MUSL_STRIP) true/true
+	mkdir -p sdcard/bin
+	cp true/true sdcard/bin/
+
 sdcard: build_all .PHONY
 	dd if=/dev/zero of=sdcard.img count=62768 bs=1K
 	mkfs.vfat -F 32 sdcard.img
 	mkdir -p mnt
 	mount -t vfat -o user,umask=000,utf8=1 --source sdcard.img --target mnt
-	cp sdcard/* mnt
+	cp -r sdcard/* mnt
+	umount mnt
+	dd if=/dev/zero of=disk.img count=12K bs=1K
+	mkfs.vfat -F 32 disk.img
+	mkdir -p mnt
+	mount -t vfat -o user,umask=000,utf8=1 --source disk.img --target mnt
+	cp -r sdcard/* mnt
 	umount mnt
 
 qemu: .PHONY
