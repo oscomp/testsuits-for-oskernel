@@ -36,7 +36,7 @@ time-test 为测试Kernel的time函数是否准确，其结果只作为专家评
 
 下载好镜像之后，将oscomp-debian放在本目录下，修改oscomp-debina/run.sh，在其中加入`-drive file=../sdcard.img,if=none,format=raw,id=x0 -device virtio-blk-device,drive=x0,bus=virtio-mmio-bus.0`参数。执行make qemu进入系统。
 
-进入系统后将/dev/sdb挂载至/mnt，随后可以进入/mnt目录运行测试程序。
+进入系统后将/dev/vdb挂载至/mnt，随后可以进入/mnt目录运行测试程序。
 
 ## 构建测试用例
 
