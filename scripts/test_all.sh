@@ -18,4 +18,3 @@ busybox echo "run netperf_testcode.sh"
 ./netperf_testcode.sh
 busybox echo "run iperf_testcode.sh"
 ./iperf_testcode.sh
-
