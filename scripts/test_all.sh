@@ -6,6 +6,8 @@ busybox echo "run iozone_testcode.sh"
 ./iozone_testcode.sh
 busybox echo "run libctest_testcode.sh"
 ./libctest_testcode.sh
+busybox echo "run libc-bench"
+./libc-bench
 busybox echo "run lmbench_testcode.sh"
 ./lmbench_testcode.sh
 busybox echo "run lua_testcode.sh"
@@ -16,3 +18,4 @@ busybox echo "run netperf_testcode.sh"
 ./netperf_testcode.sh
 busybox echo "run iperf_testcode.sh"
 ./iperf_testcode.sh
+
