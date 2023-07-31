@@ -1,0 +1,138 @@
+Introduction:
+-------------
+
+The module hwlat is a special purpose kernel module that is
+used to detect if System Management Interrupts (SMIs) are causing event
+latencies in the Linux RT kernel.
+
+SMIs are usually not serviced by the Linux kernel. They are set up by
+BIOS code and are serviced by BIOS code, usually for critical events
+such as management of thermal sensors and fans. Sometimes though, SMIs
+are used for other tasks and those tasks can spend an inordinate
+amount of time in the handler (sometimes measured in milliseconds).
+Obviously if you are trying to keep event service latencies down in the
+microsecond range, this is a problem.
+
+The SMI detector works by hogging the cpu for configurable amounts of
+time (by calling stop_machine()), polling the Time Stamp Counter (TSC)
+register for some period, then looking for gaps in the TSC data. Any
+gap indicates a time when the polling was interrupted and since the
+machine is stopped and interrupts turned off the only thing that could
+do that would be an SMI.
+
+Note that the SMI detector should *NEVER* be used in a production
+environment. It is intended to be run manually to determine if the
+hardware platform has a problem with long SMI service routines.
+
+Usage:
+------
+
+Loading the module hwlat passing the parameter "enabled=1" is the only
+step required to start the hwlat. It is possible to define a threshold
+in microseconds (us) above which latency spikes will be taken in account
+(parameter "threshold=").
+
+Example:
+
+	# insmod ./hwlat.ko enabled=1 threshold=100
+
+After the module is loaded, it creates a directory named "hwlat" under
+the debugfs mountpoint, "/debugfs/hwlat" for this text. It is necessary
+to have debugfs mounted.
+
+avg_smi_interval_us	- average interval (usecs) between SMI latency spikes
+latency_threshold_us	- minimum latency value to be considered (usecs)
+max_sample_us		- maximum SMI latency spike observed (usecs)
+ms_between_samples	- interval between samples (ms)
+ms_per_sample		- sampling time (ms)
+sample_us		- last sample (usecs). continuously updated, may be used
+			  to plot graphs or to create histograms
+smi_count		- how many latency spikes have been observed
+
+
+	# cd /debugfs/hwlat
+
+	# cat *
+	0		(avg_smi_interval_us)
+	100		(latency_threshold_us)
+	0		(latency_threshold_us)
+	5000		(ms_between_samples)
+	1		(ms_per_sample)
+	3		(sample_us)
+	0		(smi_count)
+
+
+The default values for ms_between_samples and ms_per_sample define that every
+5000ms (5s) samples will be collected during 1ms. It is possible to change the
+sampling time or the sampling interval writing to the related files. To collect
+samples during 5ms every 50ms:
+
+	# echo 5 > ms_per_sample
+	# echo 50 > ms_between_samples
+
+
+	# cat ms_between_samples
+	50
+	# cat ms_per_sample
+	5
+
+After a while, data may be verified to test the existence of SMI induced
+latencies:
+
+	# cat smi_count
+	2
+	# cat max_sample_us
+	468
+	# cat avg_smi_interval_us
+	1356306050
+
+Depending on the latencies observed it is important to better adjust the
+sampling intervals to obtain more accurate measurements. Care must be taken
+to not create a continuous sampling situation, that might be perceived by the
+kernel as a deadlock.
+
+Python Script
+-------------
+
+A python script is provided in in the kernel scripts directory named
+'hwlatdetect'. This script handles mounting/unmounting the debugfs,
+loading/unloading the hwlat module, setting various parameters
+for the SMI detector and then starting and stopping the detection. The
+hwlatdetect script handles the following arguments:
+
+Usage: hwlatdetect [options]
+
+Options:
+  -h, --help            show this help message and exit
+  --duration=DURATION   total time to test for SMIs (<n>{smdw})
+  --threshold=THRESHOLD
+                        value above which is considered an SMI (microseconds
+  --interval=INTERVAL   time between samples (milliseconds)
+  --sample_width=SAMPLE_WIDTH
+                        time to actually measure (milliseconds)
+  --report=REPORT       filename for sample data
+  --cleanup             force unload of module and umount of debugfs
+  --debug               turn on debugging prints
+  --quiet               turn off all screen output
+  --watch               print sample data to stdout as it arrives
+
+
+An example run looks like this:
+
+   $ sudo hwlatdetect --duration=1m --report=smi.txt
+   hwlatdetect:  test duration 60 seconds
+      parameters:
+              Latency threshold: 100us
+	      Non-sampling gap:  5ms
+	      Sample length:     20ms
+              Output File:       smi.txt
+   Starting test
+   test finished
+   Max Latency: 427us
+   Samples recorded: 2201
+   Samples exceeding threshold: 7
+   sample data written to smi.txt
+   $
+
+The above run generated 2201 samples of which 27 exceeded the 100
+microsecond threshold. 

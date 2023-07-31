@@ -21,3 +21,6 @@ UnixBench/pgms
 netperf/doc/netperf.info
 UnixBench/pgms/
 time-test/time-test
+
+k210/disk.img*
+k210/img.kfpkg

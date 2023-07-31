@@ -1,0 +1,17 @@
+{
+    "version": "0.1.0",
+    "files": [
+        {
+            "address": 0,
+            "bin": "sddd_rom.bin",
+            "sha256Prefix": true,
+            "swap": false
+        },
+        {
+            "address": 1048576,
+            "bin": "disk.img.lz4s-0",
+            "sha256Prefix": false,
+            "swap": true
+        }
+    ]
+}

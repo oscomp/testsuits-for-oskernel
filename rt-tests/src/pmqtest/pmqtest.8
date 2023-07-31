@@ -1,0 +1,71 @@
+.TH "pmqtest" "8" "0.1" "" ""
+.SH "NAME"
+.LP
+\fBpmqtest\fR \- Start pairs of threads and measure the latency of interprocess communication with POSIX messages queues
+.SH "SYNTAX"
+.LP
+pmqtest [-a|-a PROC] [-b USEC] [-d DIST] [-i INTV] [-l loops] [-p PRIO] [-S] [-t|-t NUM] [-T TO]
+.br
+.SH "DESCRIPTION"
+.LP
+The program \fBpmqtest\fR starts pairs of threads that are synchronized via mq_send/mw_receive() and measures the latency between sending and receiving the message.
+.SH "OPTIONS"
+.TP
+.B \-a, \-\-affinity[=PROC]
+Run on processor number PROC. If PROC is not specified, run on current processor.
+.TP
+.B \-b, \-\-breaktrace=USEC
+Send break trace command when latency > USEC. This is a debugging option to control the latency tracer in the realtime preemption patch.
+It is useful to track down unexpected large latencies of a system.
+.TP
+.B \-d, \-\-distance=DIST
+Set the distance of thread intervals in microseconds (default is 500 us). When pmqtest is called with the -t option and more than one thread is created, then this distance value is added to the interval of the threads: Interval(thread N) = Interval(thread N-1) + DIST
+.TP
+.B \-f, \-\-forcetimeout=TO
+Set an artificial delay of the send function to force timeout of the receiver, requires the -T option
+.TP
+.B \-i, \-\-interval=INTV
+Set the base interval of the thread(s) in microseconds (default is 1000 us). This sets the interval of the first thread. See also -d.
+.TP
+.B \-l, \-\-loops=LOOPS
+Set the number of loops. The default is 0 (endless). This option is useful for automated tests with a given number of test cycles. pmqtest is stopped once the number of timer intervals has been reached.
+.TP
+.B \-p, \-\-prio=PRIO
+Set the priority of the process.
+.TP
+.B \-S, \-\-smp
+Test mode for symmetric multi-processing, implies -a and -t and uses the same priority on all threads.
+.TP
+.B \-t, \-\-threads[=NUM]
+Set the number of test threads (default is 1, if this option is not given). If NUM is specified, create NUM test threads. If NUM is not specified, NUM is set to the number of available CPUs.
+.TP
+.B \-T, \-\-timeout=TO
+Use mq_timedreceive() instead of mq_receive() and specify timeout TO in seconds.
+.SH "EXAMPLES"
+The following example was running on an 8-way processor:
+.LP
+.nf
+# pmqtest -Sp99 -i100 -d0
+#0: ID10047, P99, CPU0, I100; #1: ID10048, P99, CPU0, Cycles 153695
+#2: ID10049, P99, CPU1, I100; #3: ID10050, P99, CPU1, Cycles 154211
+#4: ID10051, P99, CPU2, I100; #5: ID10052, P99, CPU2, Cycles 156823
+#6: ID10053, P99, CPU3, I100; #7: ID10054, P99, CPU3, Cycles 158202
+#8: ID10055, P99, CPU4, I100; #9: ID10056, P99, CPU4, Cycles 153399
+#10: ID10057, P99, CPU5, I100; #11: ID10058, P99, CPU5, Cycles 153992
+#12: ID10059, P99, CPU6, I100; #13: ID10060, P99, CPU6, Cycles 156576
+#14: ID10061, P99, CPU7, I100; #15: ID10062, P99, CPU7, Cycles 157957
+#1 -> #0, Min    1, Cur    8, Avg    5, Max   18
+#3 -> #2, Min    1, Cur    4, Avg    5, Max   18
+#5 -> #4, Min    1, Cur    5, Avg    5, Max   19
+#7 -> #6, Min    1, Cur    4, Avg    4, Max   17
+#9 -> #8, Min    1, Cur    9, Avg    5, Max   18
+#11 -> #10, Min    1, Cur    8, Avg    5, Max   18
+#13 -> #12, Min    1, Cur    4, Avg    5, Max   29
+#15 -> #14, Min    1, Cur    8, Avg    4, Max   17
+.fi
+.SH "AUTHORS"
+.LP
+Carsten Emde <C.Emde@osadl.org>
+.SH "SEE ALSO"
+.LP
+mq_send(3p), mq_receive(3p)
