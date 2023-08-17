@@ -21,6 +21,7 @@ UnixBench/pgms
 netperf/doc/netperf.info
 UnixBench/pgms/
 time-test/time-test
-
+copy-file-range-test/copy-file-range-test-*
+interrupts-test/interrupts-test-*
 k210/disk.img*
 k210/img.kfpkg

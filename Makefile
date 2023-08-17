@@ -3,7 +3,7 @@ MUSL_PREFIX = riscv64-linux
 MUSL_GCC = $(MUSL_PREFIX)-gcc
 MUSL_STRIP = $(MUSL_PREFIX)-strip
 
-build_all: busybox lua lmbench libctest iozone libc-bench netperf iperf unix-bench cyclictest time-test test_all true
+build_all: busybox lua lmbench libctest iozone libc-bench netperf iperf unix-bench cyclictest time-test test_all true copy-file-range-test interrupts-test
 
 busybox: .PHONY
 	cp busybox-config busybox/.config
@@ -77,6 +77,16 @@ true: .PHONY
 	mkdir -p sdcard/bin
 	cp true/true sdcard/bin/
 
+copy-file-range-test: .PHONY
+	make CC=$(MUSL_GCC) -C $@
+	$(MUSL_STRIP) $@/$@-*
+	cp $@/$@-* sdcard/
+
+interrupts-test: .PHONY
+	make CC=$(MUSL_GCC) -C $@
+	$(MUSL_STRIP) $@/$@-*
+	cp $@/$@-* sdcard/
+
 sdcard: build_all .PHONY
 	dd if=/dev/zero of=sdcard.img count=62768 bs=1K
 	mkfs.vfat -F 32 sdcard.img
@@ -106,6 +116,8 @@ clean: .PHONY
 	make -C UnixBench clean
 	make -C time-test clean
 	make -C rt-tests clean
+	make -C copy-file-range-test clean
+	make -C interrupts-test clean
 	- rm sdcard/*
 	- rm sdcard.img
 	- rm sdcard.img.gz
