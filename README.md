@@ -40,4 +40,12 @@ time-test 为测试Kernel的time函数是否准确，其结果只作为专家评
 
 ## 构建测试用例
 
+```
 docker run --rm -it -v $(pwd):/code --privileged --entrypoint make alphamj/os-contest:v7.7 -C /code sdcard
+```
+
+OR
+
+```
+make sdcard ARCH=x86_64
+```

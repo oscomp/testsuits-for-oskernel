@@ -1,7 +1,7 @@
-MUSL_LIB?=/opt/riscv64--musl--bleeding-edge-2020.08-1/riscv64-buildroot-linux-musl/sysroot/lib64/
-PREFIX?=riscv64-buildroot-linux-musl-
-CC=$(PREFIX)gcc
-OBJCOPY=$(PREFIX)objcopy
+PREFIX ?= riscv64-buildroot-linux-musl
+CC=$(PREFIX)-gcc
+OBJCOPY=$(PREFIX)-objcopy
+MUSL_LIB ?= $(shell $(CC) -print-sysroot)/lib/
 
 STATIC_EXES = $(shell cat static.txt)
 STATIC_OBJS = $(STATIC_EXES:%.exe=%.obj)
@@ -23,6 +23,7 @@ CFLAGS += -pipe -std=c99 -D_POSIX_C_SOURCE=200809L -Wall -Wno-unused-function -W
 CFLAGS += -Wno-unknown-pragmas -fno-builtin -frounding-math
 CFLAGS += -Werror=implicit-function-declaration -Werror=implicit-int -Werror=pointer-sign -Werror=pointer-arith
 CFLAGS += -Os -s
+CFLAGS += -fPIC
 CFLAGS += -Isrc/common/
 LDLIBS += -Os -s -lpthread -lm -lrt
 

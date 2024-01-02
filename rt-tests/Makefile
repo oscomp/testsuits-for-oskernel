@@ -1,6 +1,7 @@
 VERSION = 1.0
-CC =riscv64-linux-gcc -static
-AR =riscv64-linux-ar
+PREFIX ?= riscv64-linux-musl
+CC := $(PREFIX)-gcc -static
+AR := $(PREFIX)-ar
 
 OBJDIR = bld
 
@@ -29,6 +30,8 @@ srcdir	?= $(prefix)/src
 CFLAGS ?= -Wall -Wno-nonnull 
 CPPFLAGS += -D_GNU_SOURCE -Isrc/include
 LDFLAGS ?=
+
+CFLAGS	+= -fPIC
 
 PYLIB  ?= $(shell python -c 'import distutils.sysconfig;  print distutils.sysconfig.get_python_lib()')
 

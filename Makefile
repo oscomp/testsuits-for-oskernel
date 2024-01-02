@@ -1,7 +1,12 @@
-NPROC = 16
-MUSL_PREFIX = riscv64-linux
+NPROC ?= 8
+ARCH ?= x86_64
+MUSL_PREFIX ?= $(ARCH)-linux-musl
 MUSL_GCC = $(MUSL_PREFIX)-gcc
 MUSL_STRIP = $(MUSL_PREFIX)-strip
+
+# CC="musl-gcc -static" ./configure --prefix=$HOME/musl
+# ./configure --host=x86_64-linux-musl --with-sysroot=/path/to/sysroot
+# make TARGET=x86_64-linux-musl install
 
 build_all: busybox lua lmbench libctest iozone libc-bench netperf iperf unix-bench cyclictest time-test test_all true copy-file-range-test interrupts-test
 
@@ -19,15 +24,15 @@ lua: .PHONY
 	cp scripts/lua/* sdcard/
 
 lmbench: .PHONY
-	make -C lmbench build CC="riscv64-linux-gnu-gcc -static" OS=riscv64 -j $(NPROC)
-	riscv64-linux-gnu-strip lmbench/bin/riscv64/lmbench_all
+	make -C lmbench build CC="$(ARCH)-linux-gnu-gcc -static" OS=$(ARCH) -j $(NPROC)
+	$(ARCH)-linux-gnu-strip lmbench/bin/$(ARCH)/lmbench_all
 	# riscv64-linux-gnu-strip lmbench/bin/riscv64/hello
-	cp lmbench/bin/riscv64/lmbench_all sdcard/
-	cp lmbench/bin/riscv64/hello sdcard/
+	cp lmbench/bin/$(ARCH)/lmbench_all sdcard/
+	cp lmbench/bin/$(ARCH)/hello sdcard/
 	cp scripts/lmbench/* sdcard/
 
 libctest: .PHONY
-	make -C libc-test disk -j $(NPROC)
+	make -C libc-test PREFIX=$(MUSL_PREFIX) disk -j $(NPROC)
 	cp libc-test/disk/* sdcard/
 	mv sdcard/run-all.sh sdcard/libctest_testcode.sh
 
@@ -43,24 +48,24 @@ libc-bench: .PHONY
 	cp libc-bench/libc-bench sdcard/libc-bench
 
 unix-bench: .PHONY
-	make -C UnixBench -j $(NPROC) all
+	make -C UnixBench CC=$(MUSL_GCC) ARCH=$(ARCH) -j $(NPROC) all
 	cp UnixBench/pgms/* sdcard
 	cp scripts/unixbench/*.sh sdcard
 
 netperf: .PHONY
 	cd netperf && ./autogen.sh
-	cd netperf && ac_cv_func_setpgrp_void=yes ./configure --host riscv64 CC=$(MUSL_GCC) CFLAGS="-static"
+	cd netperf && ac_cv_func_setpgrp_void=yes ./configure --host=$(MUSL_PREFIX) CC=$(MUSL_GCC) CFLAGS="-static"
 	cd netperf && make -j $(NPROC)
 	cp netperf/src/netperf netperf/src/netserver sdcard/
 	cp scripts/netperf/* sdcard/
 
 iperf: .PHONY
-	cd iperf &&	./configure --host=riscv64-linux-musl CC=$(MUSL_GCC) --enable-static-bin --without-sctp && make
+	cd iperf &&	./configure --host=$(MUSL_PREFIX) CC=$(MUSL_GCC) --enable-static-bin --without-sctp --without-openssl && make
 	cp iperf/src/iperf3 sdcard/
 	cp scripts/iperf/iperf_testcode.sh sdcard/
 
 cyclictest: .PHONY
-	make -C rt-tests cyclictest hackbench
+	make -C rt-tests PREFIX=$(MUSL_PREFIX) NUMA=0 cyclictest hackbench
 	cp rt-tests/cyclictest rt-tests/hackbench sdcard/
 	cp scripts/cyclictest/cyclictest_testcode.sh sdcard/
 
@@ -116,9 +121,10 @@ clean: .PHONY
 	make -C UnixBench clean
 	make -C time-test clean
 	make -C rt-tests clean
+	make -C true clean
 	make -C copy-file-range-test clean
 	make -C interrupts-test clean
-	- rm sdcard/*
+	- rm -rf sdcard/*
 	- rm sdcard.img
 	- rm sdcard.img.gz
 
