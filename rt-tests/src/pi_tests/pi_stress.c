@@ -76,6 +76,10 @@
 /* test timeout */
 #define TIMEOUT 2
 
+#if PTHREAD_PRIO_INHERIT == 1
+#define _POSIX_THREAD_PRIO_INHERIT 1
+#endif
+
 /* determine if the C library supports Priority Inheritance mutexes */
 #if defined(_POSIX_THREAD_PRIO_INHERIT) && _POSIX_THREAD_PRIO_INHERIT != -1
 #define HAVE_PI_MUTEX 1

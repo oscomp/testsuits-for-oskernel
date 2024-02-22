@@ -98,6 +98,8 @@ else
     else ifeq ($(ARCH),riscv64)
         #OPTON += -march=rv64g -mabi=lp64
         OPTON += -march=rv64g -mabi=lp64d
+    else ifeq ($(ARCH),aarch64)
+        OPTON += -march=armv8-a -mtune=cortex-a55
     else
         OPTON += -march=native -mtune=native
     endif

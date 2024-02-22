@@ -12,7 +12,7 @@ build_all: busybox lua lmbench libctest iozone libc-bench netperf iperf unix-ben
 
 busybox: .PHONY
 	cp busybox-config busybox/.config
-	make -C busybox CC="$(MUSL_GCC) -static" STRIP=$(MUSL_STRIP) -j$(NPROC)
+	make -C busybox CC="$(MUSL_GCC) -static" CFLAGS_busybox="-no-pie" STRIP=$(MUSL_STRIP) -j$(NPROC)
 	$(MUSL_STRIP) busybox/busybox
 	cp busybox/busybox sdcard/
 	cp scripts/busybox/* sdcard/
