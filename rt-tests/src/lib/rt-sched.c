@@ -41,3 +41,25 @@ int sched_getattr(pid_t pid,
 {
         return syscall(__NR_sched_getattr, pid, attr, size, flags);
 }
+
+/* Repaired for Musl gcc */
+int sched_getparam(pid_t pid, struct sched_param *param)
+{
+        printf("To sched_getparam\n");
+        return syscall(__NR_sched_getparam, pid, param);
+}
+int sched_getscheduler(pid_t pid)
+{
+        printf("To sched_getscheduler\n");
+        return syscall(__NR_sched_getscheduler, pid);
+}
+int sched_setparam(pid_t pid, const struct sched_param *param)
+{
+        printf("To sched_setparam\n");
+        return syscall(__NR_sched_setparam, pid, param);
+}
+int sched_setscheduler(pid_t pid, int sched, const struct sched_param *param)
+{
+        printf("To sched_setscheduler\n");
+        return syscall(__NR_sched_setscheduler, pid, sched, param);
+}

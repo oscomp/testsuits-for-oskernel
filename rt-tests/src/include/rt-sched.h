@@ -82,4 +82,29 @@ int sched_getattr(pid_t pid,
 		  unsigned int size,
 		  unsigned int flags);
 
+/* Repaired for Musl gcc */
+// riscv64
+#ifdef __riscv
+#define __NR_sched_setparam 118
+#define __NR_sched_setscheduler 119
+#define __NR_sched_getscheduler 120
+#define __NR_sched_getparam 121
+#endif
+
+// x86_64
+#ifdef __x86_64__
+#define __NR_sched_setparam 142
+#define __NR_sched_getparam 143
+#define __NR_sched_setscheduler 144
+#define __NR_sched_getscheduler 145
+#endif
+
+// aarch64
+#ifdef __aarch64__
+#define __NR_sched_setparam 118
+#define __NR_sched_setscheduler 119
+#define __NR_sched_getscheduler 120
+#define __NR_sched_getparam 121
+#endif
+
 #endif /* __RT_SCHED_H__ */
