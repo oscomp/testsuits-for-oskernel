@@ -23,6 +23,7 @@
    replaced by a proper implemenation of this API. */
 
 #include <unistd.h>
+#include <stdio.h>
 #include <sys/syscall.h>
 
 #include "rt-sched.h"
