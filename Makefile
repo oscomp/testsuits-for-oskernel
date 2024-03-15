@@ -50,7 +50,7 @@ libc-bench: .PHONY
 unix-bench: .PHONY
 	make -C UnixBench CC=$(MUSL_GCC) ARCH=$(ARCH) -j $(NPROC) all
 	cp UnixBench/pgms/* sdcard
-	cp scripts/unixbench/*.sh sdcard
+	cp scripts/unixbench/* sdcard
 
 netperf: .PHONY
 	cd netperf && ./autogen.sh

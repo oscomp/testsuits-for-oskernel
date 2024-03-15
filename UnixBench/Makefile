@@ -100,6 +100,8 @@ else
         OPTON += -march=rv64g -mabi=lp64d
     else ifeq ($(ARCH),aarch64)
         OPTON += -march=armv8-a -mtune=cortex-a55
+    else ifeq ($(ARCH),x86_64)
+	OPTON += -march=x86-64 -mtune=generic -mno-avx -mno-avx2
     else
         OPTON += -march=native -mtune=native
     endif
@@ -110,6 +112,12 @@ else
     # (-mmacosx-versin-min= requires at least that version of SDK be installed)
     ifneq ($(ARCH),$(filter $(ARCH),ppc64 ppc64le))
         OPTON += -march=native -mmacosx-version-min=10.10
+    else ifeq ($(ARCH),riscv64)
+        OPTON += -march=rv64g -mabi=lp64d
+    else ifeq ($(ARCH),aarch64)
+        OPTON += -march=armv8-a -mtune=cortex-a55
+    else ifeq ($(ARCH),x86_64)
+	OPTON += -march=x86-64 -mtune=generic -mno-avx -mno-avx2
     else
         OPTON += -mcpu=native
     endif
