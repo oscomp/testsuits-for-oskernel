@@ -71,7 +71,9 @@ objdump -d objfile | grep -B 9 ecall | grep "li.a7" | tee syscall.txt
 3. 安装`qemu-sysstem-riscv64`，`opensib`和`u-boot-qemu`。
 4. 参考`artifacts/readme.txt`里的指令启动debian。
 
-> 也可选择使用搭建好的镜像，下载地址：[debian-oscomp](https://cloud.tsinghua.edu.cn/f/1ffc4bc9149645a896ea/?dl=1)
+> 也可选择使用搭建好的镜像，下载地址：
+> [debian-oscomp（清华大学云盘）](https://cloud.tsinghua.edu.cn/f/1ffc4bc9149645a896ea/?dl=1)
+> 百度网盘：链接: https://pan.baidu.com/s/1gypoa1Lz1SMRywt0wfdfgg?pwd=yvgy 提取码: yvgy 
 >
 > 执行`./run.sh`进入系统，登陆用户名：root，密码：root
 
