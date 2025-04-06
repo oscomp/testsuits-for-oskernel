@@ -15,7 +15,7 @@
 do
 	eval "./busybox $line"
 	RTN=$?
-	if [[ $RTN -ne 0 && $line != "false" ]] ;then
+	if [[ $RTN -ne 0 && "$line" != "false" ]] ;then
 		echo "testcase busybox $line fail"
 		# echo "return: $RTN, cmd: $line" >> $RST
 	else
