@@ -31,7 +31,7 @@ unlink
 wait
 waitpid
 write
-yield.sh
+yield
 "
 for i in $tests
 do
