@@ -1,4 +1,4 @@
-DOCKER ?= docker.educg.net/cg/os-contest:20250226
+DOCKER ?= docker.educg.net/cg/os-contest:20250516
 
 all: sdcard
 
