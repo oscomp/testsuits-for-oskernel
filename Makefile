@@ -41,7 +41,9 @@ sdcard: build-all .PHONY
 	mount sdcard-rv.img mnt
 	cp -rL sdcard/riscv/* mnt
 	cp mnt/musl/lib/dlopen_dso.so mnt/musl
+	cp mnt/musl/lib/tls_get_new-dtv_dso.so mnt/musl
 	cp mnt/glibc/lib/dlopen_dso.so mnt/glibc
+	cp mnt/glibc/lib/tls_get_new-dtv_dso.so mnt/glibc
 	umount mnt
 	gzip sdcard-rv.img
 
@@ -51,7 +53,9 @@ sdcard: build-all .PHONY
 	mount sdcard-la.img mnt
 	cp -rL sdcard/loongarch/* mnt
 	cp mnt/musl/lib/dlopen_dso.so mnt/musl
+	cp mnt/musl/lib/tls_get_new-dtv_dso.so mnt/musl
 	cp mnt/glibc/lib/dlopen_dso.so mnt/glibc
+	cp mnt/glibc/lib/tls_get_new-dtv_dso.so mnt/glibc
 	umount mnt
 	gzip sdcard-la.img
 

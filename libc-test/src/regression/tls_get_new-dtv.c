@@ -29,7 +29,7 @@ int main()
 	for (i=0; i<N; i++)
 		T(!pthread_create(td+i, 0, start, 0));
 
-	T(mod = dlopen("tls_get_new-dtv_dso.so", RTLD_NOW));
+	T(mod = dlopen("./tls_get_new-dtv_dso.so", RTLD_NOW));
 	pthread_barrier_wait(&b);
 
 	for (i=0; i<N; i++)
