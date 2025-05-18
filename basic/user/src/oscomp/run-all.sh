@@ -24,6 +24,7 @@ openat
 open
 pipe
 read
+sleep
 times
 umount
 uname
