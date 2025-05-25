@@ -25,7 +25,7 @@ RTTESTLIB = -lrttest -L$(OBJDIR)
 EXTRA_LIBS ?= -ldl	# for get_cpu
 
 ifeq ($(CROSS_COMPILE), riscv64-buildroot-linux-musl-)
-LDFLAGS1 +=  -latomic
+LDFLAGS1 +=  -latomic -static
 endif
 
 ifeq ($(CROSS_COMPILE), riscv64-linux-gnu-)
