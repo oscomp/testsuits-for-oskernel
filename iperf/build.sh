@@ -17,5 +17,5 @@ else
 fi
 
 make V=1 -j 
-cp src/iperf3 $1
+cp src/.libs/iperf3 $1
 cp src/.libs/libiperf.so $1

@@ -83,6 +83,7 @@ netperf: .PHONY
 	cd netperf/netperf-2.7.0 && ./configure --build=$(gcc -dumpmachine) --host=$(HOST) && make -j 8
 	cp netperf/netperf-2.7.0/src/netperf ${DESTDIR}/
 	cp netperf/netperf-2.7.0/src/netserver ${DESTDIR}/
+	cp scripts/netperf/* $(DESTDIR)/
 	
 clean:
 	make -C basic/user clean
