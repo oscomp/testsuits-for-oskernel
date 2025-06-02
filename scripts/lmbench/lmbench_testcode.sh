@@ -1,6 +1,6 @@
 #!/bin/sh
 
-echo "#### OS COMP TEST GROUP START lmbench-musl ####"
+echo "#### OS COMP TEST GROUP START lmbench ####"
 
 echo latency measurements
 ./lmbench_all lat_syscall -P 1 null
@@ -35,4 +35,4 @@ echo context switch overhead
 ./lmbench_all lat_ctx -P 1 -s 32 2 4 8 16 24 32 64 96
 
 
-echo "#### OS COMP TEST GROUP END lmbench-musl ####"
+echo "#### OS COMP TEST GROUP END lmbench ####"
