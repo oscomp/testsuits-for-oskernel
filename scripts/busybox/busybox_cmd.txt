@@ -20,7 +20,7 @@ ps
 pwd
 free
 hwclock
-kill 10
+sh -c 'sleep 5' & ./busybox kill $!
 ls
 sleep 1
 echo "#### file opration test"
