@@ -33,7 +33,7 @@ set(CMAKE_C_COMPILER        ${PREFIX}gcc)
 set(CMAKE_OBJCOPY           ${PREFIX}objcopy)
 set(CMAKE_OBJDUMP           ${PREFIX}objdump)
 set(CMAKE_RANLIB            ${PREFIX}ranlib)
-set(CMAKE_C_FLAGS           "${CMAKE_C_FLAGS} -fno-builtin -nostdinc -fno-stack-protector -ggdb -Wall -Wno-int-conversion -Wno-incompatible-pointer-types -Wno-implicit-function-declaration")
+set(CMAKE_C_FLAGS           "${CMAKE_C_FLAGS} -fPIE -pie -fno-builtin -nostdinc -fno-stack-protector -ggdb -Wall -Wno-int-conversion -Wno-incompatible-pointer-types -Wno-implicit-function-declaration")
 set(CMAKE_ASM_FLAGS         ${CMAKE_C_FLAGS})
 set(CMAKE_C_LINK_FLAGS      "${LINK_FLAGS} -nostdlib -T ${CMAKE_CURRENT_SOURCE_DIR}/${ARCH_DIR}/user.ld")
 
