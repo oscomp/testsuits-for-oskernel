@@ -1,4 +1,4 @@
-DOCKER ?= docker.educg.net/cg/os-contest:20250605
+DOCKER ?= docker.educg.net/cg/os-contest:20250613
 
 all: sdcard
 
@@ -47,7 +47,7 @@ sdcard: build-all .PHONY
 	cp mnt/glibc/lib/dlopen_dso.so mnt/glibc
 	cp mnt/glibc/lib/tls_get_new-dtv_dso.so mnt/glibc
 	umount mnt
-	gzip sdcard-rv.img
+	xz sdcard-rv.img
 
 	dd if=/dev/zero of=sdcard-la.img count=4096 bs=1M
 	mkfs.ext4 sdcard-la.img
@@ -59,15 +59,15 @@ sdcard: build-all .PHONY
 	cp mnt/glibc/lib/dlopen_dso.so mnt/glibc
 	cp mnt/glibc/lib/tls_get_new-dtv_dso.so mnt/glibc
 	umount mnt
-	gzip sdcard-la.img
+	xz sdcard-la.img
 
 
 clean:
 	make -f Makefile.sub clean
 	rm -rf sdcard/riscv/*
 	rm -rf sdcard/loongarch/*
-	rm -f sdcard-la.img.gz
-	rm -f sdcard-rv.img.gz
+	rm -f sdcard-la.img.xz
+	rm -f sdcard-rv.img.xz
 
 docker:
 	docker run --rm -it -v .:/code --entrypoint bash -w /code --privileged $(DOCKER)

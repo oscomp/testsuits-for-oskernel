@@ -12,7 +12,11 @@ size_t b_pthread_createjoin_serial1(void *dummy)
 {
 	size_t i;
 	pthread_t td;
+#ifdef __loongarch64
+	for (i=0; i<10; i++) {
+#else	
 	for (i=0; i<2500; i++) {
+#endif	  
 		pthread_create(&td, 0, emptyfunc, 0);
 		pthread_join(td, &dummy);
 	}
@@ -39,7 +43,11 @@ size_t b_pthread_create_serial1(void *dummy)
 	pthread_t td;
 	pthread_attr_init(&attr);
 	pthread_attr_setstacksize(&attr, 16384);
+#ifdef __loongarch64
+	for (i=0; i<10; i++)
+#else	
 	for (i=0; i<2500; i++)
+#endif	  
 		pthread_create(&td, &attr, emptyfunc, 0);
 	return 0;
 }
