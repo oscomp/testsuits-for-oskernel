@@ -193,7 +193,7 @@ int uname(void *buf)
     return syscall(SYS_uname, buf);
 }
 
-int brk(void *addr)
+void *brk(void *addr)
 {
     return syscall(SYS_brk, addr);
 }

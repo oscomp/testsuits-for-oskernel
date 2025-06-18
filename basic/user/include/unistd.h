@@ -38,7 +38,7 @@ int link(char *old_path, char *new_path);
 int unlink(char *path);
 int uname(void *buf);
 int time(unsigned long *tloc);
-int brk(void *);
+void *brk(void *);
 
 char *getcwd(char *, size_t);
 int chdir(const char *);
