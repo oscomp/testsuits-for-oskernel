@@ -264,6 +264,7 @@ CJSON_PUBLIC(void) cJSON_InitHooks(cJSON_Hooks* hooks)
 /* Internal constructor. */
 static cJSON *cJSON_New_Item(const internal_hooks * const hooks)
 {
+    cJSON_InitHooks(NULL); 
     cJSON* node = (cJSON*)hooks->allocate(sizeof(cJSON));
     if (node)
     {
