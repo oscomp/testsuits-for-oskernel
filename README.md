@@ -1,92 +1,95 @@
-# Testsuits for OS Kernel for On-Site Final Competition 2023
+# Testsuits for OS Kernel for On-Site Final Competition 2024
 
-**3 道题总分 200 分，task 1 和 task 2 各占 50 分，task 3 占 100 分。**
+## 排行榜分数计算方式
 
-## task 1: /proc/interrupts （[interrupts-test](https://github.com/oscomp/testsuits-for-oskernel/)）
+本阶段比赛题目为决赛线上提交阶段题目（包含busybox、cyclictest、iozone、iperf、libcbench、libctest、lmbench、lua、netperf、unixbench，以上题目统称task 0 题目）+ 新增3道题目，将于比赛开始时公布，各题目的编译和测试方式与线上提交相同。
 
-本题中，我们需要在内核中记录自系统启动以来所有外部（PLIC）中断和时钟中断的处理次数，并创建一个路径为 `/proc/interrupts` 的虚拟文件。
+由于LTP对Loong Arch架构支持不好，导致选择Loong Arch赛道的同学通过LTP测例十分困难，因此出于公平考虑，决定在现场赛自动评测题中删除LTP。在决赛线上提交阶段获得的LTP得分仍然有效，在开发板上跑通的LTP样例可找现场裁判登记。
 
-当用户读取该文件时，应当得到一个包含中断号和对应的中断处理次数的列表，其中每行包含一个中断号和对应的处理次数，均以十进制表示，之间用一个冒号和任意个空格分隔；每行应以一个换行符结尾，各行包含的中断号递增且不重复，例如
+首先对各队伍task 0题目得分进行排名，排名第一队伍映射为50分，拥有有效成绩的最后一名队伍映射为10分，中间队伍分数按比例递减，得到task 0映射得分。
 
-```plaintext
-5:        8188
-8:        1162
-10:        397
-```
+现场赛在线评测得分 = task 0 映射得分 + task 1 实际得分。
 
-当用户尝试写入、删除或移动该文件时，应当返回错误。
+**！注意现场赛评测得分和排行榜不等于最终得分！现场赛阶段最终得分包含Task2、Task3的加权平均**
 
-若存在处理的外部中断的中断号与时钟中断重复，则应当只保留时钟中断的处理次数。
+**！需要现场裁判计分的题目，在比赛结束前可多次呼叫裁判计分，取最高分作为最终得分，到达比赛截止时间后不再接受新的计分请求！**
 
-### 测试点（50 分）
+## task 1: splice
 
-1. 虚拟文件 `/proc/interrupts` 能够被读取，且不能被写入、删除和移动（25 分）
-2. 虚拟文件 `/proc/interrupts` 能够正确统计中断处理次数（25 分）
-
-## task 2: copy_file_range （[copy-file-range-test](https://github.com/oscomp/testsuits-for-oskernel/)）
-
-本题目需要我们实现一个系统调用 `copy_file_range`，用于将打开的文件中指定范围的数据复制到另一个文件中，其对应用户库函数的声明为：
+本题目需要我们实现一个系统调用`splice`，用于将打开的文件中指定范围的数据复制到管道中，或是将数据从管道复制到文件的指定范围。其对应用户库函数的声明为：
 
 ```c
 #include <unistd.h>
 
-ssize_t copy_file_range(int fd_in, off_t *off_in,
-                        int fd_out, off_t *off_out,
-                        size_t len, unsigned int flags);
+ssize_t splice(int fd_in, off_t *_Nullable off_in,
+                      int fd_out, off_t *_Nullable off_out,
+                      size_t len, unsigned int flags);
 ```
 
-该系统调用应复制文件描述符 `fd_in` 中的至多 `len` 个字节到文件描述符 `fd_out` 中。
+`splice()` 在两个文件描述符之间拷贝数据，而不涉及内核地址空间和用户地址空间之间的复制。`splice()`从文件描述符`fd_in`传输至多`len`字节的数据到文件描述符`fd_out`，其中一个文件描述符**一定是管道**，另一个一定是普通的磁盘文件。
 
-若 `off_in` 为 `NULL`，则复制时应从文件描述符 `fd_in` 本身的文件偏移处开始读取，并将其文件偏移增加成功复制的字节数；否则，从 `*off_in` 指定的文件偏移处开始读取，不改变 `fd_in` 的文件偏移，而是将 `*off_in` 增加成功复制的字节数。
+`splice()`对于参数的要求是：
 
-参数 `off_out` 的行为类似：若 `off_out` 为 `NULL`，则复制时从文件描述符 `fd_out` 本身的文件偏移处开始写入，并将其文件偏移增加成功复制的字节数；否则，从 `*off_out` 指定的文件偏移处开始写入，不改变 `fd_out` 的文件偏移，而是将 `*off_out` 增加成功复制的字节数。
+- 如果`fd_in`指的是管道，那么`off_in`必须是`NULL`。
+- 如果`fd_in`不是管道，则`off_in`一定不是NULL，且`off_in`指向的位置存储了将从`fd_in`读取的偏移量。在读取过程中，`fd_in`文件描述符的偏移不改变，而是将 `*off_in` 增加成功复制的字节数。
 
-该系统调用的返回值为成功复制的字节数，出现错误时返回负值。若读取 `fd_in` 时的文件偏移超过其大小，则直接返回 0，不进行复制。
+同样地，对于`fd_out`来说：
 
-本题中，`fd_in` 和 `fd_out` 总指向文件系统中两个不同的普通文件；`flags` 总为 0，没有实际作用。
+- 如果`fd_out`指的是管道，那么`off_out`必须是`NULL`。
+- 如果`fd_out`不是管道，则`off_out`一定不是NULL，且`off_out`指向的位置存储了将向`fd_out`写入的偏移量。在写入过程中，`fd_in`文件描述符的偏移不改变，而是将 `*off_out` 增加成功复制的字节数。
 
-### 测试点（50 分）
+本系统调用的返回值为**成功复制的字节数**，出现错误时返回负值。若`*off_in`的文件偏移超过`fd_in`的大小，则直接返回 0，不进行复制。若`off_in`或`off_out`为负值，则直接返回-1。`fd_out`的文件偏移保证不会超过文件的总字节数。
 
-1. 测试传入的 `off_in` 和 `off_out` 总为 `NULL`，不包含部分边界情况（12.5 分）
-2. 测试传入的 `off_in` 和 `off_out` 总为 `NULL`（12.5 分）
-3. 测试不包含部分边界情况（12.5 分）
-4. 无特殊约束（12.5 分）
+本题中，其中一个文件描述符一定是管道，另一个一定是普通的磁盘文件。`flags`总为0，没有实际作用。
 
-### 参考
+特殊说明：
 
-- [copy_file_range(2)](https://man7.org/linux/man-pages/man2/copy_file_range.2.html)
+1. 尽可能向管道写入数据（当管道满时，阻塞等待）。
+2. 如果文件`fd_in`的剩余部分小于`len`，则将`fd_in`文件剩余的全部内容写入管道`fd_out`。
+3. 读取管道时，允许读取的数据量小于`len`，但在管道有数据时不可返回0（当管道空时，阻塞等待）。
 
-## task 3
+### 测试点（50分）
 
-### 题目
+1. 测试的`fd_in`为普通文件，`fd_out`为管道，且管道在读写完成前不会关闭(10分)
+2. 测试的`fd_in`为管道，`fd_out`为普通文件，且管道在读写完成前不会关闭(10分)
+3. 测试文件到管道的拷贝时，普通文件`fd_in`剩余的字节数小于`len`(10分)
+4. 测试管道到文件的拷贝时，`fd_in`管道数据不足`len` bytes(10分)
+5. 边界情况处理(10分)
 
-支持syzkaller for linux内核fuzzing测试工具
+**本题为自动评测题，请将本题目测试点在开发板中运行，并使用评分客户端采集输出结果，系统会自动进行评分。**
 
-### 描述
+## task 2 git
 
-目前内核赛道参赛队实现的OS能够支持Linux应用，所以需要在参赛队自己写的内核上支持运行[syzkaller for linux](https://github.com/google/syzkaller)这个内核fuzzing测试工具。
+题目
+支持git访问特定repo
 
-### 对内核的具体要求
+描述
+目前内核赛道参赛队实现的OS能够支持Linux应用，所以需要在参赛队自己写的内核上支持运行git工具，并能支持pull/push 远程仓库。
 
-参考[syzkaller内核fuzzing测试工具的工作流程](https://github.com/google/syzkaller/blob/master/docs/internals.md)列出如下内核功能需支持的要求。硬件环境是qemu for riscv64。总分100分。
+对内核的具体要求
+参考git的工作流程列出如下内核功能需支持的要求。硬件环境是qemu和物理硬件 for riscv64/LA。总分100分。在QEMU上运行正确，得50%的分数；在开发板上运行正确，得50%的分数；二者都正确，得100%分数。
 
-1. 【10分】支持sshd for linux运行
-2. 【10分】支持syz-fuzzer for linux运行
-3. 【10分】支持syz-executor for linux运行
-4. 【10分】参考/sys/kernel/debug/kcov的输出，直接给出类似格式的输出(不需要实现kcov功能)
-5. 【10分】实现linux的kcov功能支持，能够产生类似/sys/kernel/debug/kcov的输出
-6. 【40分】支持完整运行syzaller(注意，为此可能还需要支持上面没有列出的Linux应用或Linux系统调用)
-7. 【10分】完成设计实现与执行过程分析技术报告
+【40分】支持运行git工具的本地基本操作“git --help”
 
-### 参考
+【20分】支持运行git工具的本地基本操作“git init; git commit...；git diff...”
 
-- [kcov](https://www.kernel.org/doc/html/latest/dev-tools/kcov.html)
-- [How syzkaller works](https://github.com/google/syzkaller/blob/master/docs/internals.md)
-- [Adding new OS support for syzkaller](https://github.com/google/syzkaller/blob/master/docs/adding_new_os_support.md)
-- [Setup: Debian/Ubuntu host, QEMU vm, riscv64 kernel](https://github.com/google/syzkaller/blob/master/docs/linux/setup_linux-host_qemu-vm_riscv64-kernel.md)
-- Syzkaller 源码分析(1)-(5)：[1](https://xz.aliyun.com/t/5079)、[2](https://xz.aliyun.com/t/5098)、[3](https://xz.aliyun.com/t/5154)、[4](https://xz.aliyun.com/t/5223)、[5](https://xz.aliyun.com/t/5401)
-- [syzkaller on freebsd](https://freebsdfoundation.org/wp-content/uploads/2021/01/Kernel-Fuzzing.pdf)
-- [从0到1开始使用syzkaller进行Linux内核漏洞挖掘](https://bbs.kanxue.com/thread-265405.htm)
-- [fuzzing-tutorial经典论文/书籍/博客等](https://github.com/liyansong2018/fuzzing-tutorial)
+【10分】支持运行git工具的基于http的网络基本操作 "git clone 指定的内网REPO"
 
+【10分】支持运行git工具的基于ssh的网络基本操作 "git clone 指定的内网REPO"
 
+以上四项需运行本仓库中的git-test.sh，成功运行后可呼叫现场裁判，根据此脚本的输出内容计分。git-test.sh包含验证自身md5checksum，不得随意修改。运行此脚本前需设置环境变量GIT_REPO和GIT_REPO_SSH为给定的值。
+
+【20分】支持运行git工具的基于https的网络基本操作 "git push YOUR_REPO"
+
+以上内容由参赛队伍选定自己的git服务器提供，如github、gitlab、gitee等，参赛队自行获取服务提供商的https key和仓库地址。
+通过https协议push内容到第三方git提供商，向现场裁判展示远程仓库提交前后的变化即可得分。
+
+**本题不设自动评测，完成后请现场呼叫相关老师检查计分。**
+
+## task 3 LTP
+
+对于能够在开发板上运行LTP的队伍，请找现场裁判登记。（50分）
+
+您的运行命令应该类似 `time run-ltp.sh | tee ltp-result.txt`。即需要同时保留运行时间和运行结果，交由现场裁判留档。
+
+本赛题的计分方法与Task 0类似，即第一名获得50分，有有效成绩的最后一名获得10分，其他队伍得分按比例递减。
