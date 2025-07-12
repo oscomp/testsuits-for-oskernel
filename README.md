@@ -1,11 +1,11 @@
 
-
+# 2025年全国大学生OS比赛--内核赛道--线上决赛测例
 
 ## 决赛测例 (满分按100分计)
 
-### 1. /proc/interrupts （[interrupts-test](https://github.com/oscomp/testsuits-for-oskernel/)）
+### 1. /proc/interrupts [interrupts-test]()
 
-本题中，我们需要在内核中记录自系统启动以来所有外部（PLIC）中断和时钟中断的处理次数，并创建一个路径为 `/proc/interrupts` 的虚拟文件。
+本题中，我们需要在内核中记录自QEMU模拟的（RISC-V和LoongArch64）系统中外部中断（virtio存储设备）和时钟中断的次数，并创建一个路径为 `/proc/interrupts` 的虚拟文件。
 
 当用户读取该文件时，应当得到一个包含中断号和对应的中断处理次数的列表，其中每行包含一个中断号和对应的处理次数，均以十进制表示，之间用一个冒号和任意个空格分隔；每行应以一个换行符结尾，各行包含的中断号递增且不重复，例如
 
@@ -24,7 +24,7 @@
 1. 虚拟文件 `/proc/interrupts` 能够被读取，且不能被写入、删除和移动（15 分）
 2. 虚拟文件 `/proc/interrupts` 能够正确统计中断处理次数（15 分）
 
-### 2.  copy_file_range （[copy-file-range-test](https://github.com/oscomp/testsuits-for-oskernel/)）
+### 2.  copy_file_range [copy-file-range-test]()
 
 本题目需要我们实现一个系统调用 `copy_file_range`，用于将打开的文件中指定范围的数据复制到另一个文件中，其对应用户库函数的声明为：
 
@@ -99,15 +99,6 @@ ssize_t splice(int fd_in, off_t *_Nullable off_in,
 4. 测试管道到文件的拷贝时，`fd_in`管道数据不足`len` bytes(8分)
 5. 边界情况处理(8分)
 
-# 2025年操作系统竞赛决赛及成绩占比说明
-
-## 总体成绩构成
-
-- **初赛阶段成绩占比：30%**
-- **决赛阶段成绩占比：70%**
-
----
-
-## 具体评分细则
+## 比赛成绩占比说明&具体评分细则
 
 请仔细阅读[全国大学生OS比赛官网](https://os.educg.net/)上公布的“2025-OS全国赛-技术方案”文档。
