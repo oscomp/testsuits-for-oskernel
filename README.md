@@ -3,7 +3,7 @@
 
 ## 决赛测例 (满分按100分计)
 
-### 1. /proc/interrupts [interrupts-test]()
+### 1. /proc/interrupts [interrupts-test](./interrupt-test)
 
 本题中，我们需要在内核中记录自QEMU模拟的（RISC-V和LoongArch64）系统中外部中断（virtio存储设备）和时钟中断的次数，并创建一个路径为 `/proc/interrupts` 的虚拟文件。
 
@@ -24,7 +24,7 @@
 1. 虚拟文件 `/proc/interrupts` 能够被读取，且不能被写入、删除和移动（15 分）
 2. 虚拟文件 `/proc/interrupts` 能够正确统计中断处理次数（15 分）
 
-### 2.  copy_file_range [copy-file-range-test]()
+### 2.  copy_file_range [copy-file-range-test](./copy-file-range-test)
 
 本题目需要我们实现一个系统调用 `copy_file_range`，用于将打开的文件中指定范围的数据复制到另一个文件中，其对应用户库函数的声明为：
 
