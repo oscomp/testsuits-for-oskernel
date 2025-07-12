@@ -24,7 +24,7 @@
 1. 虚拟文件 `/proc/interrupts` 能够被读取，且不能被写入、删除和移动（15 分）
 2. 虚拟文件 `/proc/interrupts` 能够正确统计中断处理次数（15 分）
 
-### 测试用例：[interrupts-test](interrupt-test)
+### 测试用例：`interrupts-test`目录中的文件
 
 ### 2.  copy_file_range 
 
@@ -55,7 +55,7 @@ ssize_t copy_file_range(int fd_in, off_t *off_in,
 3. 测试不包含部分边界情况（6 分）
 4. 无特殊约束（6 分）
 
-### 测试用例：[copy-file-range-test](copy-file-range-test)
+#### 测试用例：请看`copy-file-range-test`目录中的文件
 
 #### 参考
 
