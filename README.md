@@ -10,11 +10,13 @@
 
 
 1. 支持运行git工具在本地文件系统中的基本操作
+  ```bash
   git help
   git init
   cat >README.md
   git commit -m"add README.md"
   git log
+  ```
 
 
 ## 现场赛其他题目
