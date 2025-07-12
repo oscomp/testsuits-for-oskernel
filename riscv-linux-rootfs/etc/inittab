@@ -1,8 +1,0 @@
-::sysinit:/etc/init.d/rcS
-::shutdown:/sbin/ifdown -a
-::shutdown:/bin/umount -a -r
-ttyS0::respawn:/sbin/getty 115200 ttyS0
-::respawn:/sbin/klogd -n
-::respawn:/sbin/syslogd -n
-::respawn:/usr/sbin/ntpd -n
-::respawn:/sbin/dropbear -R -F
