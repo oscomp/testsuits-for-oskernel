@@ -1,6 +1,6 @@
 # 2025年全国大学生OS比赛--内核赛道--现场赛测例
 
-## 现场赛预先题目
+## 现场赛题目(预先公布)
 能正确运行如下程序，运行环境如下：
 - QEMU RISC-V64 with virtio-net/virtio-block
 - QEMU LoongArch64 with virtio-net/virtio-block
