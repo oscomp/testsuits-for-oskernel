@@ -1,0 +1,36 @@
+PREFIX ?= riscv64-linux-gnu-
+CC := $(PREFIX)gcc
+HOST := $(patsubst %-gcc,%,$(CC))
+STRIP := $(PREFIX)strip
+DESTDIR ?= /code/sdcard/riscv/glibc
+
+ifneq (,$(findstring riscv64,$(PREFIX)))
+    ARCH := riscv64
+else ifneq (,$(findstring loongarch64,$(PREFIX)))
+    ARCH := loongarch64
+else
+    $(error "Unknown ARCH! It should be riscv64 or loongarch64")
+endif
+
+all: copy-file-range-test  interrupts-test  splice-test
+
+
+copy-file-range-test: .PHONY
+	make -C copy-file-range-test
+	cp copy-file-range-test/copy-file-range-test-*  $(DESTDIR)/
+
+interrupts-test: .PHONY
+	make -C interrupts-test
+	cp interrupts-test/interrupts-test-* $(DESTDIR)/
+	
+splice-test: .PHONY
+	make -C splice-test
+	cp splice-test/test_splice $(DESTDIR)/
+	
+clean:
+	make -C copy-file-range-test clean
+	make -C interrupts-test clean
+	make -C splice-test clean
+
+
+.PHONY: 
