@@ -28,6 +28,7 @@ interrupts-test: .PHONY
 splice-test: .PHONY
 	make -C splice-test
 	cp splice-test/test_splice $(DESTDIR)/
+	cp scripts/splice-test.sh $(DESTDIR)/
 
 busybox: .PHONY
 	cp config/busybox-config-$(ARCH) busybox/.config
