@@ -104,5 +104,5 @@ ssize_t splice(int fd_in, off_t *_Nullable off_in,
 5. 边界情况处理(8分)
 
 ## 比赛成绩占比说明&具体评分细则
-
-请仔细阅读[全国大学生OS比赛官网](https://os.educg.net/)上公布的“2025-OS全国赛-技术方案”文档。
+1. **上述题目在QEMU模拟的RISC-V和LoongArch64平台上进行测试**
+2. **请仔细阅读[全国大学生OS比赛官网](https://os.educg.net/)上公布的“2025-OS全国赛-技术方案”文档。**
