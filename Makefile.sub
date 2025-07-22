@@ -16,17 +16,17 @@ all: copy-file-range-test  interrupts-test  splice-test busybox
 
 
 copy-file-range-test: .PHONY
-	make -C copy-file-range-test
+	make -C copy-file-range-test CC="$(CC)"
 	cp copy-file-range-test/copy-file-range-test-*  $(DESTDIR)/
 	cp scripts/copy-file-range-test.sh $(DESTDIR)/
 
 interrupts-test: .PHONY
-	make -C interrupts-test
+	make -C interrupts-test CC="$(CC)"
 	cp interrupts-test/interrupts-test-* $(DESTDIR)/
 	cp scripts/interrupts-test.sh $(DESTDIR)/	
 	
 splice-test: .PHONY
-	make -C splice-test
+	make -C splice-test CC="$(CC)"
 	cp splice-test/test_splice $(DESTDIR)/
 	cp scripts/splice-test.sh $(DESTDIR)/
 
