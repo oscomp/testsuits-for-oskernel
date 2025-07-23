@@ -7,15 +7,15 @@ def parse_copyfile_test(output):
     key = ""
     for line in output.split("\n"):
         if "START copy-file-range-test" in line:
-            key = "copy-file-range-test " + line.split(" ")[7].strip('####')
-        print(key)    
-        if "passed" in line and "copy-file-range-test 1" in key:
+            key = "CopyFileRangeTest " + line.split(" ")[6].strip('####')
+
+        if "passed" in line and "copy-file-range-test1-glibc" in key:
             ans[key] = 10
-        if "passed" in line and "copy-file-range-test 2" in key:
+        if "passed" in line and "copy-file-range-test2-glibc" in key:
             ans[key] = 8
-        if "passed" in line and "copy-file-range-test 3" in key:
+        if "passed" in line and "copy-file-range-test3-glibc" in key:
             ans[key] = 6
-        if "passed" in line  and "copy-file-range-test 4" in key:
+        if "passed" in line and "copy-file-range-test4-glibc" in key:
             ans[key] = 6
 
     return ans

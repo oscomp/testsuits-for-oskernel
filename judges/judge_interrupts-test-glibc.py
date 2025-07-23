@@ -7,11 +7,11 @@ def parse_interrupt_test(output):
     key = ""
     for line in output.split("\n"):
         if "START interrupts-test" in line:
-            key = "interrupts-test " + line.split(" ")[7].strip('####')
+            key = "InterruptsTest " + line.split(" ")[6].strip('####')
         print(key)    
-        if "passed" in line and "interrupts-test 1" in key:
+        if "passed" in line and "interrupts-test1-glibc" in key:
             ans[key] = 15
-        if "passed" in line and "interrupts-test 2" in key:
+        if "passed" in line and "interrupts-test2-glibc" in key:
             ans[key] = 15
 
     return ans
