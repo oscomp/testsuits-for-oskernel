@@ -64,6 +64,7 @@ void check() {
 }
 
 int main() {
+    puts("");
     check();
     usleep(100000);
     check();
