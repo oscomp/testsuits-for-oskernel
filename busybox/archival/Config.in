@@ -1,0 +1,436 @@
+# DO NOT EDIT. This file is generated from Config.src
+#
+# For a description of the syntax of this configuration file,
+# see docs/Kconfig-language.txt.
+#
+
+menu "Archival Utilities"
+
+config FEATURE_SEAMLESS_XZ
+	bool "Make tar, rpm, modprobe etc understand .xz data"
+	default y
+
+config FEATURE_SEAMLESS_LZMA
+	bool "Make tar, rpm, modprobe etc understand .lzma data"
+	default y
+
+config FEATURE_SEAMLESS_BZ2
+	bool "Make tar, rpm, modprobe etc understand .bz2 data"
+	default y
+
+config FEATURE_SEAMLESS_GZ
+	bool "Make tar, rpm, modprobe etc understand .gz data"
+	default y
+
+config FEATURE_SEAMLESS_Z
+	bool "Make tar, rpm, modprobe etc understand .Z data"
+	default n  # it is ancient
+
+config AR
+	bool "ar (9.5 kb)"
+	default n  # needs to be improved to be able to replace binutils ar
+	help
+	ar is an archival utility program used to create, modify, and
+	extract contents from archives. In practice, it is used exclusively
+	for object module archives used by compilers.
+
+	Unless you have a specific application which requires ar, you should
+	probably say N here: most compilers come with their own ar utility.
+
+config FEATURE_AR_LONG_FILENAMES
+	bool "Support long filenames (not needed for debs)"
+	default y
+	depends on AR
+	help
+	By default the ar format can only store the first 15 characters
+	of the filename, this option removes that limitation.
+	It supports the GNU ar long filename method which moves multiple long
+	filenames into a the data section of a new ar entry.
+
+config FEATURE_AR_CREATE
+	bool "Support archive creation"
+	default y
+	depends on AR
+	help
+	This enables archive creation (-c and -r) with busybox ar.
+config UNCOMPRESS
+	bool "uncompress (7.1 kb)"
+	default n  # ancient
+	help
+	uncompress is used to decompress archives created by compress.
+	Not much used anymore, replaced by gzip/gunzip.
+config GUNZIP
+	bool "gunzip (11 kb)"
+	default y
+	select FEATURE_GZIP_DECOMPRESS
+	help
+	gunzip is used to decompress archives created by gzip.
+	You can use the '-t' option to test the integrity of
+	an archive, without decompressing it.
+
+config ZCAT
+	bool "zcat (24 kb)"
+	default y
+	select FEATURE_GZIP_DECOMPRESS
+	help
+	Alias to "gunzip -c".
+
+config FEATURE_GUNZIP_LONG_OPTIONS
+	bool "Enable long options"
+	default y
+	depends on (GUNZIP || ZCAT) && LONG_OPTS
+config BUNZIP2
+	bool "bunzip2 (8.7 kb)"
+	default y
+	select FEATURE_BZIP2_DECOMPRESS
+	help
+	bunzip2 is a compression utility using the Burrows-Wheeler block
+	sorting text compression algorithm, and Huffman coding. Compression
+	is generally considerably better than that achieved by more
+	conventional LZ77/LZ78-based compressors, and approaches the
+	performance of the PPM family of statistical compressors.
+
+	Unless you have a specific application which requires bunzip2, you
+	should probably say N here.
+
+config BZCAT
+	bool "bzcat (8.7 kb)"
+	default y
+	select FEATURE_BZIP2_DECOMPRESS
+	help
+	Alias to "bunzip2 -c".
+config UNLZMA
+	bool "unlzma (7.5 kb)"
+	default y
+	help
+	unlzma is a compression utility using the Lempel-Ziv-Markov chain
+	compression algorithm, and range coding. Compression
+	is generally considerably better than that achieved by the bzip2
+	compressors.
+
+config LZCAT
+	bool "lzcat (7.5 kb)"
+	default y
+	help
+	Alias to "unlzma -c".
+
+config LZMA
+	bool "lzma -d"
+	default y
+	help
+	Enable this option if you want commands like "lzma -d" to work.
+	IOW: you'll get lzma applet, but it will always require -d option.
+config UNXZ
+	bool "unxz (13 kb)"
+	default y
+	help
+	unxz is a unlzma successor.
+
+config XZCAT
+	bool "xzcat (13 kb)"
+	default y
+	help
+	Alias to "unxz -c".
+
+config XZ
+	bool "xz -d"
+	default y
+	help
+	Enable this option if you want commands like "xz -d" to work.
+	IOW: you'll get xz applet, but it will always require -d option.
+config BZIP2
+	bool "bzip2 (16 kb)"
+	default y
+	help
+	bzip2 is a compression utility using the Burrows-Wheeler block
+	sorting text compression algorithm, and Huffman coding. Compression
+	is generally considerably better than that achieved by more
+	conventional LZ77/LZ78-based compressors, and approaches the
+	performance of the PPM family of statistical compressors.
+
+	Unless you have a specific application which requires bzip2, you
+	should probably say N here.
+
+config BZIP2_SMALL
+	int "Trade bytes for speed (0:fast, 9:small)"
+	default 8  # all "fast or small" options default to small
+	range 0 9
+	depends on BZIP2
+	help
+	Trade code size versus speed.
+	Approximate values with gcc-6.3.0 "bzip -9" compressing
+	linux-4.15.tar were:
+	value         time (sec)  code size (386)
+	9 (smallest)       70.11             7687
+	8                  67.93             8091
+	7                  67.88             8405
+	6                  67.78             8624
+	5                  67.05             9427
+	4-0 (fastest)      64.14            12083
+
+config FEATURE_BZIP2_DECOMPRESS
+	bool "Enable decompression"
+	default y
+	depends on BZIP2 || BUNZIP2 || BZCAT
+	help
+	Enable -d (--decompress) and -t (--test) options for bzip2.
+	This will be automatically selected if bunzip2 or bzcat is
+	enabled.
+config CPIO
+	bool "cpio (15 kb)"
+	default y
+	help
+	cpio is an archival utility program used to create, modify, and
+	extract contents from archives.
+	cpio has 110 bytes of overheads for every stored file.
+
+	This implementation of cpio can extract cpio archives created in the
+	"newc" or "crc" format.
+
+	Unless you have a specific application which requires cpio, you
+	should probably say N here.
+
+config FEATURE_CPIO_O
+	bool "Support archive creation"
+	default y
+	depends on CPIO
+	help
+	This implementation of cpio can create cpio archives in the "newc"
+	format only.
+
+config FEATURE_CPIO_P
+	bool "Support passthrough mode"
+	default y
+	depends on FEATURE_CPIO_O
+	help
+	Passthrough mode. Rarely used.
+config DPKG
+	bool "dpkg (43 kb)"
+	default y
+	select FEATURE_SEAMLESS_GZ
+	help
+	dpkg is a medium-level tool to install, build, remove and manage
+	Debian packages.
+
+	This implementation of dpkg has a number of limitations,
+	you should use the official dpkg if possible.
+config DPKG_DEB
+	bool "dpkg-deb (30 kb)"
+	default y
+	select FEATURE_SEAMLESS_GZ
+	help
+	dpkg-deb unpacks and provides information about Debian archives.
+
+	This implementation of dpkg-deb cannot pack archives.
+
+	Unless you have a specific application which requires dpkg-deb,
+	say N here.
+config GZIP
+	bool "gzip (17 kb)"
+	default y
+	help
+	gzip is used to compress files.
+	It's probably the most widely used UNIX compression program.
+
+config FEATURE_GZIP_LONG_OPTIONS
+	bool "Enable long options"
+	default y
+	depends on GZIP && LONG_OPTS
+
+config GZIP_FAST
+	int "Trade memory for speed (0:small,slow - 2:fast,big)"
+	default 0
+	range 0 2
+	depends on GZIP
+	help
+	Enable big memory options for gzip.
+	0: small buffers, small hash-tables
+	1: larger buffers, larger hash-tables
+	2: larger buffers, largest hash-tables
+	Larger models may give slightly better compression
+
+config FEATURE_GZIP_LEVELS
+	bool "Enable compression levels"
+	default n
+	depends on GZIP
+	help
+	Enable support for compression levels 4-9. The default level
+	is 6. If levels 1-3 are specified, 4 is used.
+	If this option is not selected, -N options are ignored and -6
+	is used.
+
+config FEATURE_GZIP_DECOMPRESS
+	bool "Enable decompression"
+	default y
+	depends on GZIP || GUNZIP || ZCAT
+	help
+	Enable -d (--decompress) and -t (--test) options for gzip.
+	This will be automatically selected if gunzip or zcat is
+	enabled.
+config LZOP
+	bool "lzop (12 kb)"
+	default y
+	help
+	Lzop compression/decompresion.
+
+config UNLZOP
+	bool "unlzop (13 kb)"
+	default n  # INCOMPAT: upstream lzop does not provide such tool
+	help
+	Lzop decompresion.
+
+config LZOPCAT
+	bool "lzopcat (13 kb)"
+	default n  # INCOMPAT: upstream lzop does not provide such tool
+	help
+	Alias to "lzop -dc".
+
+config LZOP_COMPR_HIGH
+	bool "lzop compression levels 7,8,9 (not very useful)"
+	default n
+	depends on LZOP || UNLZOP || LZOPCAT
+	help
+	High levels (7,8,9) of lzop compression. These levels
+	are actually slower than gzip at equivalent compression ratios
+	and take up 3.2K of code.
+config RPM
+	bool "rpm (32 kb)"
+	default y
+	help
+	Mini RPM applet - queries and extracts RPM packages.
+config RPM2CPIO
+	bool "rpm2cpio (21 kb)"
+	default y
+	help
+	Converts a RPM file into a CPIO archive.
+config TAR
+	bool "tar (39 kb)"
+	default y
+	help
+	tar is an archiving program. It's commonly used with gzip to
+	create compressed archives. It's probably the most widely used
+	UNIX archive program.
+
+config FEATURE_TAR_LONG_OPTIONS
+	bool "Enable long options"
+	default y
+	depends on TAR && LONG_OPTS
+
+config FEATURE_TAR_CREATE
+	bool "Enable -c (archive creation)"
+	default y
+	depends on TAR
+
+config FEATURE_TAR_AUTODETECT
+	bool "Autodetect compressed tarballs"
+	default y
+	depends on TAR && (FEATURE_SEAMLESS_Z || FEATURE_SEAMLESS_GZ || FEATURE_SEAMLESS_BZ2 || FEATURE_SEAMLESS_LZMA || FEATURE_SEAMLESS_XZ)
+	help
+	With this option tar can automatically detect compressed
+	tarballs. Currently it works only on files (not pipes etc).
+
+config FEATURE_TAR_FROM
+	bool "Enable -X (exclude from) and -T (include from) options"
+	default y
+	depends on TAR
+	help
+	If you enable this option you'll be able to specify
+	a list of files to include or exclude from an archive.
+
+config FEATURE_TAR_OLDGNU_COMPATIBILITY
+	bool "Support old tar header format"
+	default y
+	depends on TAR || DPKG
+	help
+	This option is required to unpack archives created in
+	the old GNU format; help to kill this old format by
+	repacking your ancient archives with the new format.
+
+config FEATURE_TAR_OLDSUN_COMPATIBILITY
+	bool "Enable untarring of tarballs with checksums produced by buggy Sun tar"
+	default y
+	depends on TAR || DPKG
+	help
+	This option is required to unpack archives created by some old
+	version of Sun's tar (it was calculating checksum using signed
+	arithmetic). It is said to be fixed in newer Sun tar, but "old"
+	tarballs still exist.
+
+config FEATURE_TAR_GNU_EXTENSIONS
+	bool "Support GNU tar extensions (long filenames)"
+	default y
+	depends on TAR || DPKG
+
+config FEATURE_TAR_TO_COMMAND
+	bool "Support writing to an external program (--to-command)"
+	default y
+	depends on TAR && FEATURE_TAR_LONG_OPTIONS
+	help
+	If you enable this option you'll be able to instruct tar to send
+	the contents of each extracted file to the standard input of an
+	external program.
+
+config FEATURE_TAR_UNAME_GNAME
+	bool "Enable use of user and group names"
+	default y
+	depends on TAR
+	help
+	Enable use of user and group names in tar. This affects contents
+	listings (-t) and preserving permissions when unpacking (-p).
+	+200 bytes.
+
+config FEATURE_TAR_NOPRESERVE_TIME
+	bool "Enable -m (do not preserve time) GNU option"
+	default y
+	depends on TAR
+
+config FEATURE_TAR_SELINUX
+	bool "Support extracting SELinux labels"
+	default n
+	depends on TAR && SELINUX
+	help
+	With this option busybox supports restoring SELinux labels
+	when extracting files from tar archives.
+config UNZIP
+	bool "unzip (26 kb)"
+	default y
+	help
+	unzip will list or extract files from a ZIP archive,
+	commonly found on DOS/WIN systems. The default behavior
+	(with no options) is to extract the archive into the
+	current directory.
+
+config FEATURE_UNZIP_CDF
+	bool "Read and use Central Directory data"
+	default y
+	depends on UNZIP
+	help
+	If you know that you only need to deal with simple
+	ZIP files without deleted/updated files, SFX archives etc,
+	you can reduce code size by unselecting this option.
+	To support less trivial ZIPs, say Y.
+
+config FEATURE_UNZIP_BZIP2
+	bool "Support compression method 12 (bzip2)"
+	default y
+	depends on FEATURE_UNZIP_CDF && DESKTOP
+
+config FEATURE_UNZIP_LZMA
+	bool "Support compression method 14 (lzma)"
+	default y
+	depends on FEATURE_UNZIP_CDF && DESKTOP
+
+config FEATURE_UNZIP_XZ
+	bool "Support compression method 95 (xz)"
+	default y
+	depends on FEATURE_UNZIP_CDF && DESKTOP
+
+config FEATURE_LZMA_FAST
+	bool "Optimize lzma for speed"
+	default n
+	depends on UNLZMA || LZCAT || LZMA || FEATURE_SEAMLESS_LZMA
+	help
+	This option reduces decompression time by about 25% at the cost of
+	a 1K bigger binary.
+
+endmenu

@@ -1,0 +1,270 @@
+# DO NOT EDIT. This file is generated from Config.src
+#
+# For a description of the syntax of this configuration file,
+# see docs/Kconfig-language.txt.
+#
+
+menu "Process Utilities"
+
+config FREE
+	bool "free (3.1 kb)"
+	default y
+	help
+	free displays the total amount of free and used physical and swap
+	memory in the system, as well as the buffers used by the kernel.
+	The shared memory column should be ignored; it is obsolete.
+config FUSER
+	bool "fuser (7 kb)"
+	default y
+	help
+	fuser lists all PIDs (Process IDs) that currently have a given
+	file open. fuser can also list all PIDs that have a given network
+	(TCP or UDP) port open.
+config IOSTAT
+	bool "iostat (7.6 kb)"
+	default y
+	help
+	Report CPU and I/O statistics
+config KILL
+	bool "kill (3.1 kb)"
+	default y
+	help
+	The command kill sends the specified signal to the specified
+	process or process group. If no signal is specified, the TERM
+	signal is sent.
+
+config KILLALL
+	bool "killall (5.6 kb)"
+	default y
+	help
+	killall sends a signal to all processes running any of the
+	specified commands. If no signal name is specified, SIGTERM is
+	sent.
+
+config KILLALL5
+	bool "killall5 (5.3 kb)"
+	default y
+	help
+	The SystemV killall command. killall5 sends a signal
+	to all processes except kernel threads and the processes
+	in its own session, so it won't kill the shell that is running
+	the script it was called from.
+config LSOF
+	bool "lsof (3.4 kb)"
+	default y
+	help
+	Show open files in the format of:
+	PID <TAB> /path/to/executable <TAB> /path/to/opened/file
+config MPSTAT
+	bool "mpstat (9.8 kb)"
+	default y
+	help
+	Per-processor statistics
+config NMETER
+	bool "nmeter (11 kb)"
+	default y
+	help
+	Prints selected system stats continuously, one line per update.
+config PGREP
+	bool "pgrep (6.5 kb)"
+	default y
+	help
+	Look for processes by name.
+
+config PKILL
+	bool "pkill (7.5 kb)"
+	default y
+	help
+	Send signals to processes by name.
+config PIDOF
+	bool "pidof (6.3 kb)"
+	default y
+	help
+	Pidof finds the process id's (pids) of the named programs. It prints
+	those id's on the standard output.
+
+config FEATURE_PIDOF_SINGLE
+	bool "Enable single shot (-s)"
+	default y
+	depends on PIDOF
+	help
+	Support '-s' for returning only the first pid found.
+
+config FEATURE_PIDOF_OMIT
+	bool "Enable omitting pids (-o PID)"
+	default y
+	depends on PIDOF
+	help
+	Support '-o PID' for omitting the given pid(s) in output.
+	The special pid %PPID can be used to name the parent process
+	of the pidof, in other words the calling shell or shell script.
+config PMAP
+	bool "pmap (6 kb)"
+	default y
+	help
+	Display processes' memory mappings.
+config POWERTOP
+	bool "powertop (9.6 kb)"
+	default y
+	help
+	Analyze power consumption on Intel-based laptops
+
+config FEATURE_POWERTOP_INTERACTIVE
+	bool "Accept keyboard commands"
+	default y
+	depends on POWERTOP
+	help
+	Without this, powertop will only refresh display every 10 seconds.
+	No keyboard commands will work, only ^C to terminate.
+config PS
+	bool "ps (11 kb)"
+	default y
+	help
+	ps gives a snapshot of the current processes.
+
+config FEATURE_PS_WIDE
+	bool "Enable wide output (-w)"
+	default y
+	depends on (PS || MINIPS) && !DESKTOP
+	help
+	Support argument 'w' for wide output.
+	If given once, 132 chars are printed, and if given more
+	than once, the length is unlimited.
+
+config FEATURE_PS_LONG
+	bool "Enable long output (-l)"
+	default y
+	depends on (PS || MINIPS) && !DESKTOP
+	help
+	Support argument 'l' for long output.
+	Adds fields PPID, RSS, START, TIME & TTY
+
+config FEATURE_PS_TIME
+	bool "Enable -o time and -o etime specifiers"
+	default y
+	depends on (PS || MINIPS) && DESKTOP
+
+config FEATURE_PS_UNUSUAL_SYSTEMS
+	bool "Support Linux prior to 2.4.0 and non-ELF systems"
+	default n
+	depends on FEATURE_PS_TIME
+	help
+	Include support for measuring HZ on old kernels and non-ELF systems
+	(if you are on Linux 2.4.0+ and use ELF, you don't need this)
+
+config FEATURE_PS_ADDITIONAL_COLUMNS
+	bool "Enable -o rgroup, -o ruser, -o nice specifiers"
+	default y
+	depends on (PS || MINIPS) && DESKTOP
+config PSTREE
+	bool "pstree (9.3 kb)"
+	default y
+	help
+	Display a tree of processes.
+config PWDX
+	bool "pwdx (3.7 kb)"
+	default y
+	help
+	Report current working directory of a process
+config SMEMCAP
+	bool "smemcap (2.5 kb)"
+	default y
+	help
+	smemcap is a tool for capturing process data for smem,
+	a memory usage statistic tool.
+config BB_SYSCTL
+	bool "sysctl (7.4 kb)"
+	default y
+	help
+	Configure kernel parameters at runtime.
+config TOP
+	bool "top (18 kb)"
+	default y
+	help
+	The top program provides a dynamic real-time view of a running
+	system.
+
+config FEATURE_TOP_INTERACTIVE
+	bool "Accept keyboard commands"
+	default y
+	depends on TOP
+	help
+	Without this, top will only refresh display every 5 seconds.
+	No keyboard commands will work, only ^C to terminate.
+
+config FEATURE_TOP_CPU_USAGE_PERCENTAGE
+	bool "Show CPU per-process usage percentage"
+	default y
+	depends on TOP
+	help
+	Make top display CPU usage for each process.
+	This adds about 2k.
+
+config FEATURE_TOP_CPU_GLOBAL_PERCENTS
+	bool "Show CPU global usage percentage"
+	default y
+	depends on FEATURE_TOP_CPU_USAGE_PERCENTAGE
+	help
+	Makes top display "CPU: NN% usr NN% sys..." line.
+	This adds about 0.5k.
+
+config FEATURE_TOP_SMP_CPU
+	bool "SMP CPU usage display ('c' key)"
+	default y
+	depends on FEATURE_TOP_CPU_GLOBAL_PERCENTS
+	help
+	Allow 'c' key to switch between individual/cumulative CPU stats
+	This adds about 0.5k.
+
+config FEATURE_TOP_DECIMALS
+	bool "Show 1/10th of a percent in CPU/mem statistics"
+	default y
+	depends on FEATURE_TOP_CPU_USAGE_PERCENTAGE
+	help
+	Show 1/10th of a percent in CPU/mem statistics.
+	This adds about 0.3k.
+
+config FEATURE_TOP_SMP_PROCESS
+	bool "Show CPU process runs on ('j' field)"
+	default y
+	depends on TOP
+	help
+	Show CPU where process was last found running on.
+	This is the 'j' field.
+
+config FEATURE_TOPMEM
+	bool "Topmem command ('s' key)"
+	default y
+	depends on TOP
+	help
+	Enable 's' in top (gives lots of memory info).
+config UPTIME
+	bool "uptime (3.7 kb)"
+	default y
+	help
+	uptime gives a one line display of the current time, how long
+	the system has been running, how many users are currently logged
+	on, and the system load averages for the past 1, 5, and 15 minutes.
+
+config FEATURE_UPTIME_UTMP_SUPPORT
+	bool "Show the number of users"
+	default y
+	depends on UPTIME && FEATURE_UTMP
+	help
+	Display the number of users currently logged on.
+config WATCH
+	bool "watch (4.4 kb)"
+	default y
+	help
+	watch is used to execute a program periodically, showing
+	output to the screen.
+
+config FEATURE_SHOW_THREADS
+	bool "Support thread display in ps/pstree/top"
+	default y
+	depends on PS || TOP || PSTREE
+	help
+	Enables the ps -T option, showing of threads in pstree,
+	and 'h' command in top.
+
+endmenu

@@ -1,0 +1,98 @@
+# DO NOT EDIT. This file is generated from Config.src
+#
+# For a description of the syntax of this configuration file,
+# see docs/Kconfig-language.txt.
+#
+
+menu "Runit Utilities"
+
+config CHPST
+	bool "chpst (9 kb)"
+	default y
+	help
+	chpst changes the process state according to the given options, and
+	execs specified program.
+
+config SETUIDGID
+	bool "setuidgid (4 kb)"
+	default y
+	help
+	Sets soft resource limits as specified by options
+
+config ENVUIDGID
+	bool "envuidgid (3.9 kb)"
+	default y
+	help
+	Sets $UID to account's uid and $GID to account's gid
+
+config ENVDIR
+	bool "envdir (2.5 kb)"
+	default y
+	help
+	Sets various environment variables as specified by files
+	in the given directory
+
+config SOFTLIMIT
+	bool "softlimit (4.5 kb)"
+	default y
+	help
+	Sets soft resource limits as specified by options
+config RUNSV
+	bool "runsv (7.8 kb)"
+	default y
+	help
+	runsv starts and monitors a service and optionally an appendant log
+	service.
+config RUNSVDIR
+	bool "runsvdir (6.3 kb)"
+	default y
+	help
+	runsvdir starts a runsv process for each subdirectory, or symlink to
+	a directory, in the services directory dir, up to a limit of 1000
+	subdirectories, and restarts a runsv process if it terminates.
+
+config FEATURE_RUNSVDIR_LOG
+	bool "Enable scrolling argument log"
+	depends on RUNSVDIR
+	default n
+	help
+	Enable feature where second parameter of runsvdir holds last error
+	message (viewable via top/ps). Otherwise (feature is off
+	or no parameter), error messages go to stderr only.
+config SV
+	bool "sv (8.5 kb)"
+	default y
+	help
+	sv reports the current status and controls the state of services
+	monitored by the runsv supervisor.
+
+config SV_DEFAULT_SERVICE_DIR
+	string "Default directory for services"
+	default "/var/service"
+	depends on SV || SVC || SVOK
+	help
+	Default directory for services.
+	Defaults to "/var/service"
+
+config SVC
+	bool "svc (8.4 kb)"
+	default y
+	help
+	svc controls the state of services monitored by the runsv supervisor.
+	It is compatible with daemontools command with the same name.
+
+config SVOK
+	bool "svok (1.5 kb)"
+	default y
+	help
+	svok checks whether runsv supervisor is running.
+	It is compatible with daemontools command with the same name.
+config SVLOGD
+	bool "svlogd (16 kb)"
+	default y
+	help
+	svlogd continuously reads log data from its standard input, optionally
+	filters log messages, and writes the data to one or more automatically
+	rotated logs.
+
+endmenu
