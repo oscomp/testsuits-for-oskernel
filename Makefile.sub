@@ -14,7 +14,7 @@ else
     $(error "Unknown ARCH! It should be riscv64 or loongarch64")
 endif
 
-all: git
+all: git busybox
 
 
 git: .PHONY
@@ -23,10 +23,10 @@ git: .PHONY
 ifneq (,$(findstring riscv64,$(PREFIX)))
 	cd zlib-1.3.1 && CROSS_PREFIX=${CROSS_TARGET}- ./configure && make -j 16 && make DESTDIR=/usr/lib/gcc-cross/riscv64-linux-gnu/11 install
 	cp /usr/lib/gcc-cross/riscv64-linux-gnu/11/usr/local/lib/libz.a /usr/lib/gcc-cross/riscv64-linux-gnu/11/
-	cd git-2.50.1 && ./configure --prefix=/usr --build=${CROSS_HOST} --host=${CROSS_TARGET} --with-gitconfig=/etc/gitconfig --with-python=python3 --without-iconv                  ac_cv_fread_reads_directories=yes ac_cv_snprintf_returns_bogus=no && make -j 16
+	cd git-2.50.1 && ./configure --prefix=/usr --build=${CROSS_HOST} --host=${CROSS_TARGET} --with-gitconfig=/etc/gitconfig --with-python=python3 --without-iconv                  ac_cv_fread_reads_directories=yes ac_cv_snprintf_returns_bogus=no && make -j 16 && make install
 else ifneq (,$(findstring loongarch64,$(PREFIX)))
 	cd zlib-1.3.1 && CROSS_PREFIX=${CROSS_TARGET}- ./configure && make -j 16 && make DESTDIR=/opt/gcc-13.2.0-loongarch64-linux-gnu/sysroot install
-	cd git-2.50.1 && ./configure --prefix=/usr --build=${CROSS_HOST} --host=${CROSS_TARGET} --with-gitconfig=/etc/gitconfig --with-python=python3 --without-iconv                  ac_cv_fread_reads_directories=yes ac_cv_snprintf_returns_bogus=no && make -j 16
+	cd git-2.50.1 && ./configure --prefix=/usr --build=${CROSS_HOST} --host=${CROSS_TARGET} --with-gitconfig=/etc/gitconfig --with-python=python3 --without-iconv                  ac_cv_fread_reads_directories=yes ac_cv_snprintf_returns_bogus=no && make -j 16 && make install
 endif
 
 busybox: .PHONY

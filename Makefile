@@ -7,12 +7,12 @@ build-all: build-rv build-la
 build-rv:
 	make -f Makefile.sub clean
 	mkdir -p sdcard/riscv/
-	make -f Makefile.sub PREFIX=riscv64-linux-gnu- DESTDIR=/code/sdcard/riscv/
+	make -f Makefile.sub PREFIX=riscv64-linux-gnu- DESTDIR=/code/sdcard/riscv/glibc
 
 build-la:
 	make -f Makefile.sub clean
 	mkdir -p sdcard/loongarch/
-	make -f Makefile.sub PREFIX=loongarch64-linux-gnu- DESTDIR=/code/sdcard/loongarch/
+	make -f Makefile.sub PREFIX=loongarch64-linux-gnu- DESTDIR=/code/sdcard/loongarch/glibc
 
 
 sdcard: build-all .PHONY
