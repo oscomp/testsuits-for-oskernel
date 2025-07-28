@@ -8,12 +8,13 @@ build-rv:
 	make -f Makefile.sub clean
 	mkdir -p sdcard/riscv/
 	make -f Makefile.sub PREFIX=riscv64-linux-gnu- DESTDIR=/code/sdcard/riscv/glibc
+	cp -fr /code/sdcard/riscv/glibc /code/sdcard/riscv/musl
 
 build-la:
 	make -f Makefile.sub clean
 	mkdir -p sdcard/loongarch/
 	make -f Makefile.sub PREFIX=loongarch64-linux-gnu- DESTDIR=/code/sdcard/loongarch/glibc
-
+	cp -fr /code/sdcard/loongarch/glibc /code/sdcard/loongarch/musl 		
 
 sdcard: build-all .PHONY
 	dd if=/dev/zero of=sdcard-rv.img count=128 bs=1M
