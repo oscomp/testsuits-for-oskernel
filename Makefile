@@ -9,7 +9,8 @@ build-rv:
 	mkdir -p sdcard/riscv/
 	make -f Makefile.sub PREFIX=riscv64-linux-gnu- DESTDIR=/code/sdcard/riscv/glibc
 	rm -fr /code/sdcard/riscv/glibc/usr/libexec/git-core
-	cp -fr /code/sdcard/riscv/glibc /code/sdcard/riscv/musl
+	mkdir -p /code/sdcard/riscv/musl
+	cp -fr /code/sdcard/riscv/glibc/* /code/sdcard/riscv/musl
 	cp scripts/git_testcode.sh /code/sdcard/riscv/glibc
 	cp scripts/git_testcode.sh /code/sdcard/riscv/musl
 	mkdir -p /code/sdcard/riscv/musl/lib
@@ -22,7 +23,8 @@ build-la:
 	mkdir -p sdcard/loongarch/
 	make -f Makefile.sub PREFIX=loongarch64-linux-gnu- DESTDIR=/code/sdcard/loongarch/glibc
 	rm -fr /code/sdcard/loongarch/glibc/usr/libexec/git-core
-	cp -fr /code/sdcard/loongarch/glibc /code/sdcard/loongarch/musl
+	mkdir -p /code/sdcard/loongarch/musl
+	cp -fr /code/sdcard/loongarch/glibc/* /code/sdcard/loongarch/musl
 	mkdir -p /code/sdcard/loongarch/musl/lib
 	mkdir -p /code/sdcard/loongarch/glibc/lib
 	cp scripts/git_testcode.sh /code/sdcard/loongarch/glibc
