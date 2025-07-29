@@ -12,6 +12,10 @@ build-rv:
 	cp -fr /code/sdcard/riscv/glibc /code/sdcard/riscv/musl
 	cp scripts/git_testcode.sh /code/sdcard/riscv/glibc
 	cp scripts/git_testcode.sh /code/sdcard/riscv/musl
+	mkdir -p /code/sdcard/riscv/musl/lib
+	mkdir -p /code/sdcard/riscv/glibc/lib
+	sed -E -i 's/#### OS COMP TEST GROUP ([^ ]+) ([^ ]+) ####/#### OS COMP TEST GROUP \1 \2-musl ####/g' sdcard/riscv/musl/*_testcode.sh
+	sed -E -i 's/#### OS COMP TEST GROUP ([^ ]+) ([^ ]+) ####/#### OS COMP TEST GROUP \1 \2-glibc ####/g' sdcard/riscv/glibc/*_testcode.sh
 
 build-la:
 	make -f Makefile.sub clean
@@ -19,8 +23,12 @@ build-la:
 	make -f Makefile.sub PREFIX=loongarch64-linux-gnu- DESTDIR=/code/sdcard/loongarch/glibc
 	rm -fr /code/sdcard/loongarch/glibc/usr/libexec/git-core
 	cp -fr /code/sdcard/loongarch/glibc /code/sdcard/loongarch/musl
+	mkdir -p /code/sdcard/loongarch/musl/lib
+	mkdir -p /code/sdcard/loongarch/glibc/lib
 	cp scripts/git_testcode.sh /code/sdcard/loongarch/glibc
 	cp scripts/git_testcode.sh /code/sdcard/loongarch/musl
+	sed -E -i 's/#### OS COMP TEST GROUP ([^ ]+) ([^ ]+) ####/#### OS COMP TEST GROUP \1 \2-musl ####/g' sdcard/loongarch/musl/*_testcode.sh
+	sed -E -i 's/#### OS COMP TEST GROUP ([^ ]+) ([^ ]+) ####/#### OS COMP TEST GROUP \1 \2-glibc ####/g' sdcard/loongarch/glibc/*_testcode.sh
 
 sdcard: build-all .PHONY
 	dd if=/dev/zero of=sdcard-rv.img count=512 bs=1M
