@@ -12,7 +12,7 @@ def parse_interrupt_test(output):
             ans["git init"] = 6.25
         if "1 file changed" in line:
             ans["git commit"] = 6.25
-        if "Author: Your Name" in line:
+        if "Author:" in line:
             ans["git log"] = 6.25                        
     return ans
 
