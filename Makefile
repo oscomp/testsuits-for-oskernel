@@ -13,6 +13,12 @@ build-rv:
 	cp -fr /code/sdcard/riscv/glibc/* /code/sdcard/riscv/musl
 	cp scripts/git_testcode.sh /code/sdcard/riscv/glibc
 	cp scripts/git_testcode.sh /code/sdcard/riscv/musl
+	cp git-2.50.1/git-daemon /code/sdcard/riscv/glibc/usr/bin/
+	cp git-2.50.1/git-daemon /code/sdcard/riscv/musl/usr/bin/
+	rm gitfiles.tar
+	cat gitfiles.tar.part-* > gitfiles.tar
+	tar xf gitfiles.tar -C /code/sdcard/riscv/glibc/
+	tar xf gitfiles.tar -C /code/sdcard/riscv/musl/
 	mkdir -p /code/sdcard/riscv/musl/lib
 	mkdir -p /code/sdcard/riscv/glibc/lib
 	sed -E -i 's/#### OS COMP TEST GROUP ([^ ]+) ([^ ]+) ####/#### OS COMP TEST GROUP \1 \2-musl ####/g' sdcard/riscv/musl/*_testcode.sh
@@ -29,11 +35,17 @@ build-la:
 	mkdir -p /code/sdcard/loongarch/glibc/lib
 	cp scripts/git_testcode.sh /code/sdcard/loongarch/glibc
 	cp scripts/git_testcode.sh /code/sdcard/loongarch/musl
+	cp git-2.50.1/git-daemon /code/sdcard/loongarch/glibc/usr/bin/
+	cp git-2.50.1/git-daemon /code/sdcard/loongarch/musl/usr/bin/
+	rm gitfiles.tar
+	cat gitfiles.tar.part-* > gitfiles.tar
+	tar xf gitfiles.tar -C /code/sdcard/loongarch/glibc/
+	tar xf gitfiles.tar -C /code/sdcard/loongarch/musl/
 	sed -E -i 's/#### OS COMP TEST GROUP ([^ ]+) ([^ ]+) ####/#### OS COMP TEST GROUP \1 \2-musl ####/g' sdcard/loongarch/musl/*_testcode.sh
 	sed -E -i 's/#### OS COMP TEST GROUP ([^ ]+) ([^ ]+) ####/#### OS COMP TEST GROUP \1 \2-glibc ####/g' sdcard/loongarch/glibc/*_testcode.sh
 
 sdcard: build-all .PHONY
-	dd if=/dev/zero of=sdcard-rv.img count=512 bs=1M
+	dd if=/dev/zero of=sdcard-rv.img count=1024 bs=1M
 	mkfs.ext4 sdcard-rv.img
 	mkdir -p mnt
 	mount sdcard-rv.img mnt
@@ -41,7 +53,7 @@ sdcard: build-all .PHONY
 	umount mnt
 	gzip sdcard-rv.img
 
-	dd if=/dev/zero of=sdcard-la.img count=512 bs=1M
+	dd if=/dev/zero of=sdcard-la.img count=1024 bs=1M
 	mkfs.ext4 sdcard-la.img
 	mkdir -p mnt
 	mount sdcard-la.img mnt
@@ -54,6 +66,7 @@ clean:
 	make -f Makefile.sub clean
 	rm -rf sdcard/riscv/*
 	rm -rf sdcard/loongarch/*
+	rm -fr gitfiles.tar
 	rm -f sdcard-la.img.gz
 	rm -f sdcard-rv.img.gz
 
