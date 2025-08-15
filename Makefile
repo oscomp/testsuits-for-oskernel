@@ -15,7 +15,7 @@ build-rv:
 	cp scripts/git_testcode.sh /code/sdcard/riscv/musl
 	cp git-2.50.1/git-daemon /code/sdcard/riscv/glibc/usr/bin/
 	cp git-2.50.1/git-daemon /code/sdcard/riscv/musl/usr/bin/
-	rm gitfiles.tar
+	rm -f gitfiles.tar
 	cat gitfiles.tar.part-* > gitfiles.tar
 	tar xf gitfiles.tar -C /code/sdcard/riscv/glibc/
 	tar xf gitfiles.tar -C /code/sdcard/riscv/musl/
@@ -37,7 +37,7 @@ build-la:
 	cp scripts/git_testcode.sh /code/sdcard/loongarch/musl
 	cp git-2.50.1/git-daemon /code/sdcard/loongarch/glibc/usr/bin/
 	cp git-2.50.1/git-daemon /code/sdcard/loongarch/musl/usr/bin/
-	rm gitfiles.tar
+	rm -f gitfiles.tar
 	cat gitfiles.tar.part-* > gitfiles.tar
 	tar xf gitfiles.tar -C /code/sdcard/loongarch/glibc/
 	tar xf gitfiles.tar -C /code/sdcard/loongarch/musl/
