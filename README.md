@@ -8,14 +8,20 @@
 - LoongArch64 2K1000开发板 with 物理存储设备/物理网络设备
 
 
-1. 支持运行git工具在本地文件系统中的基本操作
+1. 支持运行git工具在本地文件系统和网络中的基本操作
    
   ```bash
+  # basic
   git help
+  # FS related
   git init
   cat >README.md
   git commit -m"add README.md"
   git log
+  # NET related
+  git clone ...
+  git pull ...
+  git push ...
   ```
 注：如涉及块设备I/O操作，QEMU-*虚拟环境需基于 virtio-block，物理开发板需基于物理存储设备；如涉及网络设备I/O操作，QEMU-*虚拟环境需基于 virtio-net，物理开发板需基于物理网络设备；
 允许参考/重用/改进已有的设备驱动程序。
