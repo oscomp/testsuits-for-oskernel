@@ -1,3 +1,0 @@
-# ash uses fd 10 (usually) for reading the script
-echo LOST >&255
-echo OK

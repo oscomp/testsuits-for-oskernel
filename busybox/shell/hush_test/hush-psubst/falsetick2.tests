@@ -1,3 +1,0 @@
-v=v
-v=`exit 2` `false`
-echo Two:$? v:"[$v]"

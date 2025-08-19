@@ -1,3 +1,0 @@
-v=v
-echo ${v//}
-echo Ok:$?

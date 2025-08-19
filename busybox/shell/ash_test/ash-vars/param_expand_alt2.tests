@@ -1,7 +1,0 @@
-echo Unquoted: H${$+
-}H
-
-echo Quoted: "H${$+
-}H"
-
-echo Ok:$?

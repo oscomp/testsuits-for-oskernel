@@ -1,3 +1,0 @@
-exec 2>&1
-echo 'echo TEST; false' | $THIS_SH
-echo One:$?

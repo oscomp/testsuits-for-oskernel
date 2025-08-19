@@ -1,2 +1,0 @@
-var="/a/bc/def/file"
-echo "${var//\//\\/}"

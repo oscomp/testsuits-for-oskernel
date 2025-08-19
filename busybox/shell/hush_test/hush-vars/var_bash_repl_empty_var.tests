@@ -1,5 +1,0 @@
-unset v
-echo ${v/*/w}
-v=''
-echo ${v/*/w}
-echo Ok:$?

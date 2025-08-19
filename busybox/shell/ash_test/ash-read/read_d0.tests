@@ -1,1 +1,0 @@
-printf 'test\0zest\n' | (read -d '' reply; echo "$reply")

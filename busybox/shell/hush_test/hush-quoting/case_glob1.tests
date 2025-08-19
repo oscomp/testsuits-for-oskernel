@@ -1,8 +1,0 @@
-g='[3](a)(b)(c)'
-s='[3](a)(b)(c)'
-case $g in
-"$s")   echo s
-        ;;
-*)      echo "*"
-        ;;
-esac

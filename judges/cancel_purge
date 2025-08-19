@@ -1,2 +1,0 @@
-pkill qemu-system-riscv64
-pkill qemu-system-loongarch64

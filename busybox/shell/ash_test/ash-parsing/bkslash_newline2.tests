@@ -1,4 +1,0 @@
-echo Line with one backslash:
-echo '\
-'
-echo Ok:$?

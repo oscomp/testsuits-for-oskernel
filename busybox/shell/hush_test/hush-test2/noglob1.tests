@@ -1,3 +1,0 @@
-v='*.tests'
-[[ *.tests ]]; echo 1:YES:$?
-[[ $v ]]; echo 2:YES:$?

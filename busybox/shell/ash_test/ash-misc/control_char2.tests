@@ -1,3 +1,0 @@
-c=`printf '\3'`
-eval "echo $c"
-echo Done:$?

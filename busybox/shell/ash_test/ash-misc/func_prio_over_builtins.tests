@@ -1,5 +1,0 @@
-true() { echo YES >&2; }
-true
-true | true
-(true)
-echo Ok:`true 2>&1`

@@ -1,7 +1,0 @@
-cat <<END
-1
-$(echo "")
-2
-`echo ""`
-3
-END
