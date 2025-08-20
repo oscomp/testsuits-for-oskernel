@@ -1,0 +1,33 @@
+# git -v
+git version 2.47.3
+
+gcc -v
+Using built-in specs.
+COLLECT_GCC=gcc
+COLLECT_LTO_WRAPPER=/usr/libexec/gcc/loongarch64-alpine-linux-musl/14.2.0/lto-wrapper
+Target: loongarch64-alpine-linux-musl
+Configured with: /home/buildozer/aports/main/gcc/src/gcc-14.2.0/configure --prefix=/usr --mandir=/usr/share/man --infodir=/usr/share/info --build=loongarch64-alpine-linux-musl --host=loongarch64-alpine-linux-musl --target=loongarch64-alpine-linux-musl --enable-checking=release --disable-cet --disable-fixed-point --disable-libstdcxx-pch --disable-multilib --disable-nls --disable-werror --disable-symvers --enable-__cxa_atexit --enable-default-pie --enable-default-ssp --enable-languages=c,c++,d,objc,fortran --enable-link-serialization=2 --enable-linker-build-id --with-arch=loongarch64 --with-abi=lp64d --disable-libquadmath --disable-libssp --disable-libsanitizer --enable-shared --enable-threads --enable-tls --disable-libitm --with-bugurl=https://gitlab.alpinelinux.org/alpine/aports/-/issues --with-system-zlib --with-linker-hash-style=gnu --with-pkgversion='Alpine 14.2.0'
+Thread model: posix
+Supported LTO compression algorithms: zlib
+gcc version 14.2.0 (Alpine 14.2.0) 
+
+rustc --version
+rustc 1.83.0 (90b35a623 2024-11-26) (Alpine Linux 1.83.0-r0)
+
+
+vim --version
+VIM - Vi IMproved 9.1 (2024 Jan 02, compiled Feb 12 2025 17:41:07)                                            
+Included patches: 1-1105                                                                    0,0-1         All 
+Compiled by Alpine Linuxeout: Function not implemented                                                        
+Huge version without GUI.  Features included (+) or not (-):
+...
+   system vimrc file: "/etc/vim/vimrc"
+     user vimrc file: "$HOME/.vimrc"
+ 2nd user vimrc file: "~/.vim/vimrc"
+ 3rd user vimrc file: "~/.config/vim/vimrc"
+      user exrc file: "$HOME/.exrc"
+       defaults file: "$VIMRUNTIME/defaults.vim"
+  fall-back for $VIM: "/usr/share/vim"
+Compilation: gcc -c -I. -Iproto -DHAVE_CONFIG_H -Os -fstack-clash-protection -Wformat -Werror=format-security -flto=auto -D_REENTRANT -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=1 
+Linking: 
+gcc -Wl,--as-needed,-O1,--sort-common -L/usr/local/lib -o vim -lm -ltinfo 
