@@ -27,7 +27,7 @@
 
   - [包含上述程序的loongarch64 linux ext4fs镜像压缩包](https://github.com/LearningOS/rust-based-os-comp2025/releases/download/alpine-linux-loongarch64-ext4fs/alpine-linux-loongarch64-ext4fs.img.xz)
 
-- **参赛队可以使用自己制作的ext4fs镜像，但是要保证git、vim、gcc和rustc的与上述镜像中的linux应用文件是一致的。（不建议用源代码编译生成，开销太大）**
+- **参赛队可以使用自己制作的ext4fs镜像，但是要保证git、vim、gcc和rustc的与上述镜像中的[linux应用文件](https://github.com/oscomp/testsuits-for-oskernel/blob/on-site-final-2025/soft-info.txt)是一致的。（不建议用源代码编译生成，开销太大）**
 
 
 ## 第一题：git功能实现，共3小题 (共55分)
