@@ -20,8 +20,7 @@
 
   - LoongArch64 2K1000开发板 with 物理存储设备/物理网络设备
 
-- **如涉及块设备I/O操作，QEMU-*虚拟环境需基于 virtio-block，物理开发板需基于物理存储设备（非ramdisk）；如涉及网络设备I/O操作，QEMU-*虚拟环境需基于 virtio-net，物理开发板需基于物理网络设备(非loopback)； 允许参考/重用/改进已有的设备驱动程序。**
-
+- **如涉及块设备I/O操作，QEMU-RV/LA虚拟环境需基于 virtio-block，物理开发板需基于物理存储设备（非ramdisk）；如涉及网络设备I/O操作，QEMU-RV?LA虚拟环境需基于 virtio-net，物理开发板需基于物理网络设备(非loopback)； 允许参考/重用/改进已有的设备驱动程序。**
 - 下面题目涉及的主要Linux软件：git, vim, gcc, rustc，以及常用linux软件：busybox, bash等。包含这些程序的文件系统镜像如下：
 
 - [包含上述程序的riscv64 linux ext4fs镜像压缩包](https://github.com/LearningOS/rust-based-os-comp2025/releases/download/alpine-linux-riscv64-ext4fs/alpine-linux-riscv64-ext4fs.img.xz)
