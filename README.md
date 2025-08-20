@@ -85,7 +85,7 @@ git pull me (10分)
 
 ### 3.1 gcc --h  (加载运行) ================(5分）
 
-### 3.2 gcc hello.c & a.out （正确编译并运行 ）==============(10分)
+### 3.2 gcc hello.c && ./a.out （正确编译并运行 ）==============(10分)
 
 - helloworld.c
 ```c
@@ -101,7 +101,7 @@ int main(void) {
 
 ### 4.1 rustc -h  (加载运行)  5分
 
-#### 4.2 rustc helloworld.rs & helloworld （正确编译并运行 ）(10分)
+#### 4.2 rustc helloworld.rs && ./helloworld （正确编译并运行 ）(10分)
 
 - helloworld.rs
 
