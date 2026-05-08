@@ -1,11 +1,7 @@
-
 basic/user/build
 basic/user/lib/syscall_ids.h
 basic/user/riscv64
-*.o
-sdcard/*
-sdcard/riscv/*
-sdcard/loongarch/*
+sdcard/
 
 iozone/fileop
 iozone/iozone
@@ -31,4 +27,26 @@ k210/img.kfpkg
 
 lmbench_src/libtirpc-1.3.6/
 rt-tests-2.7/numactl-2.0.14/
-rt-tests-2.7/__pycache__
+
+# Common build outputs
+*.la
+*.lo
+*.o
+*.obj
+*.py[cod]
+*.xz
+
+# Common generated directories
+.deps/
+.libs/
+autom4te.cache/
+__pycache__/
+
+# Common configure/generated metadata
+config.log
+config.status
+stamp-h1
+
+# Project-specific build directories
+lmbench_src/bin/build/
+rt-tests-2.7/bld/
