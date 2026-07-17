@@ -12,23 +12,8 @@ else
     $(error "Unknown ARCH! It should be riscv64 or loongarch64")
 endif
 
-all: copy-file-range-test  interrupts-test  splice-test busybox
+all: busybox
 
-
-copy-file-range-test: .PHONY
-	make -C copy-file-range-test CC="$(CC)"
-	cp copy-file-range-test/copy-file-range-test-*  $(DESTDIR)/
-	cp scripts/copy-file-range*.sh $(DESTDIR)/
-
-interrupts-test: .PHONY
-	make -C interrupts-test CC="$(CC)"
-	cp interrupts-test/interrupts-test-* $(DESTDIR)/
-	cp scripts/interrupts*.sh $(DESTDIR)/	
-	
-splice-test: .PHONY
-	make -C splice-test CC="$(CC)"
-	cp splice-test/test_splice $(DESTDIR)/
-	cp scripts/splice*.sh $(DESTDIR)/
 
 busybox: .PHONY
 	cp config/busybox-config-$(ARCH) busybox/.config
@@ -36,9 +21,6 @@ busybox: .PHONY
 	cp busybox/busybox $(DESTDIR)/
 	
 clean:
-	make -C copy-file-range-test clean
-	make -C interrupts-test clean
-	make -C splice-test clean
 	make -C busybox clean
 
 .PHONY: 
