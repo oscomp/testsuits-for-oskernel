@@ -52,19 +52,19 @@
 
 任何测试验证失败，该测试得 0 分。
 
-#### 测试用例：`scripts/cagent.sh`
+#### 测试用例：`scripts/cagent_testcode.sh`
 
 #### 使用方法
 
 ```bash
 # 运行测试
-./scripts/cagent.sh
+./scripts/cagent_testcode.sh
 
 # 查看评分
-./scripts/cagent.sh | python3 judge/judge_cagent-glibc.py | jq .
+./scripts/cagent_testcode.sh | python3 judge/judge_cagent-glibc.py | jq .
 
 # 总分
-./scripts/cagent.sh | python3 judge/judge_cagent-glibc.py | jq '[.[].score] | add'
+./scripts/cagent_testcode.sh | python3 judge/judge_cagent-glibc.py | jq '[.[].score] | add'
 ```
 
 
