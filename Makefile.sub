@@ -12,7 +12,13 @@ else
     $(error "Unknown ARCH! It should be riscv64 or loongarch64")
 endif
 
-all: busybox
+all: busybox cagent-test
+
+cagent-test: .PHONY
+	make -C cagent-test CC="$(CC)"
+	cp cagent-test/agent_lite $(DESTDIR)/
+	cp cagent-test/simple_llm_server $(DESTDIR)/
+	cp scripts/cagent_testcode.sh $(DESTDIR)/
 
 
 busybox: .PHONY
@@ -21,6 +27,7 @@ busybox: .PHONY
 	cp busybox/busybox $(DESTDIR)/
 	
 clean:
+	make -C cagent-test clean
 	make -C busybox clean
 
-.PHONY: 
+.PHONY:
