@@ -8,7 +8,7 @@
 # 输出 (被 judge/judge_buildstorm.py 解析):
 #   BUILDSTORM_TOOLCHAIN ok|fail                         (8 分)
 #   BUILDSTORM_MINIBUILD ok|fail                         (12 分)
-#   BUILDSTORM_COMPILE mode=multi ok=true|false elapsed_s=<s> cores=<n> bytes=<n>
+#   BUILDSTORM_COMPILE mode=multi ok=true|false elapsed_s=<s> cores=<n> bytes=<n> arch=<a>
 #                                                         (40 + 120 分)
 
 echo "#### OS COMP TEST GROUP START buildstorm ####"
@@ -44,7 +44,7 @@ else
 fi
 
 cd /work/tgoskits 2>/dev/null || {
-    echo "BUILDSTORM_COMPILE mode=multi ok=false elapsed_s=0 cores=$(nproc) bytes=0"
+    echo "BUILDSTORM_COMPILE mode=multi ok=false elapsed_s=0 cores=$(nproc) bytes=0 arch=$AXARCH"
     echo "#### OS COMP TEST GROUP END buildstorm ####"
     exit 1
 }
@@ -68,9 +68,9 @@ BYTES=0
 [ -n "$ART" ] && BYTES=$(wc -c <"$ART")
 
 if [ "$RC" -eq 0 ] && [ -n "$ART" ] && [ "$BYTES" -ge 500000 ]; then
-    echo "BUILDSTORM_COMPILE mode=multi ok=true elapsed_s=$ELAPSED cores=$(nproc) bytes=$BYTES"
+    echo "BUILDSTORM_COMPILE mode=multi ok=true elapsed_s=$ELAPSED cores=$(nproc) bytes=$BYTES arch=$AXARCH"
 else
-    echo "BUILDSTORM_COMPILE mode=multi ok=false rc=$RC elapsed_s=$ELAPSED cores=$(nproc) bytes=$BYTES"
+    echo "BUILDSTORM_COMPILE mode=multi ok=false rc=$RC elapsed_s=$ELAPSED cores=$(nproc) bytes=$BYTES arch=$AXARCH"
     echo "----- buildstorm.build.out tail -----"
     tail -25 /work/buildstorm.build.out 2>/dev/null
 fi
