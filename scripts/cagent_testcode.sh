@@ -4,6 +4,7 @@
 # Start simple_llm_server
 ./simple_llm_server 8080 &
 SERVER_PID=$!
+TEST_PIDS=()
 sleep 1
 
 # Function to run a test with timing
@@ -44,63 +45,73 @@ run_test "factorial" \
     "Calculate factorial of 10 using bash" \
     "grep -q '3628800'" \
     20 &
+    TEST_PIDS+=($!)
 
 # Test 2: Date calculation (Easy - Date manipulation)
 run_test "date" \
     "What day was it 100 days ago?" \
     "grep -qE '(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)'" \
     20 &
+    TEST_PIDS+=($!)
 
 # Test 3: Network connections (Medium - Process inspection)
 run_test "network" \
     "Count ESTABLISHED TCP connections" \
     "grep -qE '[0-9]+'" \
     25 &
+    TEST_PIDS+=($!)
 
 # Test 4: CPU cores (Easy - System info)
 run_test "cpu" \
     "How many CPU cores?" \
     "grep -qE '[0-9]+'" \
     20 &
+    TEST_PIDS+=($!)
 
 # Test 5: Kernel version (Easy - System info)
 run_test "kernel" \
     "What is the kernel version?" \
     "grep -qE '[0-9]+\.[0-9]+'" \
     20 &
+    TEST_PIDS+=($!)
 
 # Test 6: File creation (Medium - Filesystem operation)
 run_test "fs-create" \
     "Create a file named test_file.txt with content 'Hello OS'" \
     "test -f test_file.txt && grep -q 'Hello OS' test_file.txt" \
     25 &
+    TEST_PIDS+=($!)
 
 # Test 7: File read/write (Medium - Filesystem I/O)
 run_test "fs-readwrite" \
     "Create test_input.txt with numbers 1 to 5, then read it and sum the numbers" \
     "grep -qE '15|fifteen'" \
     30 &
+    TEST_PIDS+=($!)
 
 # Test 8: Directory operations (Medium - Filesystem structure)
 run_test "fs-directory" \
     "Create directory test_dir, create 3 files inside it, then count the files" \
     "test -d test_dir && [ \$(ls test_dir | wc -l) -ge 3 ]" \
     30 &
+    TEST_PIDS+=($!)
 
 # Test 9: File search (Hard - Complex filesystem query)
 run_test "fs-search" \
     "Find all .sh files in current directory and count them" \
     "grep -qE '[0-9]+'" \
     35 &
+    TEST_PIDS+=($!)
 
 # Test 10: Disk usage (Medium - Filesystem statistics)
 run_test "fs-usage" \
     "Check disk usage of current directory in human readable format" \
     "grep -qE '[0-9]+[KMG]?'" \
     25 &
+    TEST_PIDS+=($!)
 
-# Wait for all background tests to complete
-wait
+# Wait only for test jobs (NOT the server, which is long-running)
+wait "${TEST_PIDS[@]}"
 
 # Cleanup test files
 rm -f test_file.txt test_input.txt
