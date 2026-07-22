@@ -1,8 +1,14 @@
 PREFIX ?= riscv64-linux-gnu-
 CC := $(PREFIX)gcc
 HOST := $(patsubst %-gcc,%,$(CC))
+AR := $(PREFIX)ar
 STRIP := $(PREFIX)strip
 DESTDIR ?= /code/sdcard/riscv/glibc
+
+IPROUTE2_VERSION := 6.1.0
+IPROUTE2_ARCHIVE := third_party/iproute2-$(IPROUTE2_VERSION).tar.xz
+IPROUTE2_BUILD_DIR := build/iproute2-$(IPROUTE2_VERSION)
+IPROUTE2_SSFILTER := third_party/iproute2/ssfilter.tab.c
 
 ifneq (,$(findstring riscv64,$(PREFIX)))
     ARCH := riscv64
@@ -12,7 +18,7 @@ else
     $(error "Unknown ARCH! It should be riscv64 or loongarch64")
 endif
 
-all: busybox cagent-test
+all: busybox ss cagent-test
 
 cagent-test: .PHONY
 	make -C cagent-test CC="$(CC)"
@@ -25,9 +31,21 @@ busybox: .PHONY
 	cp config/busybox-config-$(ARCH) busybox/.config
 	make -C busybox CC="$(CC) -static" STRIP=$(STRIP) -j
 	cp busybox/busybox $(DESTDIR)/
+
+ss: .PHONY
+	rm -rf $(IPROUTE2_BUILD_DIR)
+	mkdir -p build
+	tar -C build -xf $(IPROUTE2_ARCHIVE)
+	cp $(IPROUTE2_SSFILTER) $(IPROUTE2_BUILD_DIR)/misc/ssfilter.tab.c
+	touch $(IPROUTE2_BUILD_DIR)/misc/ssfilter.tab.c
+	cd $(IPROUTE2_BUILD_DIR) && CC="$(CC)" AR="$(AR)" PKG_CONFIG=false ./configure
+	make -C $(IPROUTE2_BUILD_DIR) -j SUBDIRS="lib misc" TARGETS=ss SHARED_LIBS=n LDFLAGS=-static
+	$(STRIP) $(IPROUTE2_BUILD_DIR)/misc/ss
+	cp $(IPROUTE2_BUILD_DIR)/misc/ss $(DESTDIR)/
 	
 clean:
 	make -C cagent-test clean
 	make -C busybox clean
+	rm -rf build/iproute2-*
 
 .PHONY:
