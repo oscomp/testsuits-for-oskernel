@@ -12,10 +12,10 @@ Scoring (200 pts total; doc 20 pts judged manually, not here):
   buildstorm compile ok       40   BUILDSTORM_COMPILE mode=multi ok=true
   buildstorm compile time    120   120 * clamp((2*B - t) / B, 0, 1)
 
-Only the multi-core (8c/8G) configuration is scored. Compile time t comes from
-the guest-reported elapsed_s (measured in-guest via /proc/uptime); tampering
-with the clock or /proc/uptime is treated as cheating (contest rule).
-Baseline B (seconds) is the placeholder below -- RE-MEASURE on the judge machine.
+Only the multi-core configuration is scored. Compile time t comes from the
+guest-reported elapsed_s (measured in-guest via /proc/uptime); tampering with
+the clock or /proc/uptime is treated as cheating (contest rule).
+Baselines B (seconds) are per-arch reference constants below (self-check only).
 """
 import json
 import os
@@ -24,17 +24,25 @@ import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 
-BASELINE = 400.0
+# Per-arch reference baselines (seconds). For contestant self-check only; the
+# final score is produced by the platform judge, which may use different values.
+# Override via judge/config.json: baseline.rv_s / baseline.la_s.
+BASELINES = {"riscv64": 4655.23, "loongarch64": 6223.0}
 try:
     with open(os.path.join(HERE, "config.json")) as f:
-        BASELINE = float(json.load(f).get("baseline.multi_s", BASELINE))
+        cfg = json.load(f)
+    if cfg.get("baseline.rv_s") is not None:
+        BASELINES["riscv64"] = float(cfg["baseline.rv_s"])
+    if cfg.get("baseline.la_s") is not None:
+        BASELINES["loongarch64"] = float(cfg["baseline.la_s"])
 except Exception:
     pass
 
 SUCCESS_PTS = 40.0
 TIME_PTS = 120.0
 ENV_PTS = {"TOOLCHAIN": 8.0, "MINIBUILD": 12.0}
-EXPECTED_CORES = 8
+# Expected core count per arch (sanity check only).
+EXPECTED_CORES = {"riscv64": 8, "loongarch64": 12}
 
 
 def read_input():
@@ -77,15 +85,21 @@ def main():
 
     tscore = 0.0
     if compile_ok:
+        arch = (kv or {}).get("arch", "")
+        baseline = BASELINES.get(arch)
         try:
             t = float(kv.get("elapsed_s"))
-            tscore = time_score(t, BASELINE)
-            notes.append(f"compile: elapsed={t:.0f}s baseline={BASELINE:.0f}s")
+            if baseline:
+                tscore = time_score(t, baseline)
+                notes.append(f"compile: arch={arch or '?'} elapsed={t:.0f}s baseline={baseline:.0f}s")
+            else:
+                notes.append(f"compile: arch={arch or 'unknown'} has no baseline -> time score 0")
         except (TypeError, ValueError):
             notes.append("compile: ok=true but elapsed_s missing/bad -> time score 0")
         cores = int(kv.get("cores", 0) or 0)
-        if cores != EXPECTED_CORES:
-            notes.append(f"WARN: guest saw cores={cores}, expected {EXPECTED_CORES} "
+        exp = EXPECTED_CORES.get(arch)
+        if exp is not None and cores != exp:
+            notes.append(f"WARN: guest saw cores={cores}, expected {exp} for {arch} "
                          f"-- check qemu -smp")
     else:
         notes.append(f"compile: ok={kv.get('ok') if kv else 'missing'}")
