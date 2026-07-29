@@ -24,10 +24,12 @@ import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 
-# Per-arch reference baselines (seconds). For contestant self-check only; the
-# final score is produced by the platform judge, which may use different values.
+# Per-arch reference baselines (seconds), measured from the timed formal build
+# only; the untimed tg-xtask pre-build is excluded. For contestant self-check
+# only; the final score is produced by the platform judge, which may use
+# different values.
 # Override via judge/config.json: baseline.rv_s / baseline.la_s.
-BASELINES = {"riscv64": 4655.23, "loongarch64": 6223.0}
+BASELINES = {"riscv64": 1616.09, "loongarch64": 1985.21}
 try:
     with open(os.path.join(HERE, "config.json")) as f:
         cfg = json.load(f)
